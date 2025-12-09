@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiến độ dự án - NHUTIN Customer Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background: #E8F3EC;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #2D4A3E 0%, #243D33 100%);
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 12px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 24px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+        }
+
+        .logo-text {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .nav-menu {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .nav-section {
+            margin-bottom: 24px;
+        }
+
+        .nav-section-title {
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0 12px;
+            margin-bottom: 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 12px;
+            border-radius: 10px;
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            margin-bottom: 2px;
+        }
+
+        .nav-item:hover {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+        }
+
+        .nav-item.active {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .nav-item svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .nav-badge {
+            margin-left: auto;
+            background: #E74C3C;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .sidebar-footer {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 16px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .user-info:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .user-details {
+            flex: 1;
+        }
+
+        .user-name {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .user-email {
+            color: rgba(255,255,255,0.6);
+            font-size: 12px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 32px;
+            min-height: 100vh;
+        }
+
+        .page-header {
+            margin-bottom: 32px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .page-subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Project Overview Card */
+        .project-overview {
+            background: #fff;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+
+        .project-info h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .meta-item svg {
+            width: 16px;
+            height: 16px;
+            stroke: #888;
+        }
+
+        .project-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #E8F3EC;
+            border-radius: 20px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #2D4A3E;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .project-status span {
+            font-size: 13px;
+            font-weight: 500;
+            color: #2D4A3E;
+        }
+
+        /* Progress Bar */
+        .progress-section {
+            margin-bottom: 24px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .progress-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .progress-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2D4A3E;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: #E8F3EC;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2D4A3E 0%, #4A7C5E 100%);
+            border-radius: 6px;
+            transition: width 0.5s ease;
+        }
+
+        /* Project Stats */
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item .value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .stat-item .label {
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* Timeline Card */
+        .timeline-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: #e0e0e0;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 24px;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -32px;
+            top: 4px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid #e0e0e0;
+        }
+
+        .timeline-item.completed .timeline-dot {
+            background: #2D4A3E;
+            border-color: #2D4A3E;
+        }
+
+        .timeline-item.current .timeline-dot {
+            background: #fff;
+            border-color: #2D4A3E;
+            box-shadow: 0 0 0 4px rgba(45, 74, 62, 0.2);
+        }
+
+        .timeline-item.current .timeline-dot::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            background: #2D4A3E;
+            border-radius: 50%;
+        }
+
+        .timeline-content {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 10px;
+        }
+
+        .timeline-item.current .timeline-content {
+            background: #E8F3EC;
+            border: 1px solid rgba(45, 74, 62, 0.2);
+        }
+
+        .timeline-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Two Columns */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        /* Documents List */
+        .documents-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .document-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.2s;
+        }
+
+        .document-item:hover {
+            background: #E8F3EC;
+            transform: translateX(4px);
+        }
+
+        .document-icon {
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .document-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: #2D4A3E;
+        }
+
+        .document-info {
+            flex: 1;
+        }
+
+        .document-name {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .document-size {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .document-download {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .document-download svg {
+            width: 18px;
+            height: 18px;
+            stroke: #888;
+        }
+
+        /* Contact Card */
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .contact-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-role {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        .contact-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 2px;
+        }
+
+        .contact-phone {
+            font-size: 13px;
+            color: #2D4A3E;
+        }
+
+        .contact-btn {
+            padding: 10px 16px;
+            background: #2D4A3E;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .contact-btn:hover {
+            background: #3D5F4F;
+        }
+
+        /* Mobile */
+        @media (max-width: 1024px) {
+            .project-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .two-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px 16px;
+            }
+
+            .project-header {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .project-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: #2D4A3E;
+            border: none;
+            border-radius: 16px;
+            color: #fff;
+            cursor: pointer;
+            z-index: 101;
+            box-shadow: 0 4px 20px rgba(45, 74, 62, 0.4);
+        }
+
+        .mobile-menu-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 99;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        /* Logout Modal */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+        .modal-overlay.show { display: flex; }
+        .logout-modal { background: #fff; border-radius: 20px; padding: 32px; max-width: 400px; width: 100%; text-align: center; animation: modalSlide 0.3s ease; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+        @keyframes modalSlide { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .logout-modal-icon { width: 72px; height: 72px; background: #FFF3E8; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+        .logout-modal-icon svg { width: 36px; height: 36px; stroke: #C75E00; }
+        .logout-modal h3 { font-size: 20px; font-weight: 600; color: #1a1a1a; margin-bottom: 8px; }
+        .logout-modal p { font-size: 14px; color: #666; margin-bottom: 24px; }
+        .logout-modal-actions { display: flex; gap: 12px; }
+        .logout-modal-btn { flex: 1; padding: 14px 20px; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+        .logout-modal-btn-cancel { background: #f5f5f5; border: none; color: #666; }
+        .logout-modal-btn-cancel:hover { background: #e8e8e8; }
+        .logout-modal-btn-confirm { background: #E74C3C; border: none; color: #fff; }
+        .logout-modal-btn-confirm:hover { background: #C0392B; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <span class="logo-text">NHUTIN Portal</span>
+            </div>
+
+            <nav class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Tổng quan</div>
+                    <a href="dashboard.html" class="nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Dự án</div>
+                    <a href="projects.html" class="nav-item active">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <span>Tiến độ dự án</span>
+                    </a>
+                    <a href="handover.html" class="nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                        </svg>
+                        <span>Bàn giao - Nghiệm thu</span>
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Kỹ thuật</div>
+                    <a href="technical-docs.html" class="nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+                        </svg>
+                        <span>Tài liệu kỹ thuật</span>
+                    </a>
+                    <a href="tickets.html" class="nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 18v-6a9 9 0 0118 0v6M3 18a3 3 0 003 3h0a3 3 0 003-3v-3a3 3 0 00-3-3h0a3 3 0 00-3 3v3zm18 0a3 3 0 01-3 3h0a3 3 0 01-3-3v-3a3 3 0 013-3h0a3 3 0 013 3v3z"/>
+                        </svg>
+                        <span>Hỗ trợ kỹ thuật</span>
+                        <span class="nav-badge">1</span>
+                    </a>
+                    <a href="maintenance.html" class="nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        <span>Bảo trì định kỳ</span>
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Hợp đồng</div>
+                    <a href="project-contracts.html" class="nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                        <span>Hợp đồng dự án</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info" onclick="logout()">
+                    <img src="https://i.pravatar.cc/150?img=3" alt="User" class="user-avatar">
+                    <div class="user-details">
+                        <div class="user-name" id="userName">Joaquin</div>
+                        <div class="user-email" id="userEmail">joaquin@example.com</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Tiến độ dự án</h1>
+                <p class="page-subtitle">Theo dõi tiến độ lắp đặt Sàn trượt tự đổ Keith Walking Floor</p>
+            </div>
+
+            <!-- Project Overview -->
+            <div class="project-overview">
+                <div class="project-header">
+                    <div class="project-info">
+                        <h2>Dự án lắp đặt Sàn trượt Keith Walking Floor</h2>
+                        <div class="project-meta">
+                            <div class="meta-item">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                <span>Nhà máy XYZ - Bình Dương</span>
+                            </div>
+                            <div class="meta-item">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <span>01/10/2024 - 15/01/2025</span>
+                            </div>
+                            <div class="meta-item">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                                <span>Mã dự án: #PRJ-2024-001</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-status">
+                        <div class="status-dot"></div>
+                        <span>Đang thực hiện</span>
+                    </div>
+                </div>
+
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <span class="progress-label">Tiến độ tổng thể</span>
+                        <span class="progress-value">75%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                </div>
+
+                <div class="project-stats">
+                    <div class="stat-item">
+                        <div class="value">6/8</div>
+                        <div class="label">Hạng mục hoàn thành</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="value">37</div>
+                        <div class="label">Ngày còn lại</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="value">12</div>
+                        <div class="label">Nhân sự triển khai</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="value">98%</div>
+                        <div class="label">Vật tư đã có</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two-columns">
+                <!-- Timeline -->
+                <div class="timeline-card">
+                    <h3 class="card-title">Các mốc tiến độ</h3>
+                    <div class="timeline">
+                        <div class="timeline-item completed">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Khảo sát và thiết kế</div>
+                                <div class="timeline-date">01/10 - 10/10/2024</div>
+                                <div class="timeline-desc">Hoàn thành khảo sát hiện trạng, đo đạc và thiết kế bản vẽ thi công.</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item completed">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Chuẩn bị vật tư thiết bị</div>
+                                <div class="timeline-date">11/10 - 31/10/2024</div>
+                                <div class="timeline-desc">Nhập khẩu và vận chuyển thiết bị Keith Walking Floor từ Mỹ.</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item completed">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Thi công móng và khung</div>
+                                <div class="timeline-date">01/11 - 20/11/2024</div>
+                                <div class="timeline-desc">Đổ móng, lắp đặt khung thép chịu lực cho hệ thống sàn trượt.</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item current">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Lắp đặt hệ thống sàn trượt</div>
+                                <div class="timeline-date">21/11 - 20/12/2024</div>
+                                <div class="timeline-desc">Đang tiến hành lắp đặt các tấm sàn trượt, hệ thống thủy lực và điều khiển.</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Chạy thử và hiệu chỉnh</div>
+                                <div class="timeline-date">21/12 - 31/12/2024</div>
+                                <div class="timeline-desc">Vận hành thử, kiểm tra và hiệu chỉnh hệ thống.</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Nghiệm thu và bàn giao</div>
+                                <div class="timeline-date">01/01 - 15/01/2025</div>
+                                <div class="timeline-desc">Nghiệm thu với khách hàng, đào tạo vận hành và bàn giao.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <!-- Documents -->
+                    <div class="timeline-card">
+                        <h3 class="card-title">Tài liệu dự án</h3>
+                        <div class="documents-list">
+                            <a href="#" class="document-item">
+                                <div class="document-icon">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                    </svg>
+                                </div>
+                                <div class="document-info">
+                                    <div class="document-name">Bản vẽ thiết kế v2.pdf</div>
+                                    <div class="document-size">2.4 MB</div>
+                                </div>
+                                <div class="document-download">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                    </svg>
+                                </div>
+                            </a>
+                            <a href="#" class="document-item">
+                                <div class="document-icon">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                    </svg>
+                                </div>
+                                <div class="document-info">
+                                    <div class="document-name">Báo cáo tiến độ tuần 5.pdf</div>
+                                    <div class="document-size">856 KB</div>
+                                </div>
+                                <div class="document-download">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                    </svg>
+                                </div>
+                            </a>
+                            <a href="#" class="document-item">
+                                <div class="document-icon">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                                <div class="document-info">
+                                    <div class="document-name">Hình ảnh tiến độ.zip</div>
+                                    <div class="document-size">15.2 MB</div>
+                                </div>
+                                <div class="document-download">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="timeline-card">
+                        <h3 class="card-title">Quản lý dự án</h3>
+                        <div class="contact-card">
+                            <img src="https://i.pravatar.cc/150?img=12" alt="PM" class="contact-avatar">
+                            <div class="contact-info">
+                                <div class="contact-role">Project Manager</div>
+                                <div class="contact-name">Trần Văn Hùng</div>
+                                <div class="contact-phone">0909 888 777</div>
+                            </div>
+                            <button class="contact-btn">Liên hệ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+    <!-- Mobile menu button -->
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+    </button>
+
+    <!-- Logout Modal -->
+    <div class="modal-overlay" id="logoutModal" onclick="if(event.target===this)closeLogoutModal()">
+        <div class="logout-modal">
+            <div class="logout-modal-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            </div>
+            <h3>Đăng xuất?</h3>
+            <p>Bạn có chắc chắn muốn đăng xuất khỏi tài khoản không?</p>
+            <div class="logout-modal-actions">
+                <button class="logout-modal-btn logout-modal-btn-cancel" onclick="closeLogoutModal()">Hủy</button>
+                <button class="logout-modal-btn logout-modal-btn-confirm" onclick="confirmLogout()">Đăng xuất</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = JSON.parse(localStorage.getItem('nhutin_user') || '{}');
+            if (userData.name) document.getElementById('userName').textContent = userData.name;
+            if (userData.email) document.getElementById('userEmail').textContent = userData.email;
+        });
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('show');
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('show');
+        }
+
+        function logout() {
+            document.getElementById('logoutModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLogoutModal() {
+            document.getElementById('logoutModal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        function confirmLogout() {
+            localStorage.removeItem('nhutin_user');
+            localStorage.removeItem('nhutin_logged_in');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
+
