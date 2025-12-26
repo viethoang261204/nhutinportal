@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Giới Thiệu - Công ty Cổ phần Như Tín</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Như Tín, chất đốt sinh khối, bã điều, xuống hàng tự động, KEITH® Walking Floor" name="keywords">
+    <meta content="Công ty Cổ phần Như Tín - Chuyên cung cấp chất đốt sinh khối bã điều và hệ thống xuống hàng tự động" name="description">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="favicon_io/site.webmanifest">
+    <link rel="shortcut icon" href="favicon_io/favicon.ico">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    
+    <style>
+        #langToggle {
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        #langToggle:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Feature Cards Styling */
+        .feature-card {
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 1px solid rgba(0,0,0,.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,.15) !important;
+            border-color: var(--primary);
+        }
+        
+        .feature-icon {
+            width: 90px;
+            height: 90px;
+            transition: all 0.4s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: var(--primary) !important;
+        }
+        
+        .feature-card:hover .feature-icon i {
+            color: white !important;
+        }
+        
+        .feature-bg-icon {
+            position: absolute;
+            right: -30px;
+            bottom: -30px;
+            font-size: 150px;
+            color: rgba(0,0,0,.02);
+            transition: all 0.4s ease;
+            z-index: 0;
+        }
+        
+        .feature-card:hover .feature-bg-icon {
+            right: -20px;
+            bottom: -20px;
+            color: rgba(42, 168, 91, 0.05);
+        }
+        
+        .feature-card h4 {
+            position: relative;
+            z-index: 1;
+            transition: color 0.3s ease;
+        }
+        
+        .feature-card:hover h4 {
+            color: var(--primary);
+        }
+        
+        .feature-card p {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-icon-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Section Subtitle Styling */
+        h6.text-primary {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 12px;
+            background: linear-gradient(135deg, #2AA85B 0%, #1F8A4A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        h6.text-primary::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #2AA85B 0%, #1F8A4A 100%);
+            border-radius: 3px;
+            box-shadow: 0 2px 10px rgba(42, 168, 91, 0.3);
+        }
+    </style>
+</head>
+
+<body class="has-fixed-header">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Navbar Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid py-5" style="margin-top: 120px; background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);">
+        <div class="container text-center py-4">
+            <h1 class="display-2 mb-3 animated slideInDown" data-i18n="page_about_title" style="font-weight: 800; background: linear-gradient(135deg, #2AA85B 0%, #1F8A4A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: none; letter-spacing: 2px;">
+                GIỚI THIỆU
+            </h1>
+            <div class="d-flex justify-content-center align-items-center animated slideInDown">
+                <a class="text-muted text-decoration-none" href="index.html" style="font-size: 16px; transition: color 0.3s;" onmouseover="this.style.color='#2AA85B'" onmouseout="this.style.color='#6c757d'">
+                    <i class="fas fa-home me-2"></i><span data-i18n="breadcrumb_home">Trang Chủ</span>
+                </a>
+                <span class="mx-3 text-muted">•</span>
+                <span data-i18n="breadcrumb_about" style="font-size: 16px; color: #2AA85B; font-weight: 600;">Giới Thiệu</span>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Company Introduction Start -->
+    <div class="container-xxl py-5" style="margin-top: 3rem;">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
+                <h6 class="text-primary" data-i18n="intro_subtitle">Giới Thiệu</h6>
+                <h1 class="mb-4" data-i18n="intro_title">CÔNG TY CỔ PHẦN NHƯ TÍN</h1>
+            </div>
+            
+            <div class="row g-5 align-items-center mb-5">
+                <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
+                    <img class="img-fluid rounded shadow" src="img/aboutnt1.jpg" alt="Như Tín Company">
+                </div>
+                <div class="col-lg-7 wow fadeInUp" data-wow-delay="0.3s">
+                    <p class="fs-5 mb-4" data-i18n="intro_text_1"><strong>Công ty cổ phần Như Tín</strong> được thành lập vào tháng 01 năm 2010. Chúng tôi luôn nỗ lực tạo dựng mối quan hệ hợp tác tốt đẹp với các đối tác và không ngừng phát triển hoạt động kinh doanh trên cơ sở mang lại lợi ích song phương.</p>
+                    <p class="fs-5 mb-4" data-i18n="intro_text_2">Chúng tôi chuyên cung cấp <strong>chất đốt sinh khối bã điều</strong> (bã vỏ hạt điều sau ép dầu).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Company Introduction End -->
+
+    <!-- Biomass Fuel Solutions Start -->
+    <div class="container-fluid bg-light py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
+                    <h2 class="mb-4 text-center" data-i18n="biomass_title">Giải Pháp Chất Đốt Sinh Khối</h2>
+                    
+                    <div class="mb-4">
+                        <p class="fs-5" data-i18n="biomass_intro">Là đơn vị tiên phong khởi xướng việc ứng dụng chất đốt bã điều cho các lò hơi công nghiệp với hàng chục năm kinh nghiệm. Chúng tôi tự tin mang đến cho khách hàng các giải pháp để sử dụng hiệu quả chất đốt bã điều (hay các chất đốt sinh khối khác) bao gồm:</p>
+                    </div>
+
+                    <div class="row g-4 mt-4">
+                        <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="bg-white rounded p-4 h-100 shadow-sm">
+                                <div class="d-flex align-items-start">
+                                    <i class="fa fa-cogs fa-3x text-primary flex-shrink-0 me-4"></i>
+                                    <div>
+                                        <h5 class="mb-3" data-i18n="biomass_solution_1_title">Thiết Bị Cải Tiến Lò Hơi</h5>
+                                        <p class="mb-0" data-i18n="biomass_solution_1_desc">Cung cấp các thiết bị cải tiến lò hơi để đốt bã điều hiệu quả, đảm bảo hoạt động ổn định và bền bỉ</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="bg-white rounded p-4 h-100 shadow-sm">
+                                <div class="d-flex align-items-start">
+                                    <i class="fa fa-chart-line fa-3x text-primary flex-shrink-0 me-4"></i>
+                                    <div>
+                                        <h5 class="mb-3" data-i18n="biomass_solution_2_title">Tiết Kiệm Chi Phí Đến 50%</h5>
+                                        <p class="mb-0" data-i18n="biomass_solution_2_desc">Tư vấn cách sử dụng chất đốt bã điều hiệu quả nhằm tiết kiệm chi phí sản xuất lên tới 50% so với khi chỉ đốt than</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="bg-white rounded p-4 h-100 shadow-sm">
+                                <div class="d-flex align-items-start">
+                                    <i class="fa fa-tools fa-3x text-primary flex-shrink-0 me-4"></i>
+                                    <div>
+                                        <h5 class="mb-3" data-i18n="biomass_solution_3_title">Bảo Vệ Tuổi Thọ Thiết Bị</h5>
+                                        <p class="mb-0" data-i18n="biomass_solution_3_desc">Tư vấn cách vận hành không ảnh hưởng đến tuổi thọ thiết bị, giúp doanh nghiệp tối ưu hóa đầu tư</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="bg-white rounded p-4 h-100 shadow-sm">
+                                <div class="d-flex align-items-start">
+                                    <i class="fa fa-leaf fa-3x text-primary flex-shrink-0 me-4"></i>
+                                    <div>
+                                        <h5 class="mb-3" data-i18n="biomass_solution_4_title">Xử Lý Khói Thải Thân Thiện</h5>
+                                        <p class="mb-0" data-i18n="biomass_solution_4_desc">Tư vấn cách xử lý khói thải không gây ảnh hưởng đến môi trường xung quanh, đáp ứng tiêu chuẩn môi trường</p>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Biomass Fuel Solutions End -->
+
+    <!-- KEITH® Walking Floor Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
+                <h6 class="text-primary" data-i18n="keith_subtitle">Công Nghệ Tiên Tiến Từ Mỹ</h6>
+                <h2 class="mb-4" data-i18n="keith_title">Hệ Thống Xuống Hàng Tự Động KEITH® Walking Floor</h2>
+            </div>
+            
+            <div class="row g-5 align-items-center mb-5">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <img class="img-fluid rounded shadow" src="img/aboutnt2.jpg" alt="KEITH® Walking Floor">
+                </div>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <p class="fs-5 mb-4" data-i18n="keith_text_1">Bên cạnh đó, từ năm 2018, Như Tín là đơn vị tiên phong tại Việt Nam đầu tư và đưa vào sử dụng công nghệ xuống hàng tự động (tự đổ) cho xe tải thùng, xe đầu kéo container từ Mỹ.</p>
+                    <p class="fs-5 mb-4" data-i18n="keith_text_2">Nhận thấy được những hiệu quả to lớn từ việc đầu tư này, Như Tín mong muốn được giới thiệu công nghệ này đến các doanh nghiệp trong nước, đóng góp vào lợi ích thiết thực cho Quý Khách Hàng.</p>
+                </div>
+            </div>
+
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 order-lg-2 wow fadeInUp" data-wow-delay="0.1s">
+                    <img class="img-fluid rounded shadow" src="img/aboutnt3.png" alt="KEITH® Walking Floor Authorized Dealer">
+                </div>
+                <div class="col-lg-6 order-lg-1 wow fadeInUp" data-wow-delay="0.3s">
+                    <p class="fs-5 mb-4" data-i18n="keith_text_3">Trải qua quá trình dài tìm hiểu, sàng lọc và ứng dụng thực tế, Như Tín hiện là Đại lý ủy quyền của KEITH® Mfg. Co, tại Việt Nam để phân phối và lắp đặt hệ thống xếp dỡ hàng hóa tự động cho xe tải, container chất lượng, hiệu quả và giá thành hợp lý cho thị trường Việt Nam.</p>
+                    <p class="fs-5 mb-0" data-i18n="keith_text_4">Với ưu điểm tinh gọn, linh hoạt, phù hợp với đa dạng hàng hóa, đa dạng tải trọng (từ 5 tấn đến 80 tấn), độ bền cao, gần như không cần bảo trì, vận hành đơn giản, lắp đặt nhanh chóng, hệ thống dễ dàng phù hợp với các loại xe tải thùng/container sẵn có của Quý Khách Hàng.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- KEITH® Walking Floor End -->
+
+    <!-- Features Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 700px;">
+                <h6 class="text-primary" data-i18n="features_subtitle">Ưu Điểm Vượt Trội</h6>
+                <h2 class="mb-4" data-i18n="features_title">Tại Sao Chọn Như Tín?</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="feature-card bg-white rounded shadow-sm h-100 p-4 position-relative overflow-hidden">
+                        <div class="feature-icon-wrapper mb-4">
+                            <div class="feature-icon d-inline-flex align-items-center justify-content-center rounded-circle bg-light mb-3">
+                                <i class="fa fa-truck fa-3x text-primary"></i>
+                            </div>
+                        </div>
+                        <h4 class="mb-3" data-i18n="feature_1_title">Tự Động Hóa Xếp Dỡ</h4>
+                        <p class="mb-0" style="color: #333;" data-i18n="feature_1_desc">Tăng tốc logistics với đội xe chuyên dụng nhiều xe, đa tải trọng, trang bị hệ thống xuống hàng tự động từ Mỹ.</p>
+                        <div class="feature-bg-icon">
+                            <i class="fa fa-truck"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="feature-card bg-white rounded shadow-sm h-100 p-4 position-relative overflow-hidden">
+                        <div class="feature-icon-wrapper mb-4">
+                            <div class="feature-icon d-inline-flex align-items-center justify-content-center rounded-circle bg-light mb-3">
+                                <i class="fa fa-clock fa-3x text-primary"></i>
+                            </div>
+                        </div>
+                        <h4 class="mb-3" data-i18n="feature_2_title">Tối Ưu Thời Gian</h4>
+                        <p class="mb-0" style="color: #333;" data-i18n="feature_2_desc">Thời gian dỡ hàng chỉ mất 5 phút. Giao hàng nhanh tận kho quý khách hàng trong ngày theo yêu cầu!</p>
+                        <div class="feature-bg-icon">
+                            <i class="fa fa-clock"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="feature-card bg-white rounded shadow-sm h-100 p-4 position-relative overflow-hidden">
+                        <div class="feature-icon-wrapper mb-4">
+                            <div class="feature-icon d-inline-flex align-items-center justify-content-center rounded-circle bg-light mb-3">
+                                <i class="fa fa-leaf fa-3x text-primary"></i>
+                            </div>
+                        </div>
+                        <h4 class="mb-3" data-i18n="feature_3_title">Nhiên Liệu Sạch</h4>
+                        <p class="mb-0" style="color: #333;" data-i18n="feature_3_desc">Dẫn đầu thị trường sinh khối bã điều tại Miền Nam với hàng chục năm kinh nghiệm. Năng lượng xanh cho tương lai.</p>
+                        <div class="feature-bg-icon">
+                            <i class="fa fa-leaf"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="feature-card bg-white rounded shadow-sm h-100 p-4 position-relative overflow-hidden">
+                        <div class="feature-icon-wrapper mb-4">
+                            <div class="feature-icon d-inline-flex align-items-center justify-content-center rounded-circle bg-light mb-3">
+                                <i class="fa fa-sliders-h fa-3x text-primary"></i>
+                            </div>
+                        </div>
+                        <h4 class="mb-3" data-i18n="feature_4_title">Linh Hoạt & Đa Dạng</h4>
+                        <p class="mb-0" style="color: #333;" data-i18n="feature_4_desc">Tinh gọn, linh hoạt, phù hợp với đa dạng hàng hóa, đa dạng tải trọng (từ 5 tấn đến 80 tấn), độ bền cao, gần như không cần bảo trì.</p>
+                        <div class="feature-bg-icon">
+                            <i class="fa fa-sliders-h"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="feature-card bg-white rounded shadow-sm h-100 p-4 position-relative overflow-hidden">
+                        <div class="feature-icon-wrapper mb-4">
+                            <div class="feature-icon d-inline-flex align-items-center justify-content-center rounded-circle bg-light mb-3">
+                                <i class="fa fa-hand-holding-heart fa-3x text-primary"></i>
+                            </div>
+                        </div>
+                        <h4 class="mb-3" data-i18n="feature_5_title">Uy Tín - Tận Tâm</h4>
+                        <p class="mb-0" style="color: #333;" data-i18n="feature_5_desc">Đội ngũ quản lý uy tín, tinh thần trách nhiệm cao, linh động, tinh gọn & hiệu quả. Cam kết mang đến sản phẩm chất lượng với giá cả cạnh tranh nhất.</p>
+                        <div class="feature-bg-icon">
+                            <i class="fa fa-hand-holding-heart"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+                    <div class="feature-card bg-white rounded shadow-sm h-100 p-4 position-relative overflow-hidden">
+                        <div class="feature-icon-wrapper mb-4">
+                            <div class="feature-icon d-inline-flex align-items-center justify-content-center rounded-circle bg-light mb-3">
+                                <i class="fa fa-headset fa-3x text-primary"></i>
+                            </div>
+                        </div>
+                        <h4 class="mb-3" data-i18n="feature_6_title">Hỗ Trợ 24/24</h4>
+                        <p class="mb-0" style="color: #333;" data-i18n="feature_6_desc">Hỗ trợ miễn phí 24/24. Liên hệ: 0907 917 301</p>
+                        <div class="feature-bg-icon">
+                            <i class="fa fa-headset"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Features End -->
+
+    <!-- Team Commitment Start -->
+    <div class="container-fluid bg-light py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-12 text-center mb-4 wow fadeInUp" data-wow-delay="0.1s">
+                    <h6 class="text-primary" data-i18n="commitment_subtitle">Đội Ngũ & Cam Kết</h6>
+                    <h2 class="mb-4" data-i18n="commitment_title">Cam Kết Chất Lượng Từ Như Tín</h2>
+                </div>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="bg-white rounded p-5 shadow-sm h-100">
+                        <h4 class="mb-4"><i class="fa fa-users text-primary me-3"></i><span data-i18n="commitment_team_title">Đội Ngũ Chuyên Nghiệp</span></h4>
+                        <p class="fs-5 mb-0" data-i18n="commitment_team_desc">Với đội ngũ quản lý uy tín, tinh thần trách nhiệm cao, linh động, tinh gọn & hiệu quả, chúng tôi cam kết mang đến cho Quý khách hàng những sản phẩm chất lượng với giá cả cạnh tranh nhất, tiến độ giao hàng đảm bảo, đáp ứng yêu cầu đa dạng của Quý khách.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="bg-white rounded p-5 shadow-sm h-100">
+                        <h4 class="mb-4"><i class="fa fa-handshake text-primary me-3"></i><span data-i18n="commitment_motto_title">Phương Châm Hoạt Động</span></h4>
+                        <p class="fs-5 mb-0" data-i18n="commitment_motto_desc">Với phương châm uy tín và hợp tác bền vững, Như Tín luôn nỗ lực cả về nhân lực và vật lực để xây dựng uy tín thương hiệu, niềm tin và sự hài lòng của khách hàng đối với sản phẩm và dịch vụ mà chúng tôi cung cấp.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Team Commitment End -->
+
+    <!-- Final Message Start -->
+    <div class="container-fluid bg-primary text-white py-5">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
+                    <h2 class="text-white mb-4" data-i18n="final_title">Lời cảm ơn & cam kết</h2>
+                    <p class="text-white fs-5 mb-4" data-i18n="final_text_1">Sự tin tưởng và ủng hộ của khách hàng trong suốt thời gian qua là nguồn động viên to lớn trên con đường phát triển của Như Tín. Chúng tôi sẽ không ngừng hoàn thiện, phục vụ khách hàng tốt nhất để xứng đáng với niềm tin đó.</p>
+                    <p class="text-white fs-5 mb-0" data-i18n="final_text_2">Công ty cổ phần Như Tín sẵn sàng đáp ứng các yêu cầu của Quý khách hàng với những sản phẩm & dịch vụ chất lượng và giá cả cạnh tranh nhất!</p>
+                </div>
+                <div class="col-lg-4 text-center wow fadeInUp" data-wow-delay="0.3s">
+                    <a href="contact.html" class="btn btn-light btn-lg rounded-pill py-3 px-5" data-i18n="final_cta">Liên Hệ Ngay</a>
+                    <p class="text-white mt-3 mb-0"><i class="fa fa-phone-alt me-2"></i><strong>0907 917 301</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Final Message End -->
+
+
+        
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Load Components Script -->
+    <script src="js/load-components.js"></script>
+    
+    <!-- i18n Script -->
+    <script src="js/i18n.js"></script>
+    
+    <!-- Language Toggle Script -->
+    <script src="js/lang-toggle.js"></script>
+    
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

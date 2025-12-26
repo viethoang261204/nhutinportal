@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiến độ giao hàng - NHUTIN Customer Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Be Vietnam Pro', sans-serif; background: #E8F3EC; min-height: 100vh; }
+        .app-container { display: flex; min-height: 100vh; }
+
+        /* Sidebar */
+        .sidebar { width: 280px; background: linear-gradient(180deg, #2D4A3E 0%, #243D33 100%); padding: 24px 16px; display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 100; transition: transform 0.3s ease; }
+        .sidebar-header { display: flex; align-items: center; gap: 12px; padding: 0 12px 24px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 24px; }
+        .logo-icon { width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+        .logo-icon svg { width: 22px; height: 22px; fill: #fff; }
+        .logo-text { color: #fff; font-size: 16px; font-weight: 600; }
+        .nav-menu { flex: 1; overflow-y: auto; }
+        .nav-section { margin-bottom: 24px; }
+        .nav-section-title { color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0 12px; margin-bottom: 8px; }
+        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; transition: all 0.2s ease; margin-bottom: 2px; }
+        .nav-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
+        .nav-item.active { background: rgba(255,255,255,0.15); color: #fff; font-weight: 500; }
+        .nav-item svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+        .nav-badge { margin-left: auto; background: #E74C3C; color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
+        .sidebar-footer { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; }
+        .user-info { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; cursor: pointer; }
+        .user-info:hover { background: rgba(255,255,255,0.08); }
+        .user-avatar { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; }
+        .user-details { flex: 1; }
+        .user-name { color: #fff; font-size: 14px; font-weight: 500; }
+        .user-email { color: rgba(255,255,255,0.6); font-size: 12px; }
+
+        /* Main Content */
+        .main-content { flex: 1; margin-left: 280px; padding: 32px; min-height: 100vh; }
+        .page-header { margin-bottom: 32px; }
+        .page-title { font-size: 24px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
+        .page-subtitle { color: #666; font-size: 14px; }
+
+        /* Shipment Cards */
+        .shipments-grid { display: flex; flex-direction: column; gap: 20px; }
+        
+        .shipment-card { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+        .shipment-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+        .shipment-info h3 { font-size: 16px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
+        .shipment-id { font-size: 13px; color: #888; }
+        .shipment-status { display: flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+        .status-transit { background: #F3E8F8; color: #7B2D8E; }
+        .status-transit::before { content: ''; width: 6px; height: 6px; background: #7B2D8E; border-radius: 50%; animation: blink 1s infinite; }
+        .status-delivered { background: #E8F3EC; color: #2D4A3E; }
+        .status-delivered::before { content: ''; width: 6px; height: 6px; background: #2D4A3E; border-radius: 50%; }
+        .status-preparing { background: #FFF3E8; color: #C75E00; }
+        .status-preparing::before { content: ''; width: 6px; height: 6px; background: #C75E00; border-radius: 50%; }
+        
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        /* Shipment Details Grid */
+        .shipment-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; padding: 20px 0; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; margin-bottom: 20px; }
+        .detail-item label { display: block; font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .detail-item span { font-size: 14px; font-weight: 500; color: #333; }
+
+        /* Tracking Timeline */
+        .tracking-timeline { position: relative; }
+        .tracking-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .tracking-title { font-size: 14px; font-weight: 600; color: #333; }
+        .toggle-btn { background: none; border: none; color: #2D4A3E; font-size: 13px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; }
+        .toggle-btn svg { width: 16px; height: 16px; transition: transform 0.3s; }
+        .toggle-btn.expanded svg { transform: rotate(180deg); }
+
+        .tracking-steps { display: flex; justify-content: space-between; position: relative; padding: 0 20px; }
+        .tracking-steps::before { content: ''; position: absolute; top: 16px; left: 40px; right: 40px; height: 3px; background: #e0e0e0; z-index: 0; }
+        
+        .tracking-step { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; flex: 1; }
+        .step-icon { width: 32px; height: 32px; border-radius: 50%; background: #fff; border: 3px solid #e0e0e0; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+        .step-icon svg { width: 14px; height: 14px; stroke: #999; }
+        .tracking-step.completed .step-icon { background: #2D4A3E; border-color: #2D4A3E; }
+        .tracking-step.completed .step-icon svg { stroke: #fff; }
+        .tracking-step.current .step-icon { border-color: #2D4A3E; animation: pulse-ring 1.5s infinite; }
+        @keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(45,74,62,0.4); } 70% { box-shadow: 0 0 0 8px rgba(45,74,62,0); } 100% { box-shadow: 0 0 0 0 rgba(45,74,62,0); } }
+        
+        .step-label { font-size: 11px; color: #888; text-align: center; max-width: 80px; }
+        .tracking-step.completed .step-label { color: #2D4A3E; font-weight: 500; }
+        .tracking-step.current .step-label { color: #2D4A3E; font-weight: 600; }
+        .step-date { font-size: 10px; color: #aaa; margin-top: 4px; }
+
+        /* Detailed Timeline */
+        .detailed-timeline { margin-top: 20px; padding-top: 20px; border-top: 1px solid #f0f0f0; display: none; }
+        .detailed-timeline.show { display: block; }
+        .timeline-event { display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid #f5f5f5; }
+        .timeline-event:last-child { border-bottom: none; }
+        .event-time { min-width: 100px; font-size: 12px; color: #888; }
+        .event-dot { width: 10px; height: 10px; background: #2D4A3E; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+        .event-content { flex: 1; }
+        .event-title { font-size: 13px; font-weight: 500; color: #333; margin-bottom: 2px; }
+        .event-location { font-size: 12px; color: #888; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .main-content { margin-left: 0; padding: 20px 16px; }
+            .tracking-steps { flex-wrap: wrap; gap: 16px; padding: 0; }
+            .tracking-steps::before { display: none; }
+            .tracking-step { flex: 0 0 calc(50% - 8px); }
+            .shipment-details { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .mobile-menu-btn { display: none; position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; background: #2D4A3E; border: none; border-radius: 16px; color: #fff; cursor: pointer; z-index: 101; box-shadow: 0 4px 20px rgba(45,74,62,0.4); }
+        .mobile-menu-btn svg { width: 24px; height: 24px; stroke: #fff; }
+        @media (max-width: 768px) { .mobile-menu-btn { display: flex; align-items: center; justify-content: center; } }
+        .overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 99; }
+        .overlay.show { display: block; }
+
+        /* Logout Modal */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+        .modal-overlay.show { display: flex; }
+        .modal { background: #fff; border-radius: 20px; padding: 32px; max-width: 400px; width: 100%; text-align: center; animation: modalSlide 0.3s ease; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+        @keyframes modalSlide { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-icon { width: 72px; height: 72px; background: #FFF3E8; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+        .modal-icon svg { width: 36px; height: 36px; stroke: #C75E00; }
+        .modal h3 { font-size: 20px; font-weight: 600; color: #1a1a1a; margin-bottom: 8px; }
+        .modal p { font-size: 14px; color: #666; margin-bottom: 24px; }
+        .modal-actions { display: flex; gap: 12px; }
+        .modal-btn { flex: 1; padding: 14px 20px; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+        .modal-btn-cancel { background: #f5f5f5; border: none; color: #666; }
+        .modal-btn-cancel:hover { background: #e8e8e8; }
+        .modal-btn-confirm { background: #E74C3C; border: none; color: #fff; }
+        .modal-btn-confirm:hover { background: #C0392B; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <span class="logo-text">NHUTIN Portal</span>
+            </div>
+            <nav class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Tổng quan</div>
+                    <a href="/portal/dashboard" class="nav-item">
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                        <span>Dashboard</span>
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Đơn hàng</div>
+                    <a href="/portal/orders" class="nav-item">
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                        <span>Đơn hàng</span>
+                        <span class="nav-badge">3</span>
+                    </a>
+                    <a href="/portal/delivery" class="nav-item active">
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
+                        <span>Tiến độ giao hàng</span>
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Tài liệu</div>
+                    <a href="/portal/documents" class="nav-item">
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        <span>Hóa đơn & Chứng từ</span>
+                    </a>
+                    <a href="/portal/contracts" class="nav-item">
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                        <span>Báo giá & Hợp đồng</span>
+                    </a>
+                    <a href="/portal/history" class="nav-item">
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span>Lịch sử giao dịch</span>
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Hỗ trợ</div>
+                    <a href="/portal/support" class="nav-item">
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 18v-6a9 9 0 0118 0v6M3 18a3 3 0 003 3h0a3 3 0 003-3v-3a3 3 0 00-3-3h0a3 3 0 00-3 3v3zm18 0a3 3 0 01-3 3h0a3 3 0 01-3-3v-3a3 3 0 013-3h0a3 3 0 013 3v3z"/></svg>
+                        <span>CSKH phụ trách</span>
+                    </a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info" onclick="logout()">
+                    <img src="https://i.pravatar.cc/150?img=3" alt="User" class="user-avatar">
+                    <div class="user-details">
+                        <div class="user-name" id="userName">Joaquin</div>
+                        <div class="user-email" id="userEmail">joaquin@example.com</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Tiến độ giao hàng</h1>
+                <p class="page-subtitle">Theo dõi trạng thái vận chuyển các lô hàng của bạn</p>
+            </div>
+
+            <div class="shipments-grid">
+                <!-- Shipment 1 - In Transit -->
+                <div class="shipment-card">
+                    <div class="shipment-header">
+                        <div class="shipment-info">
+                            <h3>Lô hàng #SHP-2024-0089</h3>
+                            <span class="shipment-id">Đơn hàng: #ORD-2024-001 • Bã vỏ hạt điều - 50 tấn</span>
+                        </div>
+                        <div class="shipment-status status-transit">Đang vận chuyển</div>
+                    </div>
+
+                    <div class="shipment-details">
+                        <div class="detail-item">
+                            <label>Container</label>
+                            <span>MSCU7654321</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Tàu / Chuyến</label>
+                            <span>EVER GOLDEN / 2045E</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Cảng đi</label>
+                            <span>Cát Lái, Việt Nam</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Cảng đến</label>
+                            <span>Busan, Hàn Quốc</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Ngày xuất phát</label>
+                            <span>03/12/2024</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Dự kiến đến</label>
+                            <span>12/12/2024</span>
+                        </div>
+                    </div>
+
+                    <div class="tracking-timeline">
+                        <div class="tracking-header">
+                            <span class="tracking-title">Trạng thái vận chuyển</span>
+                            <button class="toggle-btn" onclick="toggleTimeline(this)">
+                                Chi tiết
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                        </div>
+                        <div class="tracking-steps">
+                            <div class="tracking-step completed">
+                                <div class="step-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <span class="step-label">Đã nhận hàng</span>
+                                <span class="step-date">01/12</span>
+                            </div>
+                            <div class="tracking-step completed">
+                                <div class="step-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <span class="step-label">Đóng container</span>
+                                <span class="step-date">02/12</span>
+                            </div>
+                            <div class="tracking-step completed">
+                                <div class="step-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <span class="step-label">Xuất cảng</span>
+                                <span class="step-date">03/12</span>
+                            </div>
+                            <div class="tracking-step current">
+                                <div class="step-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 16V6M13 6l4 4M13 6l-4 4M5 20h14"/></svg>
+                                </div>
+                                <span class="step-label">Trên biển</span>
+                                <span class="step-date">Đang đi</span>
+                            </div>
+                            <div class="tracking-step">
+                                <div class="step-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                <span class="step-label">Cập cảng</span>
+                                <span class="step-date">12/12</span>
+                            </div>
+                        </div>
+
+                        <div class="detailed-timeline">
+                            <div class="timeline-event">
+                                <div class="event-time">03/12 18:30</div>
+                                <div class="event-dot"></div>
+                                <div class="event-content">
+                                    <div class="event-title">Tàu rời cảng Cát Lái</div>
+                                    <div class="event-location">📍 Cảng Cát Lái, TP.HCM, Việt Nam</div>
+                                </div>
+                            </div>
+                            <div class="timeline-event">
+                                <div class="event-time">02/12 14:00</div>
+                                <div class="event-dot"></div>
+                                <div class="event-content">
+                                    <div class="event-title">Container đã lên tàu EVER GOLDEN</div>
+                                    <div class="event-location">📍 Cảng Cát Lái, TP.HCM, Việt Nam</div>
+                                </div>
+                            </div>
+                            <div class="timeline-event">
+                                <div class="event-time">02/12 08:00</div>
+                                <div class="event-dot"></div>
+                                <div class="event-content">
+                                    <div class="event-title">Hoàn tất thủ tục hải quan xuất khẩu</div>
+                                    <div class="event-location">📍 Cảng Cát Lái, TP.HCM, Việt Nam</div>
+                                </div>
+                            </div>
+                            <div class="timeline-event">
+                                <div class="event-time">01/12 16:00</div>
+                                <div class="event-dot"></div>
+                                <div class="event-content">
+                                    <div class="event-title">Hàng đã đóng vào container MSCU7654321</div>
+                                    <div class="event-location">📍 Kho Bình Dương, Việt Nam</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipment 2 - Preparing -->
+                <div class="shipment-card">
+                    <div class="shipment-header">
+                        <div class="shipment-info">
+                            <h3>Lô hàng #SHP-2024-0090</h3>
+                            <span class="shipment-id">Đơn hàng: #ORD-2024-002 • Bã vỏ hạt điều loại A - 30 tấn</span>
+                        </div>
+                        <div class="shipment-status status-preparing">Đang chuẩn bị</div>
+                    </div>
+
+                    <div class="shipment-details">
+                        <div class="detail-item">
+                            <label>Container</label>
+                            <span>Chờ xếp</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Tàu / Chuyến</label>
+                            <span>OOCL HAMBURG / 1892W</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Cảng đi</label>
+                            <span>Cát Lái, Việt Nam</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Cảng đến</label>
+                            <span>Shanghai, Trung Quốc</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Ngày xuất phát</label>
+                            <span>10/12/2024</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Dự kiến đến</label>
+                            <span>18/12/2024</span>
+                        </div>
+                    </div>
+
+                    <div class="tracking-timeline">
+                        <div class="tracking-header">
+                            <span class="tracking-title">Trạng thái vận chuyển</span>
+                        </div>
+                        <div class="tracking-steps">
+                            <div class="tracking-step current">
+                                <div class="step-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4"/></svg>
+                                </div>
+                                <span class="step-label">Chuẩn bị hàng</span>
+                                <span class="step-date">Đang xử lý</span>
+                            </div>
+                            <div class="tracking-step">
+                                <div class="step-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                                </div>
+                                <span class="step-label">Đóng container</span>
+                                <span class="step-date">09/12</span>
+                            </div>
+                            <div class="tracking-step">
+                                <div class="step-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/></svg>
+                                </div>
+                                <span class="step-label">Xuất cảng</span>
+                                <span class="step-date">10/12</span>
+                            </div>
+                            <div class="tracking-step">
+                                <div class="step-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 16V6M13 6l4 4M13 6l-4 4"/></svg>
+                                </div>
+                                <span class="step-label">Trên biển</span>
+                                <span class="step-date">-</span>
+                            </div>
+                            <div class="tracking-step">
+                                <div class="step-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                <span class="step-label">Cập cảng</span>
+                                <span class="step-date">18/12</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipment 3 - Delivered -->
+                <div class="shipment-card">
+                    <div class="shipment-header">
+                        <div class="shipment-info">
+                            <h3>Lô hàng #SHP-2024-0085</h3>
+                            <span class="shipment-id">Đơn hàng: #ORD-2024-004 • Bã vỏ hạt điều loại B - 45 tấn</span>
+                        </div>
+                        <div class="shipment-status status-delivered">Đã giao hàng</div>
+                    </div>
+
+                    <div class="shipment-details">
+                        <div class="detail-item">
+                            <label>Container</label>
+                            <span>TEMU8912345</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Tàu / Chuyến</label>
+                            <span>MSC ANNA / 3421E</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Cảng đi</label>
+                            <span>Cát Lái, Việt Nam</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Cảng đến</label>
+                            <span>Tokyo, Nhật Bản</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Ngày xuất phát</label>
+                            <span>20/11/2024</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Ngày giao hàng</label>
+                            <span>28/11/2024</span>
+                        </div>
+                    </div>
+
+                    <div class="tracking-timeline">
+                        <div class="tracking-header">
+                            <span class="tracking-title">Trạng thái vận chuyển</span>
+                        </div>
+                        <div class="tracking-steps">
+                            <div class="tracking-step completed">
+                                <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg></div>
+                                <span class="step-label">Đã nhận hàng</span>
+                                <span class="step-date">18/11</span>
+                            </div>
+                            <div class="tracking-step completed">
+                                <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg></div>
+                                <span class="step-label">Đóng container</span>
+                                <span class="step-date">19/11</span>
+                            </div>
+                            <div class="tracking-step completed">
+                                <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg></div>
+                                <span class="step-label">Xuất cảng</span>
+                                <span class="step-date">20/11</span>
+                            </div>
+                            <div class="tracking-step completed">
+                                <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg></div>
+                                <span class="step-label">Cập cảng</span>
+                                <span class="step-date">27/11</span>
+                            </div>
+                            <div class="tracking-step completed">
+                                <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg></div>
+                                <span class="step-label">Đã giao</span>
+                                <span class="step-date">28/11</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+
+    <!-- Logout Modal -->
+    <div class="modal-overlay" id="logoutModal" onclick="if(event.target===this)closeLogoutModal()">
+        <div class="modal">
+            <div class="modal-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            </div>
+            <h3>Đăng xuất?</h3>
+            <p>Bạn có chắc chắn muốn đăng xuất khỏi tài khoản không?</p>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-cancel" onclick="closeLogoutModal()">Hủy</button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmLogout()">Đăng xuất</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = JSON.parse(localStorage.getItem('nhutin_user') || '{}');
+            if (userData.name) document.getElementById('userName').textContent = userData.name;
+            if (userData.email) document.getElementById('userEmail').textContent = userData.email;
+        });
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('show');
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('show');
+        }
+        function logout() {
+            document.getElementById('logoutModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLogoutModal() {
+            document.getElementById('logoutModal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+        function confirmLogout() {
+            localStorage.removeItem('nhutin_user');
+            localStorage.removeItem('nhutin_logged_in');
+            // Stay on current page after logout
+        }
+        function toggleTimeline(btn) {
+            btn.classList.toggle('expanded');
+            const timeline = btn.closest('.tracking-timeline').querySelector('.detailed-timeline');
+            timeline.classList.toggle('show');
+            btn.innerHTML = timeline.classList.contains('show') ? 
+                'Thu gọn<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>' :
+                'Chi tiết<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>';
+        }
+    </script>
+</body>
+</html>
+

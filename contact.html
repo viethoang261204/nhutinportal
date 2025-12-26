@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Liên hệ — NHUTIN</title>
+    <meta
+      name="description"
+      content="Liên hệ NHUTIN để nhận tư vấn về nhiên liệu sinh khối bã điều và giải pháp xuống hàng tự động (Walking Floor)."
+    />
+    <link rel="icon" href="img/logo.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/site.css" />
+  </head>
+
+  <body>
+    <div class="bgfx" aria-hidden="true"></div>
+    <a class="skip" href="#main">Bỏ qua menu</a>
+
+    <header class="topbar" data-include="components/navbar.html"></header>
+
+    <main id="main">
+      <section class="section hero">
+        <div class="container">
+          <div class="grid hero-grid">
+            <div class="card padded" data-reveal>
+              <h1>Gửi nhu cầu — NHUTIN tư vấn nhanh</h1>
+              <p class="sub">
+                Vui lòng để lại thông tin. Chúng tôi sẽ liên hệ lại sớm để tư vấn giải pháp phù hợp theo hiện trạng và mục tiêu vận hành.
+              </p>
+              <div class="hero-actions">
+                <a class="btn primary" href="tel:0907917301">Gọi ngay: 0907 917 301</a>
+                <a class="btn" href="https://zalo.me/0907917301" target="_blank" rel="noopener noreferrer">Chat Zalo</a>
+              </div>
+            </div>
+            <div class="card hero-media solid" data-reveal>
+              <img src="img/aboutnt4.jpg" alt="Liên hệ NHUTIN" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="grid contactGrid">
+            <div class="card padded solid" data-reveal>
+              <h2 class="h2" style="font-size: clamp(22px, 2.2vw, 30px)">Liên hệ với chúng tôi</h2>
+              <p class="sub">Điền thông tin, bấm “Gửi yêu cầu” để mở email soạn sẵn.</p>
+
+              <div class="row2" style="margin-top: 14px">
+                <div class="field">
+                  <label for="name">Họ và tên</label>
+                  <input id="name" type="text" placeholder="Nguyễn Văn A" />
+                </div>
+                <div class="field">
+                  <label for="phone">Số điện thoại</label>
+                  <input id="phone" type="tel" placeholder="0907 917 301" />
+                </div>
+              </div>
+
+              <div class="row2">
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input id="email" type="email" placeholder="you@company.com" />
+                </div>
+                <div class="field">
+                  <label for="service">Dịch vụ quan tâm</label>
+                  <select id="service">
+                    <option value="walking-floor">Walking Floor / Xuống hàng tự động</option>
+                    <option value="biomass">Nhiên liệu sinh khối bã điều</option>
+                    <option value="consulting">Tư vấn / Cải tiến lò hơi</option>
+                    <option value="other">Khác</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="message">Tin nhắn</label>
+                <textarea id="message" placeholder="Mô tả nhu cầu, quy mô, thời gian dự kiến..."></textarea>
+              </div>
+
+              <div class="hero-actions" style="margin-top: 10px">
+                <button class="btn primary" type="button" data-contact-send>Gửi yêu cầu</button>
+                <a class="btn" href="products.html">Xem sản phẩm</a>
+              </div>
+
+              <div style="margin-top: 14px; color: rgba(11, 18, 32, 0.68); font-size: 13px; line-height: 1.7">
+                <div><strong>Địa chỉ:</strong> 39 Chu Văn An, KP1, P. Hiệp Phú, Tp. Thủ Đức, Tp. HCM</div>
+                <div><strong>Email:</strong> nhutincorp@gmail.com</div>
+              </div>
+            </div>
+
+            <div class="card map solid" data-reveal>
+              <iframe
+                title="Bản đồ NHUTIN"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=39+Chu+Văn+An,+KP1,+P.+Hiệp+Phú,+Tp.+Thủ+Đức,+Tp.+HCM&output=embed"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div data-include="components/footer.html"></div>
+    </main>
+
+    <script src="js/include.js" defer></script>
+    <script src="js/site.js" defer></script>
+  </body>
+</html>
+
+

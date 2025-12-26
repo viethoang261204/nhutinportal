@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đơn hàng - NHUTIN Customer Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background: #E8F3EC;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar - Copy from dashboard */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #2D4A3E 0%, #243D33 100%);
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 12px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 24px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+        }
+
+        .logo-text {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .nav-menu {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .nav-section {
+            margin-bottom: 24px;
+        }
+
+        .nav-section-title {
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0 12px;
+            margin-bottom: 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 12px;
+            border-radius: 10px;
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            margin-bottom: 2px;
+        }
+
+        .nav-item:hover {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+        }
+
+        .nav-item.active {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .nav-item svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.5;
+            flex-shrink: 0;
+        }
+
+        .nav-badge {
+            margin-left: auto;
+            background: #E74C3C;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .sidebar-footer {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 16px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .user-info:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .user-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .user-name {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .user-email {
+            color: rgba(255,255,255,0.6);
+            font-size: 12px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 32px;
+            min-height: 100vh;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .page-subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .btn-primary {
+            background: #2D4A3E;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #3D5F4F;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: #333;
+            border: 1px solid #e0e0e0;
+        }
+
+        .btn-secondary:hover {
+            background: #f5f5f5;
+            border-color: #ccc;
+        }
+
+        /* Filters */
+        .filters-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px 12px 44px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #fff;
+            transition: all 0.2s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #2D4A3E;
+            box-shadow: 0 0 0 3px rgba(45, 74, 62, 0.1);
+        }
+
+        .search-box svg {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            stroke: #888;
+        }
+
+        .filter-select {
+            padding: 12px 36px 12px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6,9 12,15 18,9'/%3E%3C/svg%3E") no-repeat right 12px center;
+            cursor: pointer;
+            appearance: none;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #2D4A3E;
+        }
+
+        /* Orders Table */
+        .orders-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            overflow: hidden;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 16px 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eee;
+        }
+
+        td {
+            padding: 16px 20px;
+            font-size: 14px;
+            color: #333;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: #fafafa;
+        }
+
+        .order-id {
+            font-weight: 600;
+            color: #2D4A3E;
+        }
+
+        .order-product {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .product-image {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-name {
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 2px;
+        }
+
+        .product-qty {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .status-pending {
+            background: #FFF3E8;
+            color: #C75E00;
+        }
+
+        .status-pending::before {
+            background: #C75E00;
+        }
+
+        .status-processing {
+            background: #E8F0F8;
+            color: #2D5A8E;
+        }
+
+        .status-processing::before {
+            background: #2D5A8E;
+        }
+
+        .status-shipping {
+            background: #F3E8F8;
+            color: #7B2D8E;
+        }
+
+        .status-shipping::before {
+            background: #7B2D8E;
+        }
+
+        .status-completed {
+            background: #E8F3EC;
+            color: #2D4A3E;
+        }
+
+        .status-completed::before {
+            background: #2D4A3E;
+        }
+
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background: #fff;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: #f5f5f5;
+            border-color: #ccc;
+        }
+
+        .action-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: #666;
+        }
+
+        /* Pagination */
+        .table-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .table-info {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .pagination {
+            display: flex;
+            gap: 8px;
+        }
+
+        .page-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #666;
+            transition: all 0.2s;
+        }
+
+        .page-btn:hover {
+            background: #f5f5f5;
+        }
+
+        .page-btn.active {
+            background: #2D4A3E;
+            color: #fff;
+            border-color: #2D4A3E;
+        }
+
+        .page-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px 16px;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .filters-bar {
+                flex-direction: column;
+            }
+
+            .search-box {
+                min-width: 100%;
+            }
+
+            th, td {
+                padding: 12px 16px;
+            }
+
+            .order-product {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .product-image {
+                display: none;
+            }
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: #2D4A3E;
+            border: none;
+            border-radius: 16px;
+            color: #fff;
+            cursor: pointer;
+            z-index: 101;
+            box-shadow: 0 4px 20px rgba(45, 74, 62, 0.4);
+        }
+
+        .mobile-menu-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 99;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        /* Logout Modal */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+        .modal-overlay.show { display: flex; }
+        .modal { background: #fff; border-radius: 20px; padding: 32px; max-width: 400px; width: 100%; text-align: center; animation: slideUp 0.3s ease; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-icon { width: 72px; height: 72px; background: #FFF3E8; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+        .modal-icon svg { width: 36px; height: 36px; stroke: #C75E00; }
+        .modal h3 { font-size: 20px; font-weight: 600; color: #1a1a1a; margin-bottom: 8px; }
+        .modal p { font-size: 14px; color: #666; margin-bottom: 24px; }
+        .modal-actions { display: flex; gap: 12px; }
+        .modal-btn { flex: 1; padding: 14px 20px; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+        .modal-btn-cancel { background: #f5f5f5; border: none; color: #666; }
+        .modal-btn-cancel:hover { background: #e8e8e8; }
+        .modal-btn-confirm { background: #E74C3C; border: none; color: #fff; }
+        .modal-btn-confirm:hover { background: #C0392B; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <span class="logo-text">NHUTIN Portal</span>
+            </div>
+
+            <nav class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Tổng quan</div>
+                    <a href="/portal/dashboard" class="nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Đơn hàng</div>
+                    <a href="/portal/orders" class="nav-item active">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        </svg>
+                        <span>Đơn hàng</span>
+                        <span class="nav-badge">3</span>
+                    </a>
+                    <a href="/portal/delivery" class="nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
+                        </svg>
+                        <span>Tiến độ giao hàng</span>
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Tài liệu</div>
+                    <a href="/portal/documents" class="nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <span>Hóa đơn & Chứng từ</span>
+                    </a>
+                    <a href="/portal/contracts" class="nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                        <span>Báo giá & Hợp đồng</span>
+                    </a>
+                    <a href="/portal/history" class="nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span>Lịch sử giao dịch</span>
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Hỗ trợ</div>
+                    <a href="/portal/support" class="nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 18v-6a9 9 0 0118 0v6M3 18a3 3 0 003 3h0a3 3 0 003-3v-3a3 3 0 00-3-3h0a3 3 0 00-3 3v3zm18 0a3 3 0 01-3 3h0a3 3 0 01-3-3v-3a3 3 0 013-3h0a3 3 0 013 3v3z"/>
+                        </svg>
+                        <span>CSKH phụ trách</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info" onclick="logout()">
+                    <img src="https://i.pravatar.cc/150?img=3" alt="User" class="user-avatar">
+                    <div class="user-details">
+                        <div class="user-name" id="userName">Joaquin</div>
+                        <div class="user-email" id="userEmail">joaquin@example.com</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Đơn hàng</h1>
+                    <p class="page-subtitle">Quản lý và theo dõi tất cả đơn hàng của bạn</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                        Xuất Excel
+                    </button>
+                    <a href="#" class="btn btn-primary">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        Yêu cầu báo giá
+                    </a>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters-bar">
+                <div class="search-box">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <input type="text" placeholder="Tìm kiếm theo mã đơn, sản phẩm...">
+                </div>
+                <select class="filter-select">
+                    <option value="">Tất cả trạng thái</option>
+                    <option value="pending">Chờ xác nhận</option>
+                    <option value="processing">Đang xử lý</option>
+                    <option value="shipping">Đang vận chuyển</option>
+                    <option value="completed">Hoàn thành</option>
+                </select>
+                <select class="filter-select">
+                    <option value="">Tháng này</option>
+                    <option value="last-month">Tháng trước</option>
+                    <option value="last-3-months">3 tháng gần đây</option>
+                    <option value="this-year">Năm nay</option>
+                </select>
+            </div>
+
+            <!-- Orders Table -->
+            <div class="orders-card">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mã đơn</th>
+                                <th>Sản phẩm</th>
+                                <th>Ngày đặt</th>
+                                <th>Giá trị</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="order-id">#ORD-2024-001</span></td>
+                                <td>
+                                    <div class="order-product">
+                                        <div class="product-image">🥜</div>
+                                        <div class="product-info">
+                                            <div class="product-name">Bã vỏ hạt điều</div>
+                                            <div class="product-qty">50 tấn</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>05/12/2024</td>
+                                <td><strong>$12,500.00</strong></td>
+                                <td><span class="status-badge status-shipping">Đang vận chuyển</span></td>
+                                <td>
+                                    <button class="action-btn" title="Xem chi tiết">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="order-id">#ORD-2024-002</span></td>
+                                <td>
+                                    <div class="order-product">
+                                        <div class="product-image">🥜</div>
+                                        <div class="product-info">
+                                            <div class="product-name">Bã vỏ hạt điều loại A</div>
+                                            <div class="product-qty">30 tấn</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>03/12/2024</td>
+                                <td><strong>$8,100.00</strong></td>
+                                <td><span class="status-badge status-processing">Đang xử lý</span></td>
+                                <td>
+                                    <button class="action-btn" title="Xem chi tiết">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="order-id">#ORD-2024-003</span></td>
+                                <td>
+                                    <div class="order-product">
+                                        <div class="product-image">🥜</div>
+                                        <div class="product-info">
+                                            <div class="product-name">Bã vỏ hạt điều</div>
+                                            <div class="product-qty">100 tấn</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>01/12/2024</td>
+                                <td><strong>$25,000.00</strong></td>
+                                <td><span class="status-badge status-pending">Chờ xác nhận</span></td>
+                                <td>
+                                    <button class="action-btn" title="Xem chi tiết">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="order-id">#ORD-2024-004</span></td>
+                                <td>
+                                    <div class="order-product">
+                                        <div class="product-image">🥜</div>
+                                        <div class="product-info">
+                                            <div class="product-name">Bã vỏ hạt điều loại B</div>
+                                            <div class="product-qty">45 tấn</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>28/11/2024</td>
+                                <td><strong>$10,800.00</strong></td>
+                                <td><span class="status-badge status-completed">Hoàn thành</span></td>
+                                <td>
+                                    <button class="action-btn" title="Xem chi tiết">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="order-id">#ORD-2024-005</span></td>
+                                <td>
+                                    <div class="order-product">
+                                        <div class="product-image">🥜</div>
+                                        <div class="product-info">
+                                            <div class="product-name">Bã vỏ hạt điều</div>
+                                            <div class="product-qty">60 tấn</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>25/11/2024</td>
+                                <td><strong>$15,000.00</strong></td>
+                                <td><span class="status-badge status-completed">Hoàn thành</span></td>
+                                <td>
+                                    <button class="action-btn" title="Xem chi tiết">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-footer">
+                    <div class="table-info">Hiển thị 1-5 của 24 đơn hàng</div>
+                    <div class="pagination">
+                        <button class="page-btn">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn">4</button>
+                        <button class="page-btn">5</button>
+                        <button class="page-btn">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+    <!-- Mobile menu button -->
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+    </button>
+
+    <!-- Logout Modal -->
+    <div class="modal-overlay" id="logoutModal" onclick="if(event.target===this)closeLogoutModal()">
+        <div class="modal">
+            <div class="modal-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                </svg>
+            </div>
+            <h3>Đăng xuất?</h3>
+            <p>Bạn có chắc chắn muốn đăng xuất khỏi tài khoản không?</p>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-cancel" onclick="closeLogoutModal()">Hủy</button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmLogout()">Đăng xuất</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = JSON.parse(localStorage.getItem('nhutin_user') || '{}');
+            if (userData.name) document.getElementById('userName').textContent = userData.name;
+            if (userData.email) document.getElementById('userEmail').textContent = userData.email;
+        });
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('show');
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('show');
+        }
+
+        function logout() {
+            document.getElementById('logoutModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLogoutModal() {
+            document.getElementById('logoutModal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        function confirmLogout() {
+            localStorage.removeItem('nhutin_user');
+            localStorage.removeItem('nhutin_logged_in');
+            // Stay on current page after logout
+        }
+    </script>
+</body>
+</html>
+

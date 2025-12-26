@@ -1,54 +1,240 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NHUTIN Customer Portal</title>
-    <meta http-equiv="refresh" content="0; url=login.html">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: #E8F3EC;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .loading {
-            text-align: center;
-        }
-        .spinner {
-            width: 48px;
-            height: 48px;
-            border: 4px solid #E8F3EC;
-            border-top-color: #2D4A3E;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 16px;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        p {
-            color: #2D4A3E;
-            font-size: 14px;
-        }
-    </style>
-</head>
-<body>
-    <div class="loading">
-        <div class="spinner"></div>
-        <p>Đang chuyển hướng...</p>
-    </div>
-    <script>
-        // Redirect to login page
-        window.location.href = 'login.html';
-    </script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NHUTIN — Nhiên liệu sinh khối bã điều & Walking Floor</title>
+    <meta
+      name="description"
+      content="Công ty Cổ phần Như Tín (NHUTIN) — tiên phong ứng dụng chất đốt sinh khối bã điều cho lò hơi công nghiệp và triển khai hệ thống xuống hàng tự động (KEITH® Walking Floor)."
+    />
+    <link rel="icon" href="img/logo.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/site.css" />
+  </head>
+
+  <body>
+    <div class="bgfx" aria-hidden="true"></div>
+    <a class="skip" href="#main">Bỏ qua menu</a>
+
+    <header class="topbar" data-include="components/navbar.html"></header>
+
+    <main id="main">
+      <!-- HERO -->
+      <section class="section hero" id="top">
+        <div class="container">
+          <div class="grid hero-grid">
+            <div class="card padded" data-reveal>
+              <h1>
+                Nhiên liệu sinh khối bã điều &<br />
+                giải pháp xuống hàng tự động
+              </h1>
+              <p class="sub">
+                Thành lập tháng 01/2010, NHUTIN tiên phong ứng dụng chất đốt sinh khối bã vỏ hạt điều
+                cho lò hơi công nghiệp và triển khai hệ thống xếp dỡ hàng hóa tự động (KEITH® Walking
+                Floor).
+              </p>
+              <div class="hero-actions">
+                <a class="btn primary" href="products.html">Xem sản phẩm</a>
+                <a class="btn" href="contact.html">Nhận tư vấn</a>
+              </div>
+            </div>
+
+            <div class="card hero-media solid" data-reveal>
+              <img src="img/picture4.jpg" alt="Walking Floor - xuống hàng tự động" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHY -->
+      <section class="section">
+        <div class="container">
+          <div class="card padded deep" data-reveal>
+            <h2 class="h2">Tối ưu chi phí — tăng hiệu suất — vận hành ổn định</h2>
+            <p class="sub">
+              Chúng tôi cung cấp giải pháp toàn diện từ tư vấn, triển khai đến bảo trì, giúp doanh nghiệp
+              kiểm soát chi phí năng lượng và tối ưu quy trình xếp dỡ.
+            </p>
+
+            <div class="grid featureGrid" style="margin-top: 18px">
+              <div class="card featureCard" data-reveal>
+                <h3>Tự động hóa xuống hàng</h3>
+                <p>Giảm nhân công, giảm thời gian chờ xe, tăng vòng quay kho bãi.</p>
+              </div>
+              <div class="card featureCard" data-reveal>
+                <h3>Sinh khối bã điều</h3>
+                <p>Tiết kiệm chi phí đến 50% so với đốt than, nguồn cung ổn định.</p>
+              </div>
+              <div class="card featureCard" data-reveal>
+                <h3>Đồng hành kỹ thuật</h3>
+                <p>Khảo sát, tư vấn, triển khai và hỗ trợ vận hành theo từng dự án.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRODUCTS -->
+      <section class="section">
+        <div class="container">
+          <div data-reveal>
+            <h2 class="h2">Giải pháp toàn diện từ NHUTIN</h2>
+            <p class="sub">
+              Chúng tôi tập trung 2 mảng: nhiên liệu sinh khối bã điều và hệ thống sàn trượt tự đổ (KEITH® Walking
+              Floor).
+            </p>
+          </div>
+
+          <div class="grid twoCol" style="margin-top: 18px">
+            <article class="card padded solid" data-reveal>
+              <div class="mediaTop">
+                <img src="img/product2_a.jpg" alt="Nhiên liệu sinh khối bã điều" />
+              </div>
+              <h3 style="margin: 16px 0 0; font-size: 18px">Nhiên liệu sinh khối bã điều</h3>
+              <p class="sub">
+                Tiên phong ứng dụng bã vỏ hạt điều (sau ép dầu) cho lò hơi công nghiệp — tối ưu chi phí và thân thiện môi trường.
+              </p>
+              <ul class="list">
+                <li>Tiết kiệm chi phí sản xuất lên tới 50% so với than</li>
+                <li>Giao hàng nhanh bằng đội xe chuyên dụng</li>
+                <li>Tư vấn vận hành & xử lý khói thải đạt chuẩn</li>
+              </ul>
+              <div class="hero-actions" style="margin-top: 16px">
+                <a class="btn primary" href="products.html#biomass">Xem chi tiết</a>
+                <a class="btn" href="https://bavohatdieu.com" target="_blank" rel="noopener noreferrer">Website</a>
+              </div>
+            </article>
+
+            <article class="card padded solid" data-reveal>
+              <div class="mediaTop">
+                <img src="img/product1_a.jpg" alt="Sàn trượt tự đổ KEITH Walking Floor" />
+              </div>
+              <h3 style="margin: 16px 0 0; font-size: 18px">Sàn trượt tự đổ (Walking Floor)</h3>
+              <p class="sub">
+                Từ 2018, NHUTIN triển khai giải pháp xuống hàng tự động, giúp tối ưu quy trình logistics và kho bãi.
+              </p>
+              <ul class="list">
+                <li>Xuống hàng nhanh, giảm thời gian chờ</li>
+                <li>Phù hợp tải trọng lớn, bền bỉ</li>
+                <li>Lắp đặt nhanh, phù hợp xe sẵn có</li>
+              </ul>
+              <div class="hero-actions" style="margin-top: 16px">
+                <a class="btn primary" href="products.html#walking-floor">Xem chi tiết</a>
+                <a class="btn" href="https://thungxetudo.com" target="_blank" rel="noopener noreferrer">Website</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- STATS -->
+      <section class="section">
+        <div class="container">
+          <div class="card padded deep" data-reveal>
+            <h2 class="h2">Chỉ số vận hành doanh nghiệp quan tâm</h2>
+            <p class="sub">
+              Một số con số tham khảo dựa trên nhu cầu và kinh nghiệm triển khai thực tế.
+            </p>
+
+            <div class="grid stats" style="margin-top: 18px">
+              <div class="stat" data-reveal>
+                <div class="n"><span data-count-to="50" data-count-suffix="%">0%</span></div>
+                <div class="t">Mức tiết kiệm chi phí nhiên liệu (so với than, tùy điều kiện)</div>
+              </div>
+              <div class="stat" data-reveal>
+                <div class="n"><span data-count-to="2010">0</span></div>
+                <div class="t">Năm thành lập — kinh nghiệm ngành & đối tác lâu dài</div>
+              </div>
+              <div class="stat" data-reveal>
+                <div class="n"><span data-count-to="5" data-count-suffix=" ngày">0</span></div>
+                <div class="t">Lắp đặt nhanh (tham khảo, tùy cấu hình và hiện trạng)</div>
+              </div>
+              <div class="stat" data-reveal>
+                <div class="n"><span data-count-to="24" data-count-suffix="/7">0</span></div>
+                <div class="t">Hỗ trợ theo dự án & đồng hành vận hành</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIDEO -->
+      <section class="section">
+        <div class="container">
+          <div class="grid twoCol">
+            <div data-reveal>
+              <h2 class="h2">Nhìn nhanh quy trình & ứng dụng thực tế</h2>
+              <p class="sub">
+                Video ngắn giúp bạn hình dung cách vận hành và ứng dụng, từ đó quyết định phương án phù hợp cho doanh nghiệp.
+              </p>
+              <div class="hero-actions" style="margin-top: 14px">
+                <a class="btn primary" href="contact.html">Nhận tư vấn kỹ thuật</a>
+                <a class="btn" href="about.html">Về NHUTIN</a>
+              </div>
+            </div>
+            <div class="card solid" style="overflow: hidden" data-reveal>
+              <video
+                src="img/videointro.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                style="width: 100%; height: 360px; object-fit: cover"
+              ></video>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BLOG PREVIEW -->
+      <section class="section">
+        <div class="container">
+          <div data-reveal>
+            <h2 class="h2">Kiến thức & cập nhật</h2>
+            <p class="sub">Chia sẻ ngắn gọn, tập trung vào ứng dụng thực tế và tối ưu vận hành.</p>
+          </div>
+
+          <div class="grid blog" style="margin-top: 18px">
+            <article class="card padded blogCard solid" data-reveal>
+              <div class="thumb"><img src="img/picture1.png" alt="Walking Floor trong container" /></div>
+              <div class="meta"><span>Walking Floor</span><span>2025</span></div>
+              <h3>Walking Floor là gì? Khi nào nên triển khai?</h3>
+              <p>Nguyên lý hoạt động, lợi ích, và các tình huống giúp thu hồi vốn nhanh.</p>
+            </article>
+            <article class="card padded blogCard solid" data-reveal>
+              <div class="thumb"><img src="img/picture2.png" alt="Hệ thống sàn trượt" /></div>
+              <div class="meta"><span>Vận hành</span><span>2025</span></div>
+              <h3>Checklist an toàn khi xuống hàng tự động</h3>
+              <p>Các bước chuẩn hóa giúp giảm rủi ro và tăng độ ổn định khi vận hành.</p>
+            </article>
+            <article class="card padded blogCard solid" data-reveal>
+              <div class="thumb"><img src="img/picture3.png" alt="Bảo trì hệ thống" /></div>
+              <div class="meta"><span>Sinh khối</span><span>2025</span></div>
+              <h3>Đốt bã điều hiệu quả: tối ưu lò hơi & chi phí</h3>
+              <p>Gợi ý cải tiến lò hơi, lưu trữ và vận hành để tối ưu hiệu suất đốt.</p>
+            </article>
+          </div>
+
+          <div class="hero-actions" style="margin-top: 18px" data-reveal>
+            <a class="btn primary" href="news.html">Xem tất cả tin tức</a>
+          </div>
+        </div>
+      </section>
+
+      <div data-include="components/footer.html"></div>
+    </main>
+
+    <script src="js/include.js" defer></script>
+    <script src="js/site.js" defer></script>
+  </body>
 </html>
+
 

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bàn giao - Nghiệm thu - NHUTIN Customer Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Be Vietnam Pro', sans-serif; background: #E8F3EC; min-height: 100vh; }
+        .app-container { display: flex; min-height: 100vh; }
+
+        /* Sidebar */
+        .sidebar { width: 280px; background: linear-gradient(180deg, #2D4A3E 0%, #243D33 100%); padding: 24px 16px; display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 100; transition: transform 0.3s ease; }
+        .sidebar-header { display: flex; align-items: center; gap: 12px; padding: 0 12px 24px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 24px; }
+        .logo-icon { width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+        .logo-icon svg { width: 22px; height: 22px; fill: #fff; }
+        .logo-text { color: #fff; font-size: 16px; font-weight: 600; }
+        .nav-menu { flex: 1; overflow-y: auto; }
+        .nav-section { margin-bottom: 24px; }
+        .nav-section-title { color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0 12px; margin-bottom: 8px; }
+        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; transition: all 0.2s ease; margin-bottom: 2px; }
+        .nav-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
+        .nav-item.active { background: rgba(255,255,255,0.15); color: #fff; font-weight: 500; }
+        .nav-item svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+        .nav-badge { margin-left: auto; background: #E74C3C; color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
+        .sidebar-footer { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; }
+        .user-info { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; cursor: pointer; }
+        .user-info:hover { background: rgba(255,255,255,0.08); }
+        .user-avatar { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; }
+        .user-details { flex: 1; }
+        .user-name { color: #fff; font-size: 14px; font-weight: 500; }
+        .user-email { color: rgba(255,255,255,0.6); font-size: 12px; }
+
+        /* Main Content */
+        .main-content { flex: 1; margin-left: 280px; padding: 32px; min-height: 100vh; }
+        .page-header { margin-bottom: 24px; }
+        .page-title { font-size: 24px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
+        .page-subtitle { color: #666; font-size: 14px; }
+
+        /* Status Banner */
+        .status-banner { background: linear-gradient(135deg, #2D4A3E 0%, #3D5F4F 100%); border-radius: 20px; padding: 28px; margin-bottom: 24px; color: #fff; }
+        .status-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 16px; }
+        .status-info h3 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+        .status-info p { font-size: 14px; opacity: 0.85; }
+        .status-badge { background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+        .status-badge::before { content: ''; width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+        .status-progress { display: flex; gap: 8px; flex-wrap: wrap; }
+        .progress-step { display: flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,255,255,0.1); border-radius: 8px; font-size: 12px; }
+        .progress-step.completed { background: rgba(255,255,255,0.25); }
+        .progress-step svg { width: 16px; height: 16px; }
+
+        /* Documents Section */
+        .section-card { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); margin-bottom: 24px; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .section-title { font-size: 16px; font-weight: 600; color: #1a1a1a; display: flex; align-items: center; gap: 10px; }
+        .section-title svg { width: 20px; height: 20px; stroke: #2D4A3E; }
+        .section-badge { background: #E8F3EC; color: #2D4A3E; font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 20px; }
+
+        /* Document List */
+        .doc-list { display: flex; flex-direction: column; gap: 12px; }
+        .doc-item { display: flex; align-items: center; gap: 16px; padding: 16px; background: #f8f9fa; border-radius: 12px; transition: all 0.2s; }
+        .doc-item:hover { background: #E8F3EC; }
+        .doc-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .doc-icon svg { width: 24px; height: 24px; fill: none; stroke-width: 1.5; }
+        .doc-icon.pdf { background: #FFEBEE; }
+        .doc-icon.pdf svg { stroke: #E53935; }
+        .doc-icon.certificate { background: #E8F5E9; }
+        .doc-icon.certificate svg { stroke: #43A047; }
+        .doc-icon.image { background: #E3F2FD; }
+        .doc-icon.image svg { stroke: #1976D2; }
+        .doc-icon.warranty { background: #FFF3E0; }
+        .doc-icon.warranty svg { stroke: #EF6C00; }
+        .doc-info { flex: 1; min-width: 0; }
+        .doc-name { font-size: 14px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
+        .doc-meta { font-size: 12px; color: #888; display: flex; gap: 12px; }
+        .doc-actions { display: flex; gap: 8px; }
+        .doc-btn { width: 36px; height: 36px; border-radius: 8px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        .doc-btn svg { width: 18px; height: 18px; }
+        .btn-view { background: #f0f0f0; }
+        .btn-view:hover { background: #e0e0e0; }
+        .btn-view svg { stroke: #666; }
+        .btn-download { background: #2D4A3E; }
+        .btn-download:hover { background: #3D5F4F; }
+        .btn-download svg { stroke: #fff; }
+
+        /* Acceptance Items */
+        .acceptance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+        .acceptance-item { background: #f8f9fa; border-radius: 12px; padding: 20px; }
+        .acceptance-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .acceptance-title { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+        .acceptance-status { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; }
+        .acceptance-status.passed { color: #43A047; }
+        .acceptance-status.passed svg { stroke: #43A047; }
+        .acceptance-status.pending { color: #EF6C00; }
+        .acceptance-status.pending svg { stroke: #EF6C00; }
+        .acceptance-status svg { width: 16px; height: 16px; }
+        .acceptance-details { font-size: 13px; color: #666; line-height: 1.5; }
+        .acceptance-date { font-size: 12px; color: #888; margin-top: 8px; display: flex; align-items: center; gap: 6px; }
+        .acceptance-date svg { width: 14px; height: 14px; }
+
+        /* Warranty Card */
+        .warranty-card { background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); border-radius: 16px; padding: 24px; border: 1px solid #FFE082; }
+        .warranty-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+        .warranty-icon { width: 56px; height: 56px; background: #fff; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+        .warranty-icon svg { width: 28px; height: 28px; stroke: #EF6C00; }
+        .warranty-info h4 { font-size: 16px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
+        .warranty-info p { font-size: 13px; color: #666; }
+        .warranty-details { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .warranty-item { }
+        .warranty-item label { display: block; font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 4px; }
+        .warranty-item span { font-size: 14px; font-weight: 500; color: #333; }
+
+        /* Contact Section */
+        .contact-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+        .contact-card { background: #f8f9fa; border-radius: 12px; padding: 20px; display: flex; align-items: center; gap: 16px; }
+        .contact-avatar { width: 56px; height: 56px; border-radius: 14px; object-fit: cover; }
+        .contact-info { flex: 1; }
+        .contact-role { font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 4px; }
+        .contact-name { font-size: 15px; font-weight: 600; color: #1a1a1a; margin-bottom: 2px; }
+        .contact-phone { font-size: 13px; color: #2D4A3E; }
+        .contact-btn { width: 40px; height: 40px; background: #2D4A3E; border: none; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        .contact-btn:hover { background: #3D5F4F; }
+        .contact-btn svg { width: 20px; height: 20px; stroke: #fff; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .main-content { margin-left: 0; padding: 20px 16px; }
+            .status-header { flex-direction: column; align-items: flex-start; }
+            .warranty-details { grid-template-columns: 1fr; }
+        }
+
+        .mobile-menu-btn { display: none; position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; background: #2D4A3E; border: none; border-radius: 16px; color: #fff; cursor: pointer; z-index: 101; box-shadow: 0 4px 20px rgba(45,74,62,0.4); }
+        .mobile-menu-btn svg { width: 24px; height: 24px; stroke: #fff; }
+        @media (max-width: 768px) { .mobile-menu-btn { display: flex; align-items: center; justify-content: center; } }
+        .overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 99; }
+        .overlay.show { display: block; }
+
+        /* Logout Modal */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+        .modal-overlay.show { display: flex; }
+        .modal { background: #fff; border-radius: 20px; padding: 32px; max-width: 400px; width: 100%; text-align: center; animation: modalSlide 0.3s ease; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+        @keyframes modalSlide { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-icon { width: 72px; height: 72px; background: #FFF3E8; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+        .modal-icon svg { width: 36px; height: 36px; stroke: #C75E00; }
+        .modal h3 { font-size: 20px; font-weight: 600; color: #1a1a1a; margin-bottom: 8px; }
+        .modal p { font-size: 14px; color: #666; margin-bottom: 24px; }
+        .modal-actions { display: flex; gap: 12px; }
+        .modal-btn { flex: 1; padding: 14px 20px; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+        .modal-btn-cancel { background: #f5f5f5; border: none; color: #666; }
+        .modal-btn-cancel:hover { background: #e8e8e8; }
+        .modal-btn-confirm { background: #E74C3C; border: none; color: #fff; }
+        .modal-btn-confirm:hover { background: #C0392B; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <span class="logo-text">NHUTIN Portal</span>
+            </div>
+            <nav class="nav-menu">
+                <div class="nav-section">
+                    <div class="nav-section-title">Tổng quan</div>
+                    <a href="/portal/dashboard" class="nav-item">
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                        <span>Dashboard</span>
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Dự án</div>
+                    <a href="/portal/projects" class="nav-item">
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        <span>Tiến độ dự án</span>
+                    </a>
+                    <a href="/portal/handover" class="nav-item active">
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                        <span>Bàn giao - Nghiệm thu</span>
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Kỹ thuật</div>
+                    <a href="/portal/technical-docs" class="nav-item">
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+                        <span>Tài liệu kỹ thuật</span>
+                    </a>
+                    <a href="/portal/tickets" class="nav-item">
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 18v-6a9 9 0 0118 0v6M3 18a3 3 0 003 3h0a3 3 0 003-3v-3a3 3 0 00-3-3h0a3 3 0 00-3 3v3zm18 0a3 3 0 01-3 3h0a3 3 0 01-3-3v-3a3 3 0 013-3h0a3 3 0 013 3v3z"/></svg>
+                        <span>Hỗ trợ kỹ thuật</span>
+                        <span class="nav-badge">1</span>
+                    </a>
+                    <a href="/portal/maintenance" class="nav-item">
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        <span>Bảo trì định kỳ</span>
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Hợp đồng</div>
+                    <a href="/portal/project-contracts" class="nav-item">
+                        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                        <span>Hợp đồng dự án</span>
+                    </a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info" onclick="logout()">
+                    <img src="https://i.pravatar.cc/150?img=3" alt="User" class="user-avatar">
+                    <div class="user-details">
+                        <div class="user-name" id="userName">Joaquin</div>
+                        <div class="user-email" id="userEmail">joaquin@example.com</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Bàn giao - Nghiệm thu</h1>
+                <p class="page-subtitle">Hồ sơ bàn giao và nghiệm thu dự án Keith Walking Floor</p>
+            </div>
+
+            <!-- Status Banner -->
+            <div class="status-banner">
+                <div class="status-header">
+                    <div class="status-info">
+                        <h3>Dự án: Lắp đặt Sàn trượt Keith Walking Floor</h3>
+                        <p>Mã dự án: #PRJ-2024-001 • Nhà máy XYZ - Bình Dương</p>
+                    </div>
+                    <div class="status-badge">Đang tiến hành</div>
+                </div>
+                <div class="status-progress">
+                    <div class="progress-step completed">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                        Khảo sát
+                    </div>
+                    <div class="progress-step completed">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                        Thi công
+                    </div>
+                    <div class="progress-step completed">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                        Lắp đặt
+                    </div>
+                    <div class="progress-step">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/></svg>
+                        Chạy thử
+                    </div>
+                    <div class="progress-step">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/></svg>
+                        Nghiệm thu
+                    </div>
+                </div>
+            </div>
+
+            <!-- Handover Documents -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h3 class="section-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        Hồ sơ bàn giao
+                    </h3>
+                    <span class="section-badge">6 tài liệu</span>
+                </div>
+                <div class="doc-list">
+                    <div class="doc-item">
+                        <div class="doc-icon pdf">
+                            <svg viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                        </div>
+                        <div class="doc-info">
+                            <div class="doc-name">Biên bản nghiệm thu công trình</div>
+                            <div class="doc-meta">
+                                <span>PDF • 2.4 MB</span>
+                                <span>Cập nhật: 05/12/2024</span>
+                            </div>
+                        </div>
+                        <div class="doc-actions">
+                            <button class="doc-btn btn-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                            <button class="doc-btn btn-download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></button>
+                        </div>
+                    </div>
+                    <div class="doc-item">
+                        <div class="doc-icon certificate">
+                            <svg viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                        </div>
+                        <div class="doc-info">
+                            <div class="doc-name">Chứng nhận hoàn công</div>
+                            <div class="doc-meta">
+                                <span>PDF • 1.8 MB</span>
+                                <span>Cập nhật: 05/12/2024</span>
+                            </div>
+                        </div>
+                        <div class="doc-actions">
+                            <button class="doc-btn btn-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                            <button class="doc-btn btn-download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></button>
+                        </div>
+                    </div>
+                    <div class="doc-item">
+                        <div class="doc-icon pdf">
+                            <svg viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                        </div>
+                        <div class="doc-info">
+                            <div class="doc-name">Hồ sơ hoàn công (As-built)</div>
+                            <div class="doc-meta">
+                                <span>PDF • 15.6 MB</span>
+                                <span>Cập nhật: 03/12/2024</span>
+                            </div>
+                        </div>
+                        <div class="doc-actions">
+                            <button class="doc-btn btn-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                            <button class="doc-btn btn-download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></button>
+                        </div>
+                    </div>
+                    <div class="doc-item">
+                        <div class="doc-icon image">
+                            <svg viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                        </div>
+                        <div class="doc-info">
+                            <div class="doc-name">Hình ảnh hoàn công</div>
+                            <div class="doc-meta">
+                                <span>ZIP • 45.2 MB</span>
+                                <span>32 hình ảnh</span>
+                            </div>
+                        </div>
+                        <div class="doc-actions">
+                            <button class="doc-btn btn-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                            <button class="doc-btn btn-download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acceptance Tests -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h3 class="section-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                        Kết quả nghiệm thu
+                    </h3>
+                </div>
+                <div class="acceptance-grid">
+                    <div class="acceptance-item">
+                        <div class="acceptance-header">
+                            <span class="acceptance-title">Kiểm tra kết cấu</span>
+                            <span class="acceptance-status passed">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                                Đạt
+                            </span>
+                        </div>
+                        <div class="acceptance-details">Kết cấu khung thép, móng và hệ thống ray dẫn hướng đạt yêu cầu kỹ thuật.</div>
+                        <div class="acceptance-date">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            20/11/2024
+                        </div>
+                    </div>
+                    <div class="acceptance-item">
+                        <div class="acceptance-header">
+                            <span class="acceptance-title">Kiểm tra hệ thống thủy lực</span>
+                            <span class="acceptance-status passed">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                                Đạt
+                            </span>
+                        </div>
+                        <div class="acceptance-details">Áp suất, lưu lượng và độ kín của hệ thống thủy lực hoạt động ổn định.</div>
+                        <div class="acceptance-date">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            25/11/2024
+                        </div>
+                    </div>
+                    <div class="acceptance-item">
+                        <div class="acceptance-header">
+                            <span class="acceptance-title">Kiểm tra hệ thống điện</span>
+                            <span class="acceptance-status passed">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                                Đạt
+                            </span>
+                        </div>
+                        <div class="acceptance-details">Hệ thống điều khiển, cảm biến và an toàn điện đạt tiêu chuẩn.</div>
+                        <div class="acceptance-date">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            28/11/2024
+                        </div>
+                    </div>
+                    <div class="acceptance-item">
+                        <div class="acceptance-header">
+                            <span class="acceptance-title">Test vận hành có tải</span>
+                            <span class="acceptance-status pending">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/></svg>
+                                Chờ thực hiện
+                            </span>
+                        </div>
+                        <div class="acceptance-details">Kiểm tra vận hành với tải trọng thiết kế trong điều kiện thực tế.</div>
+                        <div class="acceptance-date">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            Dự kiến: 22/12/2024
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warranty -->
+            <div class="warranty-card">
+                <div class="warranty-header">
+                    <div class="warranty-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <div class="warranty-info">
+                        <h4>Thông tin bảo hành</h4>
+                        <p>Thiết bị Keith Walking Floor được bảo hành theo điều khoản hợp đồng</p>
+                    </div>
+                </div>
+                <div class="warranty-details">
+                    <div class="warranty-item">
+                        <label>Thời hạn bảo hành</label>
+                        <span>24 tháng</span>
+                    </div>
+                    <div class="warranty-item">
+                        <label>Ngày bắt đầu</label>
+                        <span>15/01/2025 (dự kiến)</span>
+                    </div>
+                    <div class="warranty-item">
+                        <label>Ngày kết thúc</label>
+                        <span>15/01/2027 (dự kiến)</span>
+                    </div>
+                    <div class="warranty-item">
+                        <label>Phạm vi bảo hành</label>
+                        <span>Toàn bộ thiết bị và lắp đặt</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h3 class="section-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                        Liên hệ hỗ trợ
+                    </h3>
+                </div>
+                <div class="contact-section">
+                    <div class="contact-card">
+                        <img src="https://i.pravatar.cc/150?img=12" alt="PM" class="contact-avatar">
+                        <div class="contact-info">
+                            <div class="contact-role">Project Manager</div>
+                            <div class="contact-name">Trần Văn Hùng</div>
+                            <div class="contact-phone">0909 888 777</div>
+                        </div>
+                        <button class="contact-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                        </button>
+                    </div>
+                    <div class="contact-card">
+                        <img src="https://i.pravatar.cc/150?img=8" alt="KTV" class="contact-avatar">
+                        <div class="contact-info">
+                            <div class="contact-role">Kỹ thuật viên</div>
+                            <div class="contact-name">Lê Minh Tuấn</div>
+                            <div class="contact-phone">0909 666 555</div>
+                        </div>
+                        <button class="contact-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+
+    <!-- Logout Modal -->
+    <div class="modal-overlay" id="logoutModal" onclick="if(event.target===this)closeLogoutModal()">
+        <div class="modal">
+            <div class="modal-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            </div>
+            <h3>Đăng xuất?</h3>
+            <p>Bạn có chắc chắn muốn đăng xuất khỏi tài khoản không?</p>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-cancel" onclick="closeLogoutModal()">Hủy</button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmLogout()">Đăng xuất</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = JSON.parse(localStorage.getItem('nhutin_user') || '{}');
+            if (userData.name) document.getElementById('userName').textContent = userData.name;
+            if (userData.email) document.getElementById('userEmail').textContent = userData.email;
+        });
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('show');
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('show');
+        }
+        function logout() {
+            document.getElementById('logoutModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLogoutModal() {
+            document.getElementById('logoutModal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+        function confirmLogout() {
+            localStorage.removeItem('nhutin_user');
+            localStorage.removeItem('nhutin_logged_in');
+            // Stay on current page after logout
+        }
+    </script>
+</body>
+</html>
+
