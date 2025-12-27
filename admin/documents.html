@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hóa đơn & Chứng từ - NHUTIN Customer Portal</title>
+    <title>Quản lý Tài liệu - NHUTIN Admin</title>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Be Vietnam Pro', sans-serif; background: #E8F3EC; min-height: 100vh; }
+        body { font-family: 'Be Vietnam Pro', sans-serif; background: #EFF6FF; min-height: 100vh; }
         .app-container { display: flex; min-height: 100vh; }
 
         /* Sidebar */
-        .sidebar { width: 280px; background: linear-gradient(180deg, #2D4A3E 0%, #243D33 100%); padding: 24px 16px; display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 100; transition: transform 0.3s ease; }
+        .sidebar { width: 280px; background: linear-gradient(180deg, #1E40AF 0%, #1E3A8A 100%); padding: 24px 16px; display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 100; transition: transform 0.3s ease; }
         .sidebar-header { display: flex; align-items: center; gap: 12px; padding: 0 12px 24px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 24px; }
         .logo-icon { width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
         .logo-icon svg { width: 22px; height: 22px; fill: #fff; }
@@ -48,7 +49,7 @@
         .filters-bar { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
         .search-box { flex: 1; min-width: 250px; position: relative; }
         .search-box input { width: 100%; padding: 12px 16px 12px 44px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-family: inherit; background: #fff; }
-        .search-box input:focus { outline: none; border-color: #2D4A3E; box-shadow: 0 0 0 3px rgba(45,74,62,0.1); }
+        .search-box input:focus { outline: none; border-color: #1E40AF; box-shadow: 0 0 0 3px rgba(30,64,175,0.1); }
         .search-box svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; stroke: #888; }
         .filter-select { padding: 12px 36px 12px 16px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-family: inherit; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6,9 12,15 18,9'/%3E%3C/svg%3E") no-repeat right 12px center; cursor: pointer; appearance: none; }
 
@@ -141,7 +142,7 @@
                 <div class="logo-icon">
                     <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                 </div>
-                <span class="logo-text">NHUTIN Portal</span>
+                <span class="logo-text">NHUTIN Admin</span>
             </div>
             <nav class="nav-menu" id="navMenu">
                 <!-- Menu will be rendered by portal-nav.js -->
@@ -161,8 +162,8 @@
         <main class="main-content">
             <div class="page-header">
                 <div>
-                    <h1 class="page-title">Hóa đơn & Chứng từ</h1>
-                    <p class="page-subtitle">Quản lý và tải xuống các chứng từ xuất nhập khẩu</p>
+                    <h1 class="page-title">Quản lý Tài liệu</h1>
+                    <p class="page-subtitle">Quản lý toàn bộ tài liệu của khách hàng</p>
                 </div>
             </div>
 
@@ -483,8 +484,7 @@
         }
     </script>
     
-    <!-- Portal Navigation -->
-    <script src="js/portal-nav.js"></script>
+    <script src="js/admin-nav.js"></script>
 </body>
 </html>
 

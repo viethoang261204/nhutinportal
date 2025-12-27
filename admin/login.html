@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập - NHUTIN Customer Portal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Admin Login - NHUTIN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Be Vietnam Pro', sans-serif;
-            background: linear-gradient(135deg, #E8F3EC 0%, #D4E8DA 50%, #C5DED0 100%);
+            background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 50%, #93C5FD 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -26,7 +26,7 @@
             display: flex;
             background: #fff;
             border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(45, 74, 62, 0.12);
+            box-shadow: 0 20px 60px rgba(30, 64, 175, 0.15);
             overflow: hidden;
             max-width: 1000px;
             width: 100%;
@@ -35,7 +35,7 @@
 
         .login-left {
             flex: 1;
-            background: linear-gradient(180deg, #2D4A3E 0%, #1E3329 100%);
+            background: linear-gradient(180deg, #1E40AF 0%, #1E3A8A 100%);
             padding: 60px 50px;
             display: flex;
             flex-direction: column;
@@ -51,7 +51,7 @@
             right: -50%;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
             border-radius: 50%;
         }
 
@@ -77,12 +77,14 @@
         .logo-icon svg {
             width: 28px;
             height: 28px;
-            fill: #fff;
+            stroke: #fff;
+            fill: none;
+            stroke-width: 2;
         }
 
         .logo-text {
             font-size: 22px;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: -0.5px;
         }
 
@@ -94,13 +96,13 @@
         .welcome-title {
             color: #fff;
             font-size: 32px;
-            font-weight: 600;
+            font-weight: 700;
             line-height: 1.3;
             margin-bottom: 16px;
         }
 
         .welcome-desc {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.85);
             font-size: 15px;
             line-height: 1.7;
         }
@@ -117,14 +119,15 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            color: rgba(255,255,255,0.85);
+            color: rgba(255,255,255,0.9);
             font-size: 14px;
+            font-weight: 500;
         }
 
         .feature-icon {
             width: 32px;
             height: 32px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -152,7 +155,7 @@
 
         .login-header h2 {
             font-size: 26px;
-            font-weight: 600;
+            font-weight: 700;
             color: #1a1a1a;
             margin-bottom: 8px;
         }
@@ -162,6 +165,19 @@
             font-size: 14px;
         }
 
+        .admin-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         .form-group {
             margin-bottom: 24px;
         }
@@ -169,7 +185,7 @@
         .form-group label {
             display: block;
             font-size: 13px;
-            font-weight: 500;
+            font-weight: 600;
             color: #333;
             margin-bottom: 8px;
         }
@@ -187,9 +203,9 @@
 
         .form-group input:focus {
             outline: none;
-            border-color: #2D4A3E;
+            border-color: #1E40AF;
             background: #fff;
-            box-shadow: 0 0 0 4px rgba(45, 74, 62, 0.1);
+            box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.1);
         }
 
         .form-group input::placeholder {
@@ -213,89 +229,62 @@
         .remember-me input[type="checkbox"] {
             width: 18px;
             height: 18px;
-            accent-color: #2D4A3E;
+            accent-color: #1E40AF;
             cursor: pointer;
         }
 
         .remember-me span {
             font-size: 13px;
             color: #555;
+            font-weight: 500;
         }
 
         .forgot-password {
             font-size: 13px;
-            color: #2D4A3E;
+            color: #1E40AF;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             transition: color 0.2s;
         }
 
         .forgot-password:hover {
-            color: #1E3329;
+            color: #1E3A8A;
             text-decoration: underline;
         }
 
         .login-btn {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, #2D4A3E 0%, #3D5F4F 100%);
+            background: linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%);
             color: #fff;
             border: none;
             border-radius: 12px;
             font-size: 15px;
-            font-weight: 600;
+            font-weight: 700;
             font-family: inherit;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(45, 74, 62, 0.3);
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
         }
 
         .login-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(45, 74, 62, 0.4);
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
         }
 
         .login-btn:active {
             transform: translateY(0);
         }
 
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 28px 0;
-            gap: 16px;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: #e5e5e5;
-        }
-
-        .divider span {
+        .security-note {
+            margin-top: 24px;
+            padding: 14px;
+            background: #FEF3C7;
+            border-left: 3px solid #F59E0B;
+            border-radius: 8px;
             font-size: 12px;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .register-link {
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-        }
-
-        .register-link a {
-            color: #2D4A3E;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.2s;
-        }
-
-        .register-link a:hover {
-            text-decoration: underline;
+            color: #92400E;
+            line-height: 1.6;
         }
 
         /* Responsive */
@@ -325,63 +314,64 @@
         <div class="login-left">
             <div class="logo">
                 <div class="logo-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
                     </svg>
                 </div>
-                <span class="logo-text">NHUTIN Portal</span>
+                <span class="logo-text">NHUTIN Admin</span>
             </div>
 
             <div class="welcome-content">
-                <h1 class="welcome-title">Chào mừng đến với<br>NHUTIN Portal</h1>
-                <p class="welcome-desc">Truy cập tài liệu, tạo ticket hỗ trợ và liên hệ tư vấn một cách dễ dàng.</p>
+                <h1 class="welcome-title">Admin Control Panel</h1>
+                <p class="welcome-desc">Quản lý hệ thống, khách hàng, tài liệu và tickets một cách hiệu quả.</p>
             </div>
 
             <div class="features-list">
                 <div class="feature-item">
                     <div class="feature-icon">
                         <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-                            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                            <path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                         </svg>
                     </div>
-                    <span>Xem & tải tài liệu 24/7</span>
+                    <span>Quản lý khách hàng & users</span>
                 </div>
                 <div class="feature-item">
                     <div class="feature-icon">
                         <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 11l3 3L22 4"/>
-                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                            <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                         </svg>
                     </div>
-                    <span>Tạo ticket hỗ trợ nhanh chóng</span>
+                    <span>Quản lý tài liệu & dữ liệu</span>
                 </div>
                 <div class="feature-item">
                     <div class="feature-icon">
                         <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                            <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                         </svg>
                     </div>
-                    <span>Liên hệ tư vấn trực tiếp</span>
+                    <span>Cấu hình & bảo mật hệ thống</span>
                 </div>
             </div>
         </div>
 
         <div class="login-right">
+            <div class="admin-badge">🔐 Admin Access</div>
+            
             <div class="login-header">
-                <h2>Đăng nhập</h2>
-                <p>Nhập thông tin tài khoản để tiếp tục</p>
+                <h2>Đăng nhập Admin</h2>
+                <p>Vui lòng nhập thông tin quản trị viên</p>
             </div>
 
             <form id="loginForm">
                 <div class="form-group">
-                    <label for="email">Email hoặc Mã khách hàng</label>
-                    <input type="text" id="email" placeholder="vd: abc@company.com hoặc KH001" required>
+                    <label for="email">Email Admin</label>
+                    <input type="email" id="email" placeholder="admin@nhutin.vn" required>
                 </div>
 
                 <div class="form-group">
                     <label for="password">Mật khẩu</label>
-                    <input type="password" id="password" placeholder="Nhập mật khẩu của bạn" required>
+                    <input type="password" id="password" placeholder="Nhập mật khẩu admin" required>
                 </div>
 
                 <div class="form-options">
@@ -392,16 +382,12 @@
                     <a href="#" class="forgot-password">Quên mật khẩu?</a>
                 </div>
 
-                <button type="submit" class="login-btn">Đăng nhập</button>
+                <button type="submit" class="login-btn">Đăng nhập Admin</button>
+
+                <div class="security-note">
+                    <strong>⚠️ Lưu ý bảo mật:</strong> Đây là khu vực quản trị viên. Không chia sẻ thông tin đăng nhập với bất kỳ ai.
+                </div>
             </form>
-
-            <div class="divider">
-                <span>hoặc</span>
-            </div>
-
-            <p class="register-link">
-                Chưa có tài khoản? <a href="/portal/register">Đăng ký ngay</a>
-            </p>
         </div>
     </div>
 
@@ -413,23 +399,18 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             
-            // Mock user data
-            const userData = {
-                id: 'KH001',
-                name: email.includes('@') ? email.split('@')[0] : 'Khách hàng',
-                companyName: 'Công ty ABC',
+            // Mock admin data
+            const adminData = {
+                id: 'ADMIN001',
+                name: 'Administrator',
                 email: email,
-                assignedStaff: {
-                    name: 'Nguyễn Văn Minh',
-                    phone: '0909 123 456',
-                    email: 'minh.nv@nhutin.com',
-                    avatar: 'https://i.pravatar.cc/150?img=12'
-                }
+                role: 'admin',
+                permissions: ['all']
             };
             
             // Save to localStorage
-            localStorage.setItem('nhutin_user', JSON.stringify(userData));
-            localStorage.setItem('nhutin_logged_in', 'true');
+            localStorage.setItem('nhutin_admin', JSON.stringify(adminData));
+            localStorage.setItem('nhutin_admin_logged_in', 'true');
             
             // Redirect to dashboard
             window.location.href = 'dashboard.html';
