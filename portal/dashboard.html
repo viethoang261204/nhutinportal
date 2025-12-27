@@ -806,8 +806,8 @@
         <!-- Main Content -->
         <main class="main-content">
             <div class="page-header">
-                <h1 class="welcome-text" id="welcomeText">Welcome back Joaquin!</h1>
-                <p class="welcome-sub">Đây là tổng quan tài khoản của bạn</p>
+                <h1 class="welcome-text" id="welcomeText">Xin chào Khách hàng!</h1>
+                <p class="welcome-sub">Cổng khách hàng NHUTIN - Xem tài liệu, tạo ticket và liên hệ tư vấn</p>
             </div>
 
             <!-- Stats -->
@@ -817,16 +817,16 @@
 
             <div class="two-columns">
                 <div>
-                    <!-- Contract Card -->
+                    <!-- Company Info Card -->
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" id="contractTitle">Hợp đồng hiện tại</h3>
+                            <h3 class="card-title">Thông tin khách hàng</h3>
                             <span class="card-badge">Đang hoạt động</span>
                         </div>
                         <div class="contract-card">
                             <div class="company-logo">LOGO</div>
-                            <div class="company-name" id="companyName">Evergreen Ascent Solutions</div>
-                            <div class="company-type" id="customerTypeLabel">Enterprise</div>
+                            <div class="company-name" id="companyName">Công ty ABC</div>
+                            <div class="company-type" id="customerTypeLabel">Khách hàng NHUTIN</div>
                             
                             <div class="contract-grid">
                                 <div class="contract-item">
@@ -834,25 +834,16 @@
                                     <span id="csmName">Nguyễn Văn Minh</span>
                                 </div>
                                 <div class="contract-item">
-                                    <label>Giá trị hợp đồng</label>
-                                    <span id="contractValue">$10,000.00</span>
+                                    <label>Email liên hệ</label>
+                                    <span>support@nhutin.vn</span>
                                 </div>
                                 <div class="contract-item">
-                                    <label>Ngày bắt đầu</label>
-                                    <span id="startDate">01/11/2023</span>
+                                    <label>Hotline</label>
+                                    <span id="supportPhone">0909 123 456</span>
                                 </div>
                                 <div class="contract-item">
-                                    <label>Ngày kết thúc</label>
-                                    <span id="endDate">01/11/2024</span>
-                                </div>
-                                <div class="contract-item contract-file">
-                                    <label>Hợp đồng</label>
-                                    <a href="#" class="file-link">
-                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                                        </svg>
-                                        Terms and Conditions for the Us... .pdf
-                                    </a>
+                                    <label>Trạng thái</label>
+                                    <span>Đang hoạt động</span>
                                 </div>
                             </div>
                         </div>
@@ -936,141 +927,36 @@
     </div>
 
     <script>
-        // Menu configurations based on customer type
+        // Simplified menu configuration
         const menuConfig = {
-            commodity: {
-                sections: [
-                    {
-                        title: 'Tổng quan',
-                        items: [
-                            { id: 'dashboard', icon: 'home', label: 'Dashboard', href: '/portal/dashboard', active: true },
-                        ]
-                    },
-                    {
-                        title: 'Đơn hàng',
-                        items: [
-                            { id: 'orders', icon: 'package', label: 'Đơn hàng', href: '/portal/orders', badge: 3 },
-                            { id: 'delivery', icon: 'truck', label: 'Tiến độ giao hàng', href: '/portal/delivery' },
-                        ]
-                    },
-                    {
-                        title: 'Tài liệu',
-                        items: [
-                            { id: 'documents', icon: 'file-text', label: 'Hóa đơn & Chứng từ', href: '/portal/documents' },
-                            { id: 'contracts', icon: 'clipboard', label: 'Báo giá & Hợp đồng', href: '/portal/contracts' },
-                            { id: 'history', icon: 'clock', label: 'Lịch sử giao dịch', href: '/portal/history' },
-                        ]
-                    },
-                    {
-                        title: 'Hỗ trợ',
-                        items: [
-                            { id: 'support', icon: 'headphones', label: 'CSKH phụ trách', href: '/portal/support' },
-                        ]
-                    }
-                ],
-                stats: [
-                    { icon: 'package', label: 'Đơn hàng đang xử lý', value: '3', color: 'green' },
-                    { icon: 'truck', label: 'Đang vận chuyển', value: '2', color: 'blue' },
-                    { icon: 'file-text', label: 'Hóa đơn chờ thanh toán', value: '1', color: 'orange' },
-                    { icon: 'check-circle', label: 'Đơn hoàn thành', value: '24', color: 'purple' },
-                ],
-                quickActions: [
-                    { icon: 'plus', label: 'Yêu cầu báo giá', href: '#' },
-                    { icon: 'package', label: 'Xem đơn hàng', href: '/portal/orders' },
-                    { icon: 'file-text', label: 'Tải hóa đơn', href: '/portal/documents' },
-                    { icon: 'message-circle', label: 'Liên hệ CSKH', href: '/portal/support' },
-                ]
-            },
-            technical: {
-                sections: [
-                    {
-                        title: 'Tổng quan',
-                        items: [
-                            { id: 'dashboard', icon: 'home', label: 'Dashboard', href: '/portal/dashboard', active: true },
-                        ]
-                    },
-                    {
-                        title: 'Dự án',
-                        items: [
-                            { id: 'projects', icon: 'briefcase', label: 'Tiến độ dự án', href: '/portal/projects' },
-                            { id: 'handover', icon: 'clipboard-check', label: 'Bàn giao - Nghiệm thu', href: '/portal/handover' },
-                        ]
-                    },
-                    {
-                        title: 'Kỹ thuật',
-                        items: [
-                            { id: 'technical', icon: 'folder', label: 'Tài liệu kỹ thuật', href: '/portal/technical-docs' },
-                            { id: 'tickets', icon: 'headphones', label: 'Hỗ trợ kỹ thuật', href: '/portal/tickets', badge: 1 },
-                            { id: 'maintenance', icon: 'tool', label: 'Bảo trì định kỳ', href: '/portal/maintenance' },
-                        ]
-                    },
-                    {
-                        title: 'Hợp đồng',
-                        items: [
-                            { id: 'contracts', icon: 'file', label: 'Hợp đồng dự án', href: '/portal/contracts' },
-                        ]
-                    }
-                ],
-                stats: [
-                    { icon: 'briefcase', label: 'Dự án đang thực hiện', value: '1', color: 'green' },
-                    { icon: 'percent', label: 'Tiến độ hoàn thành', value: '75%', color: 'blue' },
-                    { icon: 'headphones', label: 'Ticket đang mở', value: '1', color: 'orange' },
-                    { icon: 'calendar', label: 'Bảo trì sắp tới', value: '15/12', color: 'purple' },
-                ],
-                quickActions: [
-                    { icon: 'plus', label: 'Tạo ticket mới', href: '/portal/tickets' },
-                    { icon: 'folder', label: 'Xem tài liệu', href: '/portal/technical-docs' },
-                    { icon: 'calendar', label: 'Đặt lịch bảo trì', href: '/portal/maintenance' },
-                    { icon: 'message-circle', label: 'Liên hệ kỹ thuật', href: 'support.html' },
-                ]
-            },
-            both: {
-                sections: [
-                    {
-                        title: 'Tổng quan',
-                        items: [
-                            { id: 'dashboard', icon: 'home', label: 'Dashboard', href: '/portal/dashboard', active: true },
-                        ]
-                    },
-                    {
-                        title: 'Hàng hóa (Bã điều)',
-                        items: [
-                            { id: 'orders', icon: 'package', label: 'Đơn hàng', href: '/portal/orders', badge: 3 },
-                            { id: 'delivery', icon: 'truck', label: 'Tiến độ giao hàng', href: '/portal/delivery' },
-                            { id: 'documents', icon: 'file-text', label: 'Hóa đơn & Chứng từ', href: '/portal/documents' },
-                        ]
-                    },
-                    {
-                        title: 'Dự án (Sàn trượt Keith)',
-                        items: [
-                            { id: 'projects', icon: 'briefcase', label: 'Tiến độ dự án', href: '/portal/projects' },
-                            { id: 'technical', icon: 'folder', label: 'Tài liệu kỹ thuật', href: '/portal/technical-docs' },
-                            { id: 'tickets', icon: 'headphones', label: 'Hỗ trợ kỹ thuật', href: '/portal/tickets', badge: 1 },
-                            { id: 'maintenance', icon: 'tool', label: 'Bảo trì định kỳ', href: '/portal/maintenance' },
-                        ]
-                    },
-                    {
-                        title: 'Tài liệu & Hỗ trợ',
-                        items: [
-                            { id: 'contracts', icon: 'clipboard', label: 'Hợp đồng', href: 'contracts.html' },
-                            { id: 'history', icon: 'clock', label: 'Lịch sử giao dịch', href: '/portal/history' },
-                            { id: 'support', icon: 'user', label: 'CSKH phụ trách', href: 'support.html' },
-                        ]
-                    }
-                ],
-                stats: [
-                    { icon: 'package', label: 'Đơn hàng đang xử lý', value: '3', color: 'green' },
-                    { icon: 'briefcase', label: 'Dự án đang thực hiện', value: '1', color: 'blue' },
-                    { icon: 'headphones', label: 'Ticket đang mở', value: '1', color: 'orange' },
-                    { icon: 'check-circle', label: 'Hoàn thành', value: '24', color: 'purple' },
-                ],
-                quickActions: [
-                    { icon: 'plus', label: 'Yêu cầu báo giá', href: '#' },
-                    { icon: 'package', label: 'Xem đơn hàng', href: '/portal/orders' },
-                    { icon: 'folder', label: 'Tài liệu kỹ thuật', href: '/portal/technical-docs' },
-                    { icon: 'message-circle', label: 'Liên hệ CSKH', href: '/portal/support' },
-                ]
-            }
+            sections: [
+                {
+                    title: 'Tổng quan',
+                    items: [
+                        { id: 'dashboard', icon: 'home', label: 'Dashboard', href: 'dashboard.html', active: true },
+                    ]
+                },
+                {
+                    title: 'Tài liệu & Hỗ trợ',
+                    items: [
+                        { id: 'documents', icon: 'file-text', label: 'Tài liệu', href: 'documents.html' },
+                        { id: 'tickets', icon: 'headphones', label: 'Ticket / Hỗ trợ', href: 'tickets.html', badge: 2 },
+                        { id: 'support', icon: 'user', label: 'Liên hệ tư vấn', href: 'support.html' },
+                    ]
+                }
+            ],
+            stats: [
+                { icon: 'file-text', label: 'Tài liệu', value: '12', color: 'green' },
+                { icon: 'headphones', label: 'Ticket đang mở', value: '2', color: 'orange' },
+                { icon: 'check-circle', label: 'Ticket đã giải quyết', value: '8', color: 'blue' },
+                { icon: 'user', label: 'CSKH hỗ trợ', value: '1', color: 'purple' },
+            ],
+            quickActions: [
+                { icon: 'plus', label: 'Tạo ticket mới', href: 'tickets.html' },
+                { icon: 'file-text', label: 'Xem tài liệu', href: 'documents.html' },
+                { icon: 'message-circle', label: 'Liên hệ tư vấn', href: 'support.html' },
+                { icon: 'user', label: 'Thông tin CSKH', href: 'support.html' },
+            ]
         };
 
         // Icon SVGs
@@ -1101,37 +987,26 @@
 
         // Initialize
         function init() {
-            // Check if logged in
-            const isLoggedIn = localStorage.getItem('nhutin_logged_in');
-            if (!isLoggedIn) {
-                // User not logged in - stay on page or show login prompt
-                return;
-            }
-
-            // Get user data
-            const userData = JSON.parse(localStorage.getItem('nhutin_user') || '{}');
-            const customerType = userData.customerType || 'commodity';
-            const config = menuConfig[customerType];
+            // Get user data (optional, for demo purposes)
+            const userData = JSON.parse(localStorage.getItem('nhutin_user') || '{"name":"Khách hàng","email":"customer@example.com","companyName":"Công ty ABC"}');
+            const config = menuConfig;
 
             // Update UI
             document.getElementById('userName').textContent = userData.name || 'Khách hàng';
             document.getElementById('userEmail').textContent = userData.email || '';
-            document.getElementById('welcomeText').textContent = `Welcome back ${userData.name || 'Khách hàng'}!`;
+            document.getElementById('welcomeText').textContent = `Xin chào ${userData.name || 'Khách hàng'}!`;
             document.getElementById('companyName').textContent = userData.companyName || 'Công ty ABC';
+            document.getElementById('customerTypeLabel').textContent = 'Khách hàng NHUTIN';
             
             if (userData.assignedStaff) {
                 document.getElementById('csmName').textContent = userData.assignedStaff.name;
                 document.getElementById('supportName').textContent = userData.assignedStaff.name;
                 document.getElementById('supportPhone').textContent = userData.assignedStaff.phone;
+            } else {
+                document.getElementById('csmName').textContent = 'Nguyễn Văn Minh';
+                document.getElementById('supportName').textContent = 'Nguyễn Văn Minh';
+                document.getElementById('supportPhone').textContent = '0909 123 456';
             }
-
-            // Update customer type label
-            const typeLabels = {
-                commodity: 'Khách hàng Bã Điều',
-                technical: 'Khách hàng Sàn Trượt Keith',
-                both: 'Khách hàng VIP (Cả 2 loại)'
-            };
-            document.getElementById('customerTypeLabel').textContent = typeLabels[customerType];
 
             // Render sidebar menu
             renderMenu(config.sections);
