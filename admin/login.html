@@ -14,19 +14,26 @@
 
         body {
             font-family: 'Be Vietnam Pro', sans-serif;
-            background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 50%, #93C5FD 100%);
+            background: linear-gradient(180deg, 
+                #e0c3fc 0%,
+                #8ec5fc 25%,
+                #b1e5fc 50%,
+                #c2f0fc 75%,
+                #daf5f0 100%
+            );
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            background-attachment: fixed;
         }
 
         .login-container {
             display: flex;
             background: #fff;
             border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(30, 64, 175, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 119, 182, 0.15);
             overflow: hidden;
             max-width: 1000px;
             width: 100%;
@@ -35,7 +42,7 @@
 
         .login-left {
             flex: 1;
-            background: linear-gradient(180deg, #1E40AF 0%, #1E3A8A 100%);
+            background: linear-gradient(180deg, #0077b6 0%, #005a8d 100%);
             padding: 60px 50px;
             display: flex;
             flex-direction: column;
@@ -203,9 +210,9 @@
 
         .form-group input:focus {
             outline: none;
-            border-color: #1E40AF;
+            border-color: #0077b6;
             background: #fff;
-            box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.1);
+            box-shadow: 0 0 0 4px rgba(0, 119, 182, 0.1);
         }
 
         .form-group input::placeholder {
@@ -229,7 +236,7 @@
         .remember-me input[type="checkbox"] {
             width: 18px;
             height: 18px;
-            accent-color: #1E40AF;
+            accent-color: #0077b6;
             cursor: pointer;
         }
 
@@ -241,14 +248,14 @@
 
         .forgot-password {
             font-size: 13px;
-            color: #1E40AF;
+            color: #0077b6;
             text-decoration: none;
             font-weight: 600;
             transition: color 0.2s;
         }
 
         .forgot-password:hover {
-            color: #1E3A8A;
+            color: #005a8d;
             text-decoration: underline;
         }
 
@@ -264,12 +271,12 @@
             font-family: inherit;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 119, 182, 0.3);
         }
 
         .login-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+            box-shadow: 0 6px 20px rgba(0, 119, 182, 0.4);
         }
 
         .login-btn:active {
@@ -356,7 +363,6 @@
         </div>
 
         <div class="login-right">
-            <div class="admin-badge">🔐 Admin Access</div>
             
             <div class="login-header">
                 <h2>Đăng nhập Admin</h2>
@@ -372,14 +378,6 @@
                 <div class="form-group">
                     <label for="password">Mật khẩu</label>
                     <input type="password" id="password" placeholder="Nhập mật khẩu admin" required>
-                </div>
-
-                <div class="form-options">
-                    <label class="remember-me">
-                        <input type="checkbox" checked>
-                        <span>Ghi nhớ đăng nhập</span>
-                    </label>
-                    <a href="#" class="forgot-password">Quên mật khẩu?</a>
                 </div>
 
                 <button type="submit" class="login-btn">Đăng nhập Admin</button>

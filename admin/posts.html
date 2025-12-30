@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Bài viết - NHUTIN Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Be Vietnam Pro', sans-serif; 
+            background: linear-gradient(180deg, 
+                #e0c3fc 0%,
+                #8ec5fc 25%,
+                #b1e5fc 50%,
+                #c2f0fc 75%,
+                #daf5f0 100%
+            );
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+        .app-container { display: flex; min-height: 100vh; }
+
+        /* Sidebar */
+        .sidebar { width: 280px; background: linear-gradient(180deg, #0077b6 0%, #005a8d 100%); padding: 24px 16px; display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 100; }
+        .sidebar-header { display: flex; align-items: center; gap: 12px; padding: 0 12px 24px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 24px; }
+        .logo-icon { width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+        .logo-icon svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 2; }
+        .logo-text { color: #fff; font-size: 16px; font-weight: 700; }
+        .nav-menu { flex: 1; overflow-y: auto; }
+        .nav-section { margin-bottom: 24px; }
+        .nav-section-title { color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 0 12px; margin-bottom: 8px; }
+        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; transition: all 0.2s ease; margin-bottom: 2px; font-weight: 500; }
+        .nav-item:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        .nav-item.active { background: rgba(255,255,255,0.2); color: #fff; font-weight: 600; }
+        .nav-item svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+        .nav-badge { margin-left: auto; background: #EF4444; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
+        .sidebar-footer { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; }
+        .user-info { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; cursor: pointer; }
+        .user-info:hover { background: rgba(255,255,255,0.1); }
+        .user-avatar { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; }
+        .user-details { flex: 1; }
+        .user-name { color: #fff; font-size: 14px; font-weight: 600; }
+        .user-email { color: rgba(255,255,255,0.7); font-size: 12px; }
+
+        /* Main Content */
+        .main-content { flex: 1; margin-left: 280px; padding: 32px; min-height: 100vh; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
+        .page-title { font-size: 28px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+        .page-subtitle { color: #666; font-size: 14px; }
+
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; text-decoration: none; font-family: inherit; border: none; }
+        .btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+        .btn-primary { background: linear-gradient(135deg, #0096c7 0%, #0077b6 100%); color: #fff; }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,119,182,0.3); }
+
+        /* Search & Filters */
+        .filters-bar { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+        .search-box { flex: 1; min-width: 300px; position: relative; }
+        .search-box input { width: 100%; padding: 12px 16px 12px 44px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-family: inherit; background: #fff; }
+        .search-box input:focus { outline: none; border-color: #0077b6; box-shadow: 0 0 0 3px rgba(0,119,182,0.1); }
+        .search-box svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; stroke: #888; fill: none; stroke-width: 2; }
+        .filter-select { padding: 12px 36px 12px 16px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-family: inherit; background: #fff; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6,9 12,15 18,9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
+
+        /* Post Cards Grid */
+        .posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; align-items: stretch; }
+        
+        .post-card { 
+            background: #fff; 
+            border-radius: 16px; 
+            overflow: hidden; 
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04); 
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .post-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        
+        .post-thumbnail { width: 100%; height: 200px; object-fit: cover; background: linear-gradient(135deg, #CAF0F8 0%, #90E0EF 100%); flex-shrink: 0; }
+        
+        .post-content { 
+            padding: 20px; 
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .post-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .post-category { display: inline-block; padding: 4px 12px; background: #E8F0F8; color: #0077b6; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+        .post-status { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+        .post-status.published { background: #D1FAE5; color: #059669; }
+        .post-status.draft { background: #FED7AA; color: #EA580C; }
+        
+        .post-title { font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; line-height: 1.4; }
+        .post-excerpt { 
+            font-size: 13px; 
+            color: #666; 
+            line-height: 1.6; 
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .post-meta { display: flex; gap: 16px; padding-top: 12px; border-top: 1px solid #f0f0f0; font-size: 12px; color: #888; margin-top: auto; }
+        .post-meta-item { display: flex; align-items: center; gap: 4px; }
+        .post-meta-item svg { width: 14px; height: 14px; stroke: currentColor; }
+        
+        .post-actions { display: flex; gap: 8px; margin-top: 12px; flex-shrink: 0; }
+        .post-btn { flex: 1; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s; }
+        .post-btn svg { width: 16px; height: 16px; }
+        .btn-edit { background: #f5f5f5; border: 1px solid #e0e0e0; color: #333; }
+        .btn-edit:hover { background: #e8e8e8; }
+        .btn-delete { background: #FEE2E2; border: 1px solid #FCA5A5; color: #DC2626; }
+        .btn-delete:hover { background: #FCA5A5; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .main-content { margin-left: 0; padding: 24px 16px; }
+            .posts-grid { grid-template-columns: 1fr; }
+        }
+
+        .overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 99; }
+        .overlay.show { display: block; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+        .modal-overlay.show { display: flex; }
+        .modal { background: #fff; border-radius: 20px; padding: 32px; max-width: 400px; width: 100%; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+        .modal-icon { width: 72px; height: 72px; background: #CAF0F8; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+        .modal-icon svg { width: 36px; height: 36px; stroke: #0077b6; stroke-width: 2; fill: none; }
+        .modal h3 { font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
+        .modal p { font-size: 14px; color: #666; margin-bottom: 24px; line-height: 1.5; }
+        .modal-actions { display: flex; gap: 12px; }
+        .modal-btn { flex: 1; padding: 14px 20px; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: inherit; border: none; }
+        .modal-btn-cancel { background: #f5f5f5; color: #666; }
+        .modal-btn-cancel:hover { background: #e8e8e8; }
+        .modal-btn-confirm { background: #DC2626; color: #fff; }
+        .modal-btn-confirm:hover { background: #B91C1C; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <span class="logo-text">NHUTIN Admin</span>
+            </div>
+            <nav class="nav-menu" id="navMenu"></nav>
+            <div class="sidebar-footer">
+                <div class="user-info" onclick="toggleUserMenu()">
+                    <img src="https://i.pravatar.cc/150?img=8" alt="Admin" class="user-avatar" id="userAvatar">
+                    <div class="user-details">
+                        <div class="user-name" id="userName">Administrator</div>
+                        <div class="user-email" id="userEmail">admin@nhutin.vn</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Quản lý Bài viết</h1>
+                    <p class="page-subtitle">Tổng số: 12 bài viết</p>
+                </div>
+                <button class="btn btn-primary">
+                    <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                    Thêm bài viết mới
+                </button>
+            </div>
+
+            <div class="filters-bar">
+                <div class="search-box">
+                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <input type="text" placeholder="Tìm kiếm bài viết...">
+                </div>
+                <select class="filter-select">
+                    <option>Tất cả trạng thái</option>
+                    <option>Đã xuất bản</option>
+                    <option>Bản nháp</option>
+                </select>
+                <select class="filter-select">
+                    <option>Tất cả danh mục</option>
+                    <option>Walking Floor</option>
+                    <option>Sinh khối</option>
+                    <option>Vận hành</option>
+                </select>
+            </div>
+
+            <div class="posts-grid">
+                <!-- Post 1 -->
+                <div class="post-card">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=400&fit=crop" alt="Post" class="post-thumbnail">
+                    <div class="post-content">
+                        <div class="post-header">
+                            <span class="post-category">Walking Floor</span>
+                            <span class="post-status published">Published</span>
+                        </div>
+                        <h3 class="post-title">Walking Floor là gì? Khi nào nên triển khai?</h3>
+                        <p class="post-excerpt">Nguyên lý hoạt động, lợi ích, và các tình huống giúp thu hồi vốn nhanh khi áp dụng hệ thống Walking Floor...</p>
+                        <div class="post-meta">
+                            <div class="post-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                30/12/2025
+                            </div>
+                            <div class="post-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                1,234 lượt xem
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <button class="post-btn btn-edit">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                Chỉnh sửa
+                            </button>
+                            <button class="post-btn btn-delete">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                                Xóa
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post 2 -->
+                <div class="post-card">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=400&fit=crop" alt="Post" class="post-thumbnail">
+                    <div class="post-content">
+                        <div class="post-header">
+                            <span class="post-category">Vận hành</span>
+                            <span class="post-status published">Published</span>
+                        </div>
+                        <h3 class="post-title">Checklist an toàn khi xuống hàng tự động</h3>
+                        <p class="post-excerpt">Các bước chuẩn hóa giúp giảm rủi ro và tăng độ ổn định khi vận hành hệ thống sàn trượt tự động...</p>
+                        <div class="post-meta">
+                            <div class="post-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                28/12/2025
+                            </div>
+                            <div class="post-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                856 lượt xem
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <button class="post-btn btn-edit">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                Chỉnh sửa
+                            </button>
+                            <button class="post-btn btn-delete">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                                Xóa
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post 3 - Draft -->
+                <div class="post-card">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=400&fit=crop" alt="Post" class="post-thumbnail">
+                    <div class="post-content">
+                        <div class="post-header">
+                            <span class="post-category">Sinh khối</span>
+                            <span class="post-status draft">Draft</span>
+                        </div>
+                        <h3 class="post-title">Đốt bã điều hiệu quả: tối ưu lò hơi & chi phí</h3>
+                        <p class="post-excerpt">Gợi ý cải tiến lò hơi, lưu trữ và vận hành để tối ưu hiệu suất đốt nhiên liệu sinh khối bã điều...</p>
+                        <div class="post-meta">
+                            <div class="post-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                25/12/2025
+                            </div>
+                            <div class="post-meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                0 lượt xem
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <button class="post-btn btn-edit">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                Chỉnh sửa
+                            </button>
+                            <button class="post-btn btn-delete">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                                Xóa
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+    <div class="modal-overlay" id="logoutModal">
+        <div class="modal">
+            <div class="modal-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            </div>
+            <h3>Đăng xuất?</h3>
+            <p>Bạn có chắc chắn muốn đăng xuất khỏi admin panel không?</p>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-cancel" onclick="closeLogoutModal()">Hủy</button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmLogout()">Đăng xuất</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin-nav.js"></script>
+</body>
+</html>
+

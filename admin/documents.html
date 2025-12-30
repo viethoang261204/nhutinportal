@@ -8,30 +8,41 @@
     <link rel="stylesheet" href="css/admin.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Be Vietnam Pro', sans-serif; background: #EFF6FF; min-height: 100vh; }
+        body { 
+            font-family: 'Be Vietnam Pro', sans-serif; 
+            background: linear-gradient(180deg, 
+                #e0c3fc 0%,
+                #8ec5fc 25%,
+                #b1e5fc 50%,
+                #c2f0fc 75%,
+                #daf5f0 100%
+            );
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
         .app-container { display: flex; min-height: 100vh; }
 
         /* Sidebar */
-        .sidebar { width: 280px; background: linear-gradient(180deg, #1E40AF 0%, #1E3A8A 100%); padding: 24px 16px; display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 100; transition: transform 0.3s ease; }
+        .sidebar { width: 280px; background: linear-gradient(180deg, #0077b6 0%, #1E3A8A 100%); padding: 24px 16px; display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 100; transition: transform 0.3s ease; }
         .sidebar-header { display: flex; align-items: center; gap: 12px; padding: 0 12px 24px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 24px; }
         .logo-icon { width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
         .logo-icon svg { width: 22px; height: 22px; fill: #fff; }
         .logo-text { color: #fff; font-size: 16px; font-weight: 600; }
         .nav-menu { flex: 1; overflow-y: auto; }
         .nav-section { margin-bottom: 24px; }
-        .nav-section-title { color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0 12px; margin-bottom: 8px; }
-        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; transition: all 0.2s ease; margin-bottom: 2px; }
-        .nav-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
-        .nav-item.active { background: rgba(255,255,255,0.15); color: #fff; font-weight: 500; }
+        .nav-section-title { color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 0 12px; margin-bottom: 8px; }
+        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; transition: all 0.2s ease; margin-bottom: 2px; font-weight: 500; }
+        .nav-item:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        .nav-item.active { background: rgba(255,255,255,0.2); color: #fff; font-weight: 600; }
         .nav-item svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-        .nav-badge { margin-left: auto; background: #E74C3C; color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
+        .nav-badge { margin-left: auto; background: #EF4444; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
         .sidebar-footer { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; }
         .user-info { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; cursor: pointer; }
-        .user-info:hover { background: rgba(255,255,255,0.08); }
+        .user-info:hover { background: rgba(255,255,255,0.1); }
         .user-avatar { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; }
         .user-details { flex: 1; }
-        .user-name { color: #fff; font-size: 14px; font-weight: 500; }
-        .user-email { color: rgba(255,255,255,0.6); font-size: 12px; }
+        .user-name { color: #fff; font-size: 14px; font-weight: 600; }
+        .user-email { color: rgba(255,255,255,0.7); font-size: 12px; }
 
         /* Main Content */
         .main-content { flex: 1; margin-left: 280px; padding: 32px; min-height: 100vh; }
@@ -41,15 +52,15 @@
 
         /* Tabs */
         .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
-        .tab { padding: 10px 20px; background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-weight: 500; color: #666; cursor: pointer; transition: all 0.2s; }
-        .tab:hover { border-color: #2D4A3E; color: #2D4A3E; }
-        .tab.active { background: #2D4A3E; border-color: #2D4A3E; color: #fff; }
+        .tab { padding: 10px 20px; background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-weight: 600; color: #666; cursor: pointer; transition: all 0.2s; }
+        .tab:hover { border-color: #0077b6; color: #0077b6; }
+        .tab.active { background: #0077b6; border-color: #0077b6; color: #fff; }
 
         /* Filters */
         .filters-bar { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
         .search-box { flex: 1; min-width: 250px; position: relative; }
         .search-box input { width: 100%; padding: 12px 16px 12px 44px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-family: inherit; background: #fff; }
-        .search-box input:focus { outline: none; border-color: #1E40AF; box-shadow: 0 0 0 3px rgba(30,64,175,0.1); }
+        .search-box input:focus { outline: none; border-color: #0077b6; box-shadow: 0 0 0 3px rgba(0,119,182,0.1); }
         .search-box svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; stroke: #888; }
         .filter-select { padding: 12px 36px 12px 16px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-family: inherit; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6,9 12,15 18,9'/%3E%3C/svg%3E") no-repeat right 12px center; cursor: pointer; appearance: none; }
 
@@ -61,8 +72,8 @@
 
         .doc-header { display: flex; gap: 14px; margin-bottom: 16px; }
         .doc-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .doc-icon.invoice { background: #E8F3EC; }
-        .doc-icon.invoice svg { stroke: #2D4A3E; }
+        .doc-icon.invoice { background: #90E0EF; }
+        .doc-icon.invoice svg { stroke: #0077b6; }
         .doc-icon.packing { background: #E8F0F8; }
         .doc-icon.packing svg { stroke: #2D5A8E; }
         .doc-icon.certificate { background: #FFF3E8; }
@@ -81,7 +92,7 @@
         .meta-item span { font-size: 13px; font-weight: 500; color: #333; }
 
         .doc-status { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 500; }
-        .status-paid { background: #E8F3EC; color: #2D4A3E; }
+        .status-paid { background: #D1FAE5; color: #059669; }
         .status-unpaid { background: #FFF3E8; color: #C75E00; }
         .status-processing { background: #E8F0F8; color: #2D5A8E; }
 
@@ -90,8 +101,8 @@
         .doc-btn svg { width: 16px; height: 16px; }
         .btn-view { background: #f5f5f5; border: 1px solid #e0e0e0; color: #333; }
         .btn-view:hover { background: #e8e8e8; }
-        .btn-download { background: #2D4A3E; border: none; color: #fff; }
-        .btn-download:hover { background: #3D5F4F; }
+        .btn-download { background: linear-gradient(135deg, #3B82F6 0%, #0077b6 100%); border: none; color: #fff; }
+        .btn-download:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,119,182,0.3); }
 
         /* Empty State */
         .empty-state { text-align: center; padding: 60px 20px; }
@@ -111,7 +122,7 @@
             .documents-grid { grid-template-columns: 1fr; }
         }
 
-        .mobile-menu-btn { display: none; position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; background: #2D4A3E; border: none; border-radius: 16px; color: #fff; cursor: pointer; z-index: 101; box-shadow: 0 4px 20px rgba(45,74,62,0.4); }
+        .mobile-menu-btn { display: none; position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; background: #0077b6; border: none; border-radius: 16px; color: #fff; cursor: pointer; z-index: 101; box-shadow: 0 4px 20px rgba(0,119,182,0.4); }
         .mobile-menu-btn svg { width: 24px; height: 24px; stroke: #fff; }
         @media (max-width: 768px) { .mobile-menu-btn { display: flex; align-items: center; justify-content: center; } }
         .overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 99; }
@@ -149,10 +160,10 @@
             </nav>
             <div class="sidebar-footer">
                 <div class="user-info" onclick="toggleUserMenu()">
-                    <img src="https://i.pravatar.cc/150?img=3" alt="User" class="user-avatar" id="userAvatar">
+                    <img src="https://i.pravatar.cc/150?img=8" alt="Admin" class="user-avatar" id="userAvatar">
                     <div class="user-details">
-                        <div class="user-name" id="userName">Khách hàng</div>
-                        <div class="user-email" id="userEmail">customer@example.com</div>
+                        <div class="user-name" id="userName">Administrator</div>
+                        <div class="user-email" id="userEmail">admin@nhutin.vn</div>
                     </div>
                 </div>
             </div>
@@ -440,34 +451,6 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const userData = JSON.parse(localStorage.getItem('nhutin_user') || '{}');
-            if (userData.name) document.getElementById('userName').textContent = userData.name;
-            if (userData.email) document.getElementById('userEmail').textContent = userData.email;
-        });
-
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
-            document.getElementById('overlay').classList.toggle('show');
-        }
-        function closeSidebar() {
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('overlay').classList.remove('show');
-        }
-        function logout() {
-            document.getElementById('logoutModal').classList.add('show');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeLogoutModal() {
-            document.getElementById('logoutModal').classList.remove('show');
-            document.body.style.overflow = '';
-        }
-        function confirmLogout() {
-            localStorage.removeItem('nhutin_user');
-            localStorage.removeItem('nhutin_logged_in');
-            // Stay on current page after logout
-        }
-
         function filterDocs(type) {
             // Update tabs
             document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));

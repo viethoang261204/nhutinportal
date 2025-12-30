@@ -8,10 +8,21 @@
     <link rel="stylesheet" href="css/admin.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Be Vietnam Pro', sans-serif; background: #EFF6FF; min-height: 100vh; }
+        body { 
+            font-family: 'Be Vietnam Pro', sans-serif; 
+            background: linear-gradient(180deg, 
+                #e0c3fc 0%,
+                #8ec5fc 25%,
+                #b1e5fc 50%,
+                #c2f0fc 75%,
+                #daf5f0 100%
+            );
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
         .app-container { display: flex; min-height: 100vh; }
 
-        .sidebar { width: 280px; background: linear-gradient(180deg, #1E40AF 0%, #1E3A8A 100%); padding: 24px 16px; display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 100; }
+        .sidebar { width: 280px; background: linear-gradient(180deg, #0077b6 0%, #005a8d 100%); padding: 24px 16px; display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 100; }
         .sidebar-header { display: flex; align-items: center; gap: 12px; padding: 0 12px 24px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 24px; }
         .logo-icon { width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
         .logo-icon svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 2; }
@@ -40,8 +51,8 @@
         /* Tabs */
         .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
         .tab { padding: 10px 18px; background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-weight: 600; color: #666; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
-        .tab:hover { border-color: #1E40AF; color: #1E40AF; }
-        .tab.active { background: #1E40AF; border-color: #1E40AF; color: #fff; }
+        .tab:hover { border-color: #0077b6; color: #0077b6; }
+        .tab.active { background: #0077b6; border-color: #0077b6; color: #fff; }
         .tab-count { background: rgba(0,0,0,0.1); padding: 2px 8px; border-radius: 8px; font-size: 11px; font-weight: 700; }
         .tab.active .tab-count { background: rgba(255,255,255,0.2); }
 
@@ -53,8 +64,8 @@
         .stat-icon svg { width: 20px; height: 20px; fill: none; stroke-width: 2; }
         .stat-icon.open { background: #FED7AA; }
         .stat-icon.open svg { stroke: #EA580C; }
-        .stat-icon.progress { background: #DBEAFE; }
-        .stat-icon.progress svg { stroke: #1E40AF; }
+        .stat-icon.progress { background: #CAF0F8; }
+        .stat-icon.progress svg { stroke: #0077b6; }
         .stat-icon.resolved { background: #D1FAE5; }
         .stat-icon.resolved svg { stroke: #059669; }
         .stat-value { font-size: 28px; font-weight: 800; color: #1a1a1a; }
@@ -76,8 +87,8 @@
         .ticket-status { display: flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; }
         .status-open { background: #FED7AA; color: #EA580C; }
         .status-open::before { content: ''; width: 6px; height: 6px; background: #EA580C; border-radius: 50%; animation: pulse 2s infinite; }
-        .status-progress { background: #DBEAFE; color: #1E40AF; }
-        .status-progress::before { content: ''; width: 6px; height: 6px; background: #1E40AF; border-radius: 50%; }
+        .status-progress { background: #CAF0F8; color: #0077b6; }
+        .status-progress::before { content: ''; width: 6px; height: 6px; background: #0077b6; border-radius: 50%; }
         .status-resolved { background: #D1FAE5; color: #059669; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
@@ -103,8 +114,8 @@
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
         .modal-overlay.show { display: flex; }
         .modal { background: #fff; border-radius: 20px; padding: 32px; max-width: 400px; width: 100%; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
-        .modal-icon { width: 72px; height: 72px; background: #DBEAFE; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
-        .modal-icon svg { width: 36px; height: 36px; stroke: #1E40AF; stroke-width: 2; fill: none; }
+        .modal-icon { width: 72px; height: 72px; background: #CAF0F8; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+        .modal-icon svg { width: 36px; height: 36px; stroke: #0077b6; stroke-width: 2; fill: none; }
         .modal h3 { font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
         .modal p { font-size: 14px; color: #666; margin-bottom: 24px; line-height: 1.5; }
         .modal-actions { display: flex; gap: 12px; }
