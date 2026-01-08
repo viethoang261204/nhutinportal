@@ -152,7 +152,7 @@ function initContact() {
     const service = qs("#service")?.value || qs("#topic")?.value || "";
     const message = qs("#message")?.value || "";
 
-    const subject = encodeURIComponent("[NHUTIN] Yêu cầu tư vấn / báo giá");
+    const subject = encodeURIComponent("[NHUTIN] Yêu cầu tư vấn / liên hệ");
     const body = encodeURIComponent(
       `Họ và tên: ${name}\nSĐT: ${phone}\nEmail: ${email}\nNhu cầu: ${service}\n\nTin nhắn:\n${message}\n`
     );

@@ -995,4 +995,58 @@ footer {
   }
 }
 
+/* Dropdown Menu for Products */
+.navlinks .has-dropdown {
+  position: relative;
+}
+
+.navlinks .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  min-width: 220px;
+  padding: 8px 0;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  list-style: none;
+  z-index: 1000;
+}
+
+.navlinks .has-dropdown:hover .dropdown,
+.navlinks .has-dropdown:focus-within .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.navlinks .dropdown li {
+  margin: 0;
+}
+
+.navlinks .dropdown a {
+  display: block;
+  padding: 12px 20px;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.navlinks .dropdown a:hover {
+  background: var(--bg1);
+  color: var(--primary);
+  padding-left: 24px;
+}
+
+@media (max-width: 960px) {
+  .navlinks .dropdown {
+    display: none;
+  }
+}
+
 
