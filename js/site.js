@@ -161,6 +161,40 @@ function initContact() {
   document.documentElement.dataset.contactInit = "1";
 }
 
+// Simple slider (used on product pages)
+function initSliders() {
+  if (document.documentElement.dataset.sliderInit === "1") return;
+  const sliders = qsa("[data-slider]");
+  if (!sliders.length) return;
+
+  sliders.forEach((root) => {
+    if (root.dataset.bound === "1") return;
+
+    const slides = qsa("[data-slide]", root);
+    const dots = qsa("[data-dot]", root);
+    const prev = qs("[data-prev]", root);
+    const next = qs("[data-next]", root);
+    if (!slides.length) return;
+
+    let idx = 0;
+
+    const show = (i) => {
+      idx = (i + slides.length) % slides.length;
+      slides.forEach((s, k) => s.classList.toggle("is-active", k === idx));
+      dots.forEach((d, k) => d.classList.toggle("is-active", k === idx));
+    };
+
+    prev?.addEventListener("click", () => show(idx - 1));
+    next?.addEventListener("click", () => show(idx + 1));
+    dots.forEach((d, k) => d.addEventListener("click", () => show(k)));
+
+    root.dataset.bound = "1";
+    show(0);
+  });
+
+  document.documentElement.dataset.sliderInit = "1";
+}
+
 function boot() {
   initNav();
   initReveal();
@@ -169,6 +203,7 @@ function boot() {
   initFab();
   initYear();
   initContact();
+  initSliders();
 }
 
 if (document.readyState === "loading") {

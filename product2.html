@@ -121,92 +121,133 @@
         </div>
       </section>
 
-      <section class="p1-section">
+      <!-- TOP (kiểu ảnh 1): slider trái + nội dung nhanh phải -->
+      <section class="p2-top">
         <div class="container">
-          <div class="p1-split" data-reveal>
-            <div>
-              <h2 class="p1-section-title">Bã điều là gì?</h2>
-              <p class="p1-section-sub">
-                Bã điều (bã vỏ hạt điều) là phần bã thu được sau khi đem vỏ hạt điều ép lấy dầu điều. Phần bã điều này được sử dụng làm chất đốt lò hơi giá hợp lý với nhiệt lượng cao, có thể đạt đến 5000 Kcal/kg.
-              </p>
-              <ul class="p1-list">
-                <li>Phù hợp cho lò hơi công nghiệp, nhà máy sản xuất và các nhu cầu nhiệt liên tục.</li>
-                <li>Nguồn cung ổn định quanh năm, có thể giao tận nơi theo kế hoạch vận hành.</li>
-                <li>Có thể phối trộn cùng các loại sinh khối khác để tối ưu hiệu quả đốt.</li>
-              </ul>
+          <div class="p2-top-grid" data-reveal>
+            <div class="p2-slider" data-slider aria-label="Thư viện hình ảnh">
+              <div class="p2-slide is-active" data-slide>
+                <img src="img/product2_a.jpg" alt="Bã vỏ hạt điều" />
+              </div>
+              <div class="p2-slide" data-slide>
+                <img src="img/aboutnt4.jpg" alt="Ứng dụng bã điều" />
+              </div>
+              <div class="p2-slide" data-slide>
+                <img src="img/product2_a.jpg" alt="Bã điều chất lượng" />
+              </div>
+
+              <div class="p2-slider-controls" aria-label="Điều khiển slider">
+                <div class="p2-slider-btns">
+                  <button class="p2-slider-btn" type="button" data-prev>Trước</button>
+                  <button class="p2-slider-btn" type="button" data-next>Sau</button>
+                </div>
+                <div class="p2-dots" aria-label="Chọn slide">
+                  <button class="p2-dot is-active" type="button" data-dot aria-label="Slide 1"></button>
+                  <button class="p2-dot" type="button" data-dot aria-label="Slide 2"></button>
+                  <button class="p2-dot" type="button" data-dot aria-label="Slide 3"></button>
+                </div>
+              </div>
             </div>
-            <div>
-              <img src="img/aboutnt4.jpg" alt="Ứng dụng bã điều" style="width: 100%; border-radius: 24px; box-shadow: var(--shadow)" />
-            </div>
+
+            <aside class="p2-side" aria-label="Nội dung nhanh">
+              <h3>Nội dung nhanh</h3>
+              <a href="#ba-dieu-la-gi">
+                Bã điều là gì?
+                <span class="sub">Tổng quan và lý do được dùng làm nhiên liệu.</span>
+              </a>
+              <a href="#so-bo-hat-dieu">
+                Hạt điều & thị trường
+                <span class="sub">Vùng trồng, sản lượng và xuất khẩu.</span>
+              </a>
+              <a href="#vo-hat-dieu">
+                Vỏ điều
+                <span class="sub">Đặc tính và vai trò trong chuỗi chế biến.</span>
+              </a>
+              <a href="#dau-vo-dieu">
+                Dầu vỏ điều (CNSL)
+                <span class="sub">Các ứng dụng phổ biến trong công nghiệp.</span>
+              </a>
+              <a href="#nhutin-cung-cap">
+                NHUTIN cung cấp
+                <span class="sub">Giao hàng, chứng từ và hotline.</span>
+              </a>
+            </aside>
           </div>
         </div>
       </section>
 
-      <section class="p1-section">
+      <!-- (kiểu ảnh 2): khối nội dung lớn + 3 ô tóm tắt -->
+      <section class="p2-article">
         <div class="container">
-          <div class="p1-head" data-reveal>
-            <h2 class="p1-section-title">Sơ bộ về Hạt Điều – Vỏ Điều và Dầu Vỏ Điều</h2>
-            <p class="p1-section-sub">
-              Tổng quan về vùng trồng điều, vỏ điều và dầu vỏ điều (CNSL) trong chuỗi chế biến, cũng như vai trò của bã điều sau ép dầu.
+          <div class="p2-article-card" data-reveal>
+            <h2 id="ba-dieu-la-gi">Bã điều là gì?</h2>
+            <p>
+              Bã điều (bã vỏ hạt điều) là bã thu được sau khi đem vỏ hạt điều ép lấy dầu điều.
+              Phần bã điều này được sử dụng làm chất đốt lò hơi giá rẻ mà nhiệt lượng cao lên đến 5000 Kcal/kg.
+            </p>
+
+            <h3 id="so-bo-hat-dieu">Sơ bộ về Hạt Điều – Vỏ Điều và Dầu Vỏ Điều</h3>
+            <p>
+              Các vùng trồng cây điều ở Việt Nam bao gồm chủ yếu ở miền Nam (tỉnh Bình Phước, Đồng Nai) và ít hơn ở miền Trung (tỉnh Bình Định, Phú Yên).
+              Sản lượng hạt điều thô thu được trong nước từ tổng diện tích vùng nguyên liệu 305 ha là 370 ngàn tấn (2022).
+            </p>
+            <p>
+              Bên cạnh một lượng khiêm tốn hạt điều trong nước, Việt Nam nhập một lượng khá lớn hạt điều thô theo dạng tạm nhập tái xuất với số lượng hơn 3 triệu tấn (theo thống kê hải quan 2022).
+              Sau khi qua khâu chế biến tách vỏ hạt điều cứng và có thể cả lụa, nhân hạt điều được xuất khẩu trở lại.
+              Việt Nam là nước xuất khẩu lớn nhất trên thế giới, với sản lượng nhân điều xuất khẩu khoảng 600.000 tấn/năm, chiếm 80% sản lượng nhân điều thế giới (2022).
+            </p>
+
+            <h3 id="vo-hat-dieu">Vỏ hạt điều</h3>
+            <p>
+              Vỏ hạt điều là lớp vỏ bọc bên ngoài của hạt điều, có màu nâu đen và rất cứng.
+              Vỏ hạt điều rất khó bóc, đòi hỏi kỹ thuật và máy móc để tách hạt và vỏ ra khỏi nhau.
+              Sau khi tách hạt và vỏ, vỏ hạt điều chủ yếu được dùng làm nguyên liệu chế biến dầu vỏ hạt điều.
             </p>
           </div>
 
-          <div class="p1-split" data-reveal>
-            <div>
-              <p class="p1-section-sub" style="margin-bottom: 14px; max-width: none">
-                Các vùng trồng cây điều ở Việt Nam bao gồm chủ yếu ở miền Nam (tỉnh Bình Phước, Đồng Nai) và ít hơn ở miền Trung (tỉnh Bình Định, Phú Yên).
-                Sản lượng hạt điều thô thu được trong nước từ tổng diện tích vùng nguyên liệu 305 ha là 370 ngàn tấn (2022).
-              </p>
-              <p class="p1-section-sub" style="margin-bottom: 0; max-width: none">
-                Bên cạnh một lượng khiêm tốn hạt điều trong nước, Việt Nam nhập một lượng khá lớn hạt điều thô theo dạng tạm nhập tái xuất với số lượng hơn 3 triệu tấn (theo thống kê hải quan 2022).
-                Sau khi qua khâu chế biến tách vỏ hạt điều cứng và có thể cả lụa, nhân hạt điều được xuất khẩu trở lại.
-                Việt Nam là nước xuất khẩu lớn nhất trên thế giới, với sản lượng nhân điều xuất khẩu khoảng 600.000 tấn/năm, chiếm 80% sản lượng nhân điều thế giới (2022).
-              </p>
+          <div class="p2-mini-row" data-reveal aria-label="Tóm tắt nhanh">
+  
+          <!-- Thị trường -->
+          <div class="p2-mini">
+            <div class="mini-thumb">
+              <img src="img/picture1.png" alt="Thị trường xuất khẩu" />
             </div>
-            <div>
-              <div class="p1-feature" style="padding: 18px 20px">
-                <h3 style="margin-bottom: 10px">Thị trường xuất khẩu chính</h3>
-                <p style="margin: 0; color: var(--muted); line-height: 1.7">
-                  Mỹ, Trung Quốc (chiếm 90% thị phần), Đức (60% thị phần), Hà Lan (80% thị phần).
-                </p>
-              </div>
-              <div style="height: 12px"></div>
-              <div class="p1-feature" style="padding: 18px 20px">
-                <h3 style="margin-bottom: 10px">Vỏ hạt điều</h3>
-                <p style="margin: 0; color: var(--muted); line-height: 1.7">
-                  Vỏ hạt điều là lớp vỏ bọc bên ngoài, màu nâu đen và cứng. Sau khi tách hạt và vỏ, vỏ hạt điều chủ yếu được dùng làm nguyên liệu chế biến dầu vỏ hạt điều.
-                </p>
-              </div>
-            </div>
+            <h4>Thị trường</h4>
+            <p>
+              Xuất khẩu chủ yếu sang Mỹ, Trung Quốc và các nước châu Âu như Đức, Hà Lan.
+            </p>
           </div>
 
-          <div style="height: 26px"></div>
-
-          <div class="p1-split" data-reveal>
-            <div>
-              <h3 class="p1-section-title" style="font-size: 26px; margin-bottom: 10px">Dầu vỏ hạt điều CNSL</h3>
-              <p class="p1-section-sub" style="margin-bottom: 16px; max-width: none">
-                Dầu vỏ hạt điều CNSL (Cashew Nut Shell Liquid) được sử dụng trong nhiều ứng dụng khác nhau như sau:
-              </p>
-              <ul class="p1-list">
-                <li>Công nghiệp chế biến gỗ: CNSL được sử dụng như một chất lỏng chống ẩm trong sản xuất gỗ.</li>
-                <li>Sơn và mực in: CNSL là thành phần giúp tăng độ bóng và độ bền của bề mặt.</li>
-                <li>Chất độn: CNSL có thể dùng làm chất độn trong sản xuất nhựa và cao su.</li>
-                <li>Chất tẩy: CNSL được dùng trong sản xuất một số sản phẩm chăm sóc da và tóc.</li>
-                <li>Chất độc: CNSL có trong một số sản phẩm như thuốc trừ sâu và thuốc trừ cỏ.</li>
-              </ul>
-            </div>
-            <div>
-              <h3 class="p1-section-title" style="font-size: 26px; margin-bottom: 10px">Công ty Như Tín chuyên cung cấp Bã Điều</h3>
-              <ul class="p1-list">
-                <li>Giao hàng tận nơi – xe xuống hàng tự động tận kho.</li>
-                <li>Chất lượng và số lượng ổn định quanh năm.</li>
-                <li>Giá cả cạnh tranh, giao hàng ổn định – xuống hàng nhanh.</li>
-                <li>Cung cấp hóa đơn chứng từ bán hàng rõ ràng.</li>
-                <li>Hotline: 0907 917 301 – 0978 572 662.</li>
-              </ul>
-            </div>
+          <!-- Vỏ / CNSL -->
+           
+          <div class="p2-mini">
+             <h4 id="vo-hat-dieu">Vỏ hạt điều</h4>
+            <p>
+              Vỏ hạt điều là lớp vỏ bọc bên ngoài của hạt điều, có màu nâu đen và rất cứng.
+              Vỏ hạt điều rất khó bóc, đòi hỏi kỹ thuật và máy móc để tách hạt và vỏ ra khỏi nhau.
+              Sau khi tách hạt và vỏ, vỏ hạt điều chủ yếu được dùng làm nguyên liệu chế biến dầu vỏ hạt điều.
+            </p>
+            <br>
+            <h4>Dầu vỏ hạt điều (CNSL)</h4>
+            
+            <p>
+              Nguyên liệu công nghiệp dùng trong sơn, mực in, gỗ, nhựa, cao su và hóa chất chuyên dụng.
+            </p>
           </div>
+
+          <!-- Công ty Như Tín -->
+          <div class="p2-mini">
+            <div class="mini-thumb">
+              <img src="img/picture1.png" alt="Kho bãi và vận chuyển Như Tín" />
+            </div>
+            <h4>Công ty Như Tín</h4>
+            <p>
+              Chuyên cung cấp bã điều số lượng lớn, giao hàng tận nơi, chất lượng ổn định, giá cạnh tranh.
+            </p>
+          </div>
+
+        </div>
+
         </div>
       </section>
 
