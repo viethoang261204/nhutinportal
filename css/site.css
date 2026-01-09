@@ -1189,7 +1189,7 @@ footer {
 }
 
 .p1-section-title {
-  margin: 0 0 10px;
+  margin: 0 0 14px;
   font-size: 34px;
   letter-spacing: -0.3px;
 }
@@ -1200,6 +1200,45 @@ footer {
   font-size: 17px;
   line-height: 1.75;
   max-width: 72ch;
+}
+
+.p1-head {
+  text-align: center;
+  max-width: 980px;
+  margin: 0 auto 10px;
+}
+
+.p1-head .p1-section-sub {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.p1-app-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.p1-app-card {
+  padding: 18px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadowSoft);
+}
+
+.p1-app-card .t {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--deep);
+}
+
+.p1-app-card .d {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--muted);
 }
 
 .p1-feature-row {
@@ -1402,6 +1441,9 @@ footer {
     grid-template-columns: 1fr;
   }
   .p1-stepsGrid {
+    grid-template-columns: 1fr;
+  }
+  .p1-app-grid {
     grid-template-columns: 1fr;
   }
 }
