@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bài viết — NHUTIN</title>
+    <meta name="description" content="Bài viết và kiến thức từ NHUTIN." />
+    <link rel="icon" href="img/logo.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/site.css" />
+    <style>
+      .post-header { margin-bottom: 24px; }
+      .post-meta { color: var(--muted, #666); font-size: 14px; margin-bottom: 8px; }
+      .post-title { font-size: clamp(24px, 3vw, 32px); font-weight: 700; line-height: 1.25; color: var(--deep, #0b1220); }
+      .post-thumb { border-radius: 12px; overflow: hidden; margin-bottom: 28px; max-height: 400px; }
+      .post-thumb img { width: 100%; height: auto; max-height: 400px; object-fit: cover; }
+      .post-body { font-size: 16px; line-height: 1.75; color: rgba(11, 18, 32, 0.85); }
+      .post-body img { max-width: 100%; height: auto; border-radius: 8px; }
+      .post-body p { margin: 0 0 1em; }
+      .post-body h2, .post-body h3 { margin: 1.5em 0 0.5em; color: var(--deep); }
+      .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); text-decoration: none; font-weight: 600; margin-bottom: 16px; }
+      .back-link:hover { text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <div class="bgfx" aria-hidden="true"></div>
+    <a class="skip" href="#main">Bỏ qua menu</a>
+
+    <header class="topbar" data-include="components/navbar.html"></header>
+
+    <main id="main">
+      <section class="section">
+        <div class="container" style="max-width: 800px">
+          <div id="postContainer">
+            <div class="blog-loading" style="text-align:center;padding:60px;color:var(--muted,#666)">Đang tải bài viết...</div>
+          </div>
+        </div>
+      </section>
+
+      <div data-include="components/footer.html"></div>
+    </main>
+
+    <script src="js/include.js" defer></script>
+    <script src="js/site.js" defer></script>
+    <script>
+      (function() {
+        var params = new URLSearchParams(window.location.search);
+        var slug = params.get('slug') || params.get('id') || '';
+        var container = document.getElementById('postContainer');
+        if (!container) return;
+
+        if (!slug) {
+          container.innerHTML = '<p class="sub">Không tìm thấy bài viết. <a href="news.html">Quay lại tin tức</a></p>';
+          return;
+        }
+
+        var base = new URL('admin/api/posts-public.php', window.location.href).href;
+        var url = base + (slug ? '?slug=' + encodeURIComponent(slug) : '');
+        if (/^\d+$/.test(slug)) url = base + '?id=' + slug;
+
+        fetch(url)
+          .then(function(r) { return r.json(); })
+          .then(function(res) {
+            if (!res.success || !res.data) {
+              container.innerHTML = '<p class="sub">Không tìm thấy bài viết. <a href="news.html">Quay lại tin tức</a></p>';
+              return;
+            }
+            var p = res.data;
+            document.title = (p.title || 'Bài viết') + ' — NHUTIN';
+            var metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc && p.excerpt) metaDesc.content = p.excerpt.substring(0, 160);
+
+            var thumb = p.thumbnail_url || 'img/picture1.png';
+            var cat = (p.category || '').trim() || 'Tin tức';
+            var pub = p.published_at || p.created_at || '';
+            var pubStr = pub ? pub.substring(0, 10) : '';
+
+            var html = '<a href="news.html" class="back-link">&larr; Tin tức</a>' +
+              '<article class="post-header" data-reveal">' +
+              '<div class="post-meta">' + cat + (pubStr ? ' &middot; ' + pubStr : '') + '</div>' +
+              '<h1 class="post-title">' + (p.title || '').replace(/</g, '&lt;') + '</h1>' +
+              '</article>';
+            if (thumb && thumb.indexOf('unsplash') === -1) {
+              html += '<div class="post-thumb" data-reveal"><img src="' + thumb + '" alt="" onerror="this.style.display=\'none\'"></div>';
+            }
+            var body = (p.content || p.excerpt || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+            html += '<div class="post-body" data-reveal">' + body + '</div>';
+            container.innerHTML = html;
+          })
+          .catch(function() {
+            container.innerHTML = '<p class="sub">Không thể tải bài viết. <a href="news.html">Quay lại tin tức</a></p>';
+          });
+      })();
+    </script>
+  </body>
+</html>

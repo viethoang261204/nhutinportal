@@ -4,163 +4,148 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý Tài liệu - NHUTIN Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/admin.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Be Vietnam Pro', sans-serif; 
-            background: linear-gradient(180deg, 
-                #e0c3fc 0%,
-                #8ec5fc 25%,
-                #b1e5fc 50%,
-                #c2f0fc 75%,
-                #daf5f0 100%
-            );
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background: linear-gradient(180deg, #bfdbfe 0%, #93c5fd 25%, #bae6fd 50%, #cffafe 75%, #e0f2fe 100%);
             min-height: 100vh;
             background-attachment: fixed;
         }
         .app-container { display: flex; min-height: 100vh; }
-
-        /* Sidebar */
-        .sidebar { width: 280px; background: linear-gradient(180deg, #0077b6 0%, #1E3A8A 100%); padding: 24px 16px; display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 100; transition: transform 0.3s ease; }
+        .sidebar { width: 280px; background: linear-gradient(180deg, #0077b6 0%, #005a8d 100%); padding: 24px 16px; display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 100; }
         .sidebar-header { display: flex; align-items: center; gap: 12px; padding: 0 12px 24px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 24px; }
         .logo-icon { width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
-        .logo-icon svg { width: 22px; height: 22px; fill: #fff; }
-        .logo-text { color: #fff; font-size: 16px; font-weight: 600; }
+        .logo-icon svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 2; }
+        .logo-text { color: #fff; font-size: 16px; font-weight: 700; }
         .nav-menu { flex: 1; overflow-y: auto; }
-        .nav-section { margin-bottom: 24px; }
-        .nav-section-title { color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 0 12px; margin-bottom: 8px; }
-        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; transition: all 0.2s ease; margin-bottom: 2px; font-weight: 500; }
-        .nav-item:hover { background: rgba(255,255,255,0.1); color: #fff; }
-        .nav-item.active { background: rgba(255,255,255,0.2); color: #fff; font-weight: 600; }
-        .nav-item svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-        .nav-badge { margin-left: auto; background: #EF4444; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
         .sidebar-footer { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; }
         .user-info { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; cursor: pointer; }
         .user-info:hover { background: rgba(255,255,255,0.1); }
         .user-avatar { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; }
-        .user-details { flex: 1; }
         .user-name { color: #fff; font-size: 14px; font-weight: 600; }
         .user-email { color: rgba(255,255,255,0.7); font-size: 12px; }
 
-        /* Main Content */
         .main-content { flex: 1; margin-left: 280px; padding: 32px; min-height: 100vh; }
         .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
-        .page-title { font-size: 24px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
+        .page-title { font-size: 28px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
         .page-subtitle { color: #666; font-size: 14px; }
 
-        /* Tabs */
-        .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
-        .tab { padding: 10px 20px; background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-weight: 600; color: #666; cursor: pointer; transition: all 0.2s; }
-        .tab:hover { border-color: #0077b6; color: #0077b6; }
-        .tab.active { background: #0077b6; border-color: #0077b6; color: #fff; }
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; text-decoration: none; font-family: inherit; border: none; }
+        .btn-primary { background: linear-gradient(135deg, #0096c7 0%, #0077b6 100%); color: #fff; }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,119,182,0.3); }
+        .btn-outline { background: #fff; border: 1px solid #E5E7EB; color: #4B5563; }
+        .btn-outline:hover { background: #F9FAFB; }
 
-        /* Filters */
         .filters-bar { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
-        .search-box { flex: 1; min-width: 250px; position: relative; }
-        .search-box input { width: 100%; padding: 12px 16px 12px 44px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-family: inherit; background: #fff; }
-        .search-box input:focus { outline: none; border-color: #0077b6; box-shadow: 0 0 0 3px rgba(0,119,182,0.1); }
-        .search-box svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; stroke: #888; }
-        .filter-select { padding: 12px 36px 12px 16px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-family: inherit; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6,9 12,15 18,9'/%3E%3C/svg%3E") no-repeat right 12px center; cursor: pointer; appearance: none; }
+        .search-box { flex: 1; min-width: 280px; position: relative; }
+        .search-box input { width: 100%; padding: 12px 16px 12px 44px; border: 1px solid #E5E7EB; border-radius: 10px; font-size: 14px; font-family: inherit; background: #fff; }
+        .search-box input:focus { outline: none; border-color: #0077b6; box-shadow: 0 0 0 3px rgba(0,119,182,0.12); }
+        .search-box svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; stroke: #888; fill: none; stroke-width: 2; }
+        .filter-select { padding: 12px 36px 12px 16px; border: 1px solid #E5E7EB; border-radius: 10px; font-size: 14px; font-family: inherit; background: #fff; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6,9 12,15 18,9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
 
-        /* Documents Grid */
         .documents-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
-
         .document-card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); transition: all 0.2s; }
         .document-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-
-        .doc-header { display: flex; gap: 14px; margin-bottom: 16px; }
-        .doc-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .doc-icon.invoice { background: #90E0EF; }
-        .doc-icon.invoice svg { stroke: #0077b6; }
-        .doc-icon.packing { background: #E8F0F8; }
-        .doc-icon.packing svg { stroke: #2D5A8E; }
-        .doc-icon.certificate { background: #FFF3E8; }
-        .doc-icon.certificate svg { stroke: #C75E00; }
-        .doc-icon.bill { background: #F3E8F8; }
-        .doc-icon.bill svg { stroke: #7B2D8E; }
-        .doc-icon svg { width: 24px; height: 24px; fill: none; stroke-width: 1.5; }
-
-        .doc-info { flex: 1; min-width: 0; }
-        .doc-title { font-size: 14px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .doc-order { font-size: 12px; color: #888; }
-
-        .doc-meta { display: flex; gap: 16px; padding: 12px 0; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; margin-bottom: 16px; }
-        .meta-item { display: flex; flex-direction: column; }
-        .meta-item label { font-size: 11px; color: #888; margin-bottom: 2px; }
-        .meta-item span { font-size: 13px; font-weight: 500; color: #333; }
-
-        .doc-status { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 500; }
-        .status-paid { background: #D1FAE5; color: #059669; }
-        .status-unpaid { background: #FFF3E8; color: #C75E00; }
-        .status-processing { background: #E8F0F8; color: #2D5A8E; }
-
+        .doc-top { margin-bottom: 12px; }
+        .doc-title { font-size: 15px; font-weight: 700; color: #111827; margin-bottom: 4px; }
+        .doc-code { font-size: 12px; color: #6B7280; }
+        .doc-meta { display: grid; gap: 8px; margin-bottom: 14px; }
+        .meta-row { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; }
+        .meta-row span { color: #6B7280; }
+        .meta-row strong { color: #1f2937; font-weight: 600; text-align: right; }
+        .status { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+        .status.published { background: #D1FAE5; color: #059669; }
+        .status.archived { background: #F3F4F6; color: #6B7280; }
+        .status.draft { background: #E0F2FE; color: #0284C7; }
         .doc-actions { display: flex; gap: 8px; }
-        .doc-btn { flex: 1; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s; }
-        .doc-btn svg { width: 16px; height: 16px; }
-        .btn-view { background: #f5f5f5; border: 1px solid #e0e0e0; color: #333; }
-        .btn-view:hover { background: #e8e8e8; }
-        .btn-download { background: linear-gradient(135deg, #3B82F6 0%, #0077b6 100%); border: none; color: #fff; }
-        .btn-download:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,119,182,0.3); }
+        .doc-btn { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #E5E7EB; background: #fff; color: #374151; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; }
+        .doc-btn:hover { background: #F9FAFB; }
+        .btn-edit { background: #ECFEFF; border-color: #BAE6FD; color: #0369A1; }
+        .btn-delete { background: #FEF2F2; border-color: #FECACA; color: #B91C1C; }
+        .empty-state { background: #fff; border-radius: 14px; padding: 28px; text-align: center; color: #6B7280; }
 
-        /* Empty State */
-        .empty-state { text-align: center; padding: 60px 20px; }
-        .empty-icon { width: 80px; height: 80px; background: #f5f5f5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
-        .empty-icon svg { width: 40px; height: 40px; stroke: #ccc; }
-        .empty-state h3 { font-size: 18px; font-weight: 600; color: #333; margin-bottom: 8px; }
-        .empty-state p { font-size: 14px; color: #888; }
+        .pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: 24px; padding: 20px; border-top: 1px solid #E5E7EB; }
+        .pagination-info { font-size: 13px; color: #6B7280; }
+        .pagination-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .pagination .limit-select { padding: 8px 32px 8px 12px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px; font-family: inherit; background: #fff; cursor: pointer; }
+        .page-btn { padding: 8px 14px; border: 1px solid #E5E7EB; background: #fff; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; color: #333; }
+        .page-btn:hover:not(:disabled) { background: #0077b6; color: #fff; border-color: #0077b6; }
+        .page-btn.active { background: #0077b6; color: #fff; border-color: #0077b6; }
+        .page-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .page-btn:disabled:hover { background: #fff; color: #333; border-color: #E5E7EB; }
+        .page-text { font-size: 14px; color: #374151; font-weight: 500; }
 
-        /* Mobile */
-        @media (max-width: 768px) {
+        .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99; }
+        .overlay.show { display: block; }
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+        .modal-overlay.show { display: flex; }
+        .modal { background: #fff; border-radius: 20px; padding: 32px; max-width: 400px; width: 100%; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+        .modal-icon { width: 72px; height: 72px; background: #CAF0F8; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+        .modal-icon svg { width: 36px; height: 36px; stroke: #0077b6; stroke-width: 2; fill: none; }
+        .modal h3 { font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
+        .modal p { font-size: 14px; color: #666; margin-bottom: 24px; line-height: 1.5; }
+        .modal-actions { display: flex; gap: 12px; }
+        .modal-btn { flex: 1; padding: 14px 20px; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: inherit; border: none; }
+        .modal-btn-cancel { background: #f5f5f5; color: #666; }
+        .modal-btn-confirm { background: #DC2626; color: #fff; }
+
+        .form-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 1100; align-items: center; justify-content: center; padding: 20px; }
+        .form-modal-overlay.show { display: flex; }
+        .form-modal { width: 100%; max-width: 760px; max-height: 90vh; overflow: auto; background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 16px 50px rgba(0,0,0,0.2); }
+        .form-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .form-modal-title { font-size: 20px; font-weight: 700; color: #111827; }
+        .icon-btn { width: 34px; height: 34px; border: 1px solid #E5E7EB; border-radius: 8px; background: #fff; cursor: pointer; }
+        .icon-btn:hover { background: #F9FAFB; }
+        .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+        .form-group.full { grid-column: 1 / -1; }
+        .form-label { font-size: 13px; font-weight: 600; color: #374151; }
+        .form-input, .form-select { width: 100%; border: 1px solid #E5E7EB; border-radius: 10px; padding: 10px 12px; font-family: inherit; font-size: 14px; }
+        .form-input:focus, .form-select:focus { outline: none; border-color: #0077b6; box-shadow: 0 0 0 3px rgba(0,119,182,0.12); }
+        .form-error { display: none; margin-bottom: 12px; background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; padding: 10px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; }
+        .form-error.show { display: block; }
+        .form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
+        .upload-inline { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .upload-note { font-size: 12px; color: #6B7280; }
+        .picker-toolbar { display: flex; gap: 8px; width: 100%; }
+        .picker-table-wrap { border: 1px solid #E5E7EB; border-radius: 10px; overflow: hidden; max-height: 300px; overflow-y: auto; }
+        .picker-table { width: 100%; border-collapse: collapse; background: #fff; }
+        .picker-table th, .picker-table td { padding: 10px 12px; border-bottom: 1px solid #F3F4F6; font-size: 13px; text-align: left; }
+        .picker-table th { background: #F9FAFB; font-weight: 700; color: #4B5563; position: sticky; top: 0; z-index: 1; }
+        .selected-display { min-height: 42px; background: #F9FAFB; }
+        .selected-helper { font-size: 12px; color: #6B7280; }
+
+        .toast { position: fixed; right: 24px; bottom: 24px; background: #111827; color: #fff; padding: 10px 14px; border-radius: 10px; font-size: 13px; opacity: 0; pointer-events: none; transform: translateY(6px); transition: all 0.2s ease; z-index: 1300; }
+        .toast.show { opacity: 1; transform: translateY(0); }
+        .toast.error { background: #B91C1C; }
+
+        @media (max-width: 899px) {
             .sidebar { transform: translateX(-100%); }
             .sidebar.open { transform: translateX(0); }
-            .main-content { margin-left: 0; padding: 20px 16px; }
-            .page-header { flex-direction: column; align-items: flex-start; }
-            .filters-bar { flex-direction: column; }
-            .search-box { min-width: 100%; }
+            .main-content { margin-left: 0; padding: 24px 16px; padding-top: 72px; }
             .documents-grid { grid-template-columns: 1fr; }
         }
-
-        .mobile-menu-btn { display: none; position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; background: #0077b6; border: none; border-radius: 16px; color: #fff; cursor: pointer; z-index: 101; box-shadow: 0 4px 20px rgba(0,119,182,0.4); }
-        .mobile-menu-btn svg { width: 24px; height: 24px; stroke: #fff; }
-        @media (max-width: 768px) { .mobile-menu-btn { display: flex; align-items: center; justify-content: center; } }
-        .overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 99; }
-        .overlay.show { display: block; }
-
-        /* Logout Modal */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-        .modal-overlay.show { display: flex; }
-        .modal { background: #fff; border-radius: 20px; padding: 32px; max-width: 400px; width: 100%; text-align: center; animation: modalSlide 0.3s ease; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
-        @keyframes modalSlide { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .modal-icon { width: 72px; height: 72px; background: #FFF3E8; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
-        .modal-icon svg { width: 36px; height: 36px; stroke: #C75E00; }
-        .modal h3 { font-size: 20px; font-weight: 600; color: #1a1a1a; margin-bottom: 8px; }
-        .modal p { font-size: 14px; color: #666; margin-bottom: 24px; }
-        .modal-actions { display: flex; gap: 12px; }
-        .modal-btn { flex: 1; padding: 14px 20px; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; }
-        .modal-btn-cancel { background: #f5f5f5; border: none; color: #666; }
-        .modal-btn-cancel:hover { background: #e8e8e8; }
-        .modal-btn-confirm { background: #E74C3C; border: none; color: #fff; }
-        .modal-btn-confirm:hover { background: #C0392B; }
     </style>
 </head>
 <body>
     <div class="app-container">
-        <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
                 </div>
                 <span class="logo-text">NHUTIN Admin</span>
             </div>
-            <nav class="nav-menu" id="navMenu">
-                <!-- Menu will be rendered by portal-nav.js -->
-            </nav>
+            <nav class="nav-menu" id="navMenu"></nav>
             <div class="sidebar-footer">
                 <div class="user-info" onclick="toggleUserMenu()">
-                    <img src="https://i.pravatar.cc/150?img=8" alt="Admin" class="user-avatar" id="userAvatar">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Admin" class="user-avatar" id="userAvatar" data-avatar-init>
                     <div class="user-details">
                         <div class="user-name" id="userName">Administrator</div>
                         <div class="user-email" id="userEmail">admin@nhutin.vn</div>
@@ -169,280 +154,60 @@
             </div>
         </aside>
 
-        <!-- Main Content -->
         <main class="main-content">
             <div class="page-header">
                 <div>
                     <h1 class="page-title">Quản lý Tài liệu</h1>
-                    <p class="page-subtitle">Quản lý toàn bộ tài liệu của khách hàng</p>
+                    <p class="page-subtitle" id="documentsSubtitle">Tổng số: 0 tài liệu</p>
                 </div>
+                <button class="btn btn-primary" id="addDocumentBtn" type="button">Thêm tài liệu</button>
             </div>
 
-            <!-- Tabs -->
-            <div class="tabs">
-                <button class="tab active" onclick="filterDocs('all')">Tất cả</button>
-                <button class="tab" onclick="filterDocs('invoice')">Hóa đơn</button>
-                <button class="tab" onclick="filterDocs('packing')">Packing List</button>
-                <button class="tab" onclick="filterDocs('certificate')">Chứng nhận</button>
-                <button class="tab" onclick="filterDocs('bill')">Bill of Lading</button>
-            </div>
-
-            <!-- Filters -->
             <div class="filters-bar">
                 <div class="search-box">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                    </svg>
-                    <input type="text" placeholder="Tìm kiếm theo tên file, mã đơn hàng...">
+                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <input type="text" id="documentSearch" placeholder="Tìm theo tiêu đề, mã tài liệu, tên file...">
                 </div>
-                <select class="filter-select">
-                    <option value="">Tháng này</option>
-                    <option value="last-month">Tháng trước</option>
-                    <option value="last-3-months">3 tháng gần đây</option>
-                    <option value="this-year">Năm nay</option>
+                <select class="filter-select" id="documentTypeFilter">
+                    <option value="">Tất cả loại tài liệu</option>
+                </select>
+                <select class="filter-select" id="statusFilter">
+                    <option value="">Tất cả trạng thái</option>
+                    <option value="draft">Draft</option>
+                    <option value="published">Published</option>
+                    <option value="archived">Archived</option>
                 </select>
             </div>
 
-            <!-- Documents Grid -->
-            <div class="documents-grid">
-                <!-- Invoice -->
-                <div class="document-card" data-type="invoice">
-                    <div class="doc-header">
-                        <div class="doc-icon invoice">
-                            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                        </div>
-                        <div class="doc-info">
-                            <div class="doc-title">Commercial Invoice #INV-2024-001</div>
-                            <div class="doc-order">Đơn hàng: #ORD-2024-001</div>
-                        </div>
-                    </div>
-                    <div class="doc-meta">
-                        <div class="meta-item">
-                            <label>Ngày tạo</label>
-                            <span>05/12/2024</span>
-                        </div>
-                        <div class="meta-item">
-                            <label>Giá trị</label>
-                            <span>$12,500.00</span>
-                        </div>
-                        <div class="meta-item">
-                            <label>Trạng thái</label>
-                            <span class="doc-status status-paid">Đã thanh toán</span>
-                        </div>
-                    </div>
-                    <div class="doc-actions">
-                        <button class="doc-btn btn-view">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                            Xem
-                        </button>
-                        <button class="doc-btn btn-download">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                            Tải xuống
-                        </button>
-                    </div>
-                </div>
+            <div class="documents-grid" id="documentsGrid">
+                <div class="empty-state">Đang tải dữ liệu...</div>
+            </div>
 
-                <!-- Packing List -->
-                <div class="document-card" data-type="packing">
-                    <div class="doc-header">
-                        <div class="doc-icon packing">
-                            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
-                        </div>
-                        <div class="doc-info">
-                            <div class="doc-title">Packing List #PL-2024-001</div>
-                            <div class="doc-order">Đơn hàng: #ORD-2024-001</div>
-                        </div>
-                    </div>
-                    <div class="doc-meta">
-                        <div class="meta-item">
-                            <label>Ngày tạo</label>
-                            <span>05/12/2024</span>
-                        </div>
-                        <div class="meta-item">
-                            <label>Số lượng</label>
-                            <span>50 tấn</span>
-                        </div>
-                        <div class="meta-item">
-                            <label>Container</label>
-                            <span>MSCU7654321</span>
-                        </div>
-                    </div>
-                    <div class="doc-actions">
-                        <button class="doc-btn btn-view">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                            Xem
-                        </button>
-                        <button class="doc-btn btn-download">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                            Tải xuống
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Certificate of Origin -->
-                <div class="document-card" data-type="certificate">
-                    <div class="doc-header">
-                        <div class="doc-icon certificate">
-                            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
-                        </div>
-                        <div class="doc-info">
-                            <div class="doc-title">Certificate of Origin (C/O)</div>
-                            <div class="doc-order">Đơn hàng: #ORD-2024-001</div>
-                        </div>
-                    </div>
-                    <div class="doc-meta">
-                        <div class="meta-item">
-                            <label>Ngày cấp</label>
-                            <span>04/12/2024</span>
-                        </div>
-                        <div class="meta-item">
-                            <label>Loại C/O</label>
-                            <span>Form AK</span>
-                        </div>
-                        <div class="meta-item">
-                            <label>Xuất xứ</label>
-                            <span>Việt Nam</span>
-                        </div>
-                    </div>
-                    <div class="doc-actions">
-                        <button class="doc-btn btn-view">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                            Xem
-                        </button>
-                        <button class="doc-btn btn-download">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                            Tải xuống
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Bill of Lading -->
-                <div class="document-card" data-type="bill">
-                    <div class="doc-header">
-                        <div class="doc-icon bill">
-                            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                        </div>
-                        <div class="doc-info">
-                            <div class="doc-title">Bill of Lading #BL-EGLV-2024001</div>
-                            <div class="doc-order">Đơn hàng: #ORD-2024-001</div>
-                        </div>
-                    </div>
-                    <div class="doc-meta">
-                        <div class="meta-item">
-                            <label>Ngày phát hành</label>
-                            <span>03/12/2024</span>
-                        </div>
-                        <div class="meta-item">
-                            <label>Hãng tàu</label>
-                            <span>Evergreen</span>
-                        </div>
-                        <div class="meta-item">
-                            <label>Loại B/L</label>
-                            <span>Original</span>
-                        </div>
-                    </div>
-                    <div class="doc-actions">
-                        <button class="doc-btn btn-view">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                            Xem
-                        </button>
-                        <button class="doc-btn btn-download">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                            Tải xuống
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Phytosanitary Certificate -->
-                <div class="document-card" data-type="certificate">
-                    <div class="doc-header">
-                        <div class="doc-icon certificate">
-                            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
-                        </div>
-                        <div class="doc-info">
-                            <div class="doc-title">Phytosanitary Certificate</div>
-                            <div class="doc-order">Đơn hàng: #ORD-2024-001</div>
-                        </div>
-                    </div>
-                    <div class="doc-meta">
-                        <div class="meta-item">
-                            <label>Ngày cấp</label>
-                            <span>02/12/2024</span>
-                        </div>
-                        <div class="meta-item">
-                            <label>Cơ quan cấp</label>
-                            <span>Cục BVTV</span>
-                        </div>
-                        <div class="meta-item">
-                            <label>Số chứng nhận</label>
-                            <span>VN-2024-08765</span>
-                        </div>
-                    </div>
-                    <div class="doc-actions">
-                        <button class="doc-btn btn-view">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                            Xem
-                        </button>
-                        <button class="doc-btn btn-download">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                            Tải xuống
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Invoice 2 -->
-                <div class="document-card" data-type="invoice">
-                    <div class="doc-header">
-                        <div class="doc-icon invoice">
-                            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                        </div>
-                        <div class="doc-info">
-                            <div class="doc-title">Commercial Invoice #INV-2024-002</div>
-                            <div class="doc-order">Đơn hàng: #ORD-2024-002</div>
-                        </div>
-                    </div>
-                    <div class="doc-meta">
-                        <div class="meta-item">
-                            <label>Ngày tạo</label>
-                            <span>03/12/2024</span>
-                        </div>
-                        <div class="meta-item">
-                            <label>Giá trị</label>
-                            <span>$8,100.00</span>
-                        </div>
-                        <div class="meta-item">
-                            <label>Trạng thái</label>
-                            <span class="doc-status status-unpaid">Chờ thanh toán</span>
-                        </div>
-                    </div>
-                    <div class="doc-actions">
-                        <button class="doc-btn btn-view">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                            Xem
-                        </button>
-                        <button class="doc-btn btn-download">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                            Tải xuống
-                        </button>
-                    </div>
+            <div class="pagination">
+                <span class="pagination-info" id="paginationInfo">Đang tải...</span>
+                <div class="pagination-controls">
+                    <select class="limit-select" id="limitSelect" title="Số bản ghi mỗi trang">
+                        <option value="10" selected>10 / trang</option>
+                        <option value="20">20 / trang</option>
+                        <option value="30">30 / trang</option>
+                        <option value="50">50 / trang</option>
+                    </select>
+                    <button class="page-btn" id="prevPageBtn" type="button">« Trước</button>
+                    <span class="page-text" id="pageInfo">Trang 1/1</span>
+                    <button class="page-btn" id="nextPageBtn" type="button">Sau »</button>
                 </div>
             </div>
         </main>
     </div>
 
     <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
-    <button class="mobile-menu-btn" onclick="toggleSidebar()">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-    </button>
-
-    <!-- Logout Modal -->
-    <div class="modal-overlay" id="logoutModal" onclick="if(event.target===this)closeLogoutModal()">
+    <div class="modal-overlay" id="logoutModal">
         <div class="modal">
             <div class="modal-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
             </div>
             <h3>Đăng xuất?</h3>
-            <p>Bạn có chắc chắn muốn đăng xuất khỏi tài khoản không?</p>
+            <p>Bạn có chắc chắn muốn đăng xuất khỏi admin panel không?</p>
             <div class="modal-actions">
                 <button class="modal-btn modal-btn-cancel" onclick="closeLogoutModal()">Hủy</button>
                 <button class="modal-btn modal-btn-confirm" onclick="confirmLogout()">Đăng xuất</button>
@@ -450,24 +215,117 @@
         </div>
     </div>
 
-    <script>
-        function filterDocs(type) {
-            // Update tabs
-            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
+    <div class="form-modal-overlay" id="documentFormModal">
+        <div class="form-modal">
+            <div class="form-modal-header">
+                <h3 class="form-modal-title" id="documentModalTitle">Thêm tài liệu</h3>
+                <button class="icon-btn" id="closeDocumentModalBtn" type="button">✕</button>
+            </div>
 
-            // Filter documents
-            document.querySelectorAll('.document-card').forEach(card => {
-                if (type === 'all' || card.dataset.type === type) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-    </script>
-    
+            <div id="documentFormError" class="form-error"></div>
+
+            <form id="documentForm">
+                <input type="hidden" id="documentId">
+                <input type="hidden" id="documentFilePath">
+                <input type="hidden" id="documentFileName">
+                <input type="hidden" id="documentFileSize">
+                <input type="hidden" id="documentMimeType">
+
+                <div class="form-grid">
+                    <div class="form-group full">
+                        <label class="form-label" for="documentTitle">Tiêu đề tài liệu *</label>
+                        <input class="form-input" id="documentTitle" maxlength="255" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="documentType">Loại tài liệu *</label>
+                        <select class="form-select" id="documentType" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="selectedCustomersDisplay">Khách hàng đã chọn *</label>
+                        <input class="form-input selected-display" id="selectedCustomersDisplay" readonly placeholder="Chưa chọn khách hàng">
+                        <div class="upload-inline">
+                            <button class="btn btn-outline" id="openCustomerPickerBtn" type="button">Thêm khách hàng</button>
+                            <button class="btn btn-outline" id="addCustomerQuickBtn" type="button">Mở trang khách hàng</button>
+                        </div>
+                        <div class="selected-helper">Có thể chọn một hoặc nhiều khách hàng trong màn hình chọn.</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="documentStatus">Trạng thái</label>
+                        <select class="form-select" id="documentStatus">
+                            <option value="draft">Draft (chỉ admin xem)</option>
+                            <option value="published" selected>Published (hiện trên Portal)</option>
+                            <option value="archived">Archived</option>
+                        </select>
+                        <div class="upload-note" style="margin-top: 4px;">Chọn Published để khách hàng xem được trên Portal.</div>
+                    </div>
+                    <div class="form-group full">
+                        <label class="form-label">File tài liệu *</label>
+                        <div class="upload-inline">
+                            <input id="uploadFileInput" type="file" hidden>
+                            <button class="btn btn-outline" id="uploadFileButton" type="button">Chọn file & Upload</button>
+                            <span id="uploadFileLabel" class="upload-note">Chưa chọn file</span>
+                        </div>
+                        <div class="upload-note">Kích thước tối đa 20MB.</div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-outline" id="cancelDocumentBtn" type="button">Hủy</button>
+                    <button class="btn btn-primary" type="submit">Lưu tài liệu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="deleteDocumentModal">
+        <div class="modal">
+            <div class="modal-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 9v4m0 4h.01M4.93 19h14.14c1.54 0 2.5-1.67 1.73-3L13.73 3a2 2 0 00-3.46 0L3.2 16c-.77 1.33.19 3 1.73 3z"/>
+                </svg>
+            </div>
+            <h3>Xóa tài liệu?</h3>
+            <p id="deleteDocumentText">Bạn có chắc chắn muốn xóa tài liệu này không?</p>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-cancel" id="cancelDeleteDocumentBtn" type="button">Hủy</button>
+                <button class="modal-btn modal-btn-confirm" id="confirmDeleteDocumentBtn" type="button">Xóa</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-modal-overlay" id="customerPickerModal">
+        <div class="form-modal" style="max-width: 900px;">
+            <div class="form-modal-header">
+                <h3 class="form-modal-title">Chọn khách hàng cho tài liệu</h3>
+                <button class="icon-btn" id="closeCustomerPickerBtn" type="button">✕</button>
+            </div>
+            <div class="picker-toolbar">
+                <input class="form-input" id="customerPickerSearch" placeholder="Tìm theo mã KH hoặc tên công ty...">
+            </div>
+            <div class="picker-table-wrap" style="margin-top: 12px;">
+                <table class="picker-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 44px;">
+                                <input type="checkbox" id="customerSelectAll">
+                            </th>
+                            <th>Mã khách hàng</th>
+                            <th>Tên công ty</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customerPickerBody"></tbody>
+                </table>
+            </div>
+            <div class="form-actions" style="margin-top: 16px;">
+                <button class="btn btn-outline" id="cancelCustomerPickerBtn" type="button">Hủy</button>
+                <button class="btn btn-primary" id="applyCustomerPickerBtn" type="button">Xác nhận chọn</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="documentToast"></div>
+
     <script src="js/admin-nav.js"></script>
+    <script src="js/documents.js"></script>
 </body>
 </html>
-

@@ -20,7 +20,10 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            user-select: none;
+            -webkit-user-select: none;
         }
+        input, textarea { user-select: text; -webkit-user-select: text; }
 
         .register-container {
             background: #fff;
@@ -427,13 +430,13 @@
             </div>
             <h3>Đăng ký thành công!</h3>
             <p>Cảm ơn bạn đã đăng ký. Chúng tôi sẽ xem xét và kích hoạt tài khoản của bạn trong vòng 24 giờ. Bạn sẽ nhận được email xác nhận khi tài khoản được kích hoạt.</p>
-            <a href="/portal/login" class="register-btn" style="display: inline-block; text-decoration: none;">
+            <a href="/portal/login.html" class="register-btn" style="display: inline-block; text-decoration: none;">
                 Quay lại đăng nhập
             </a>
         </div>
 
         <p class="login-link" id="loginLink">
-            Đã có tài khoản? <a href="/portal/login">Đăng nhập ngay</a>
+            Đã có tài khoản? <a href="/portal/login.html">Đăng nhập ngay</a>
         </p>
     </div>
 

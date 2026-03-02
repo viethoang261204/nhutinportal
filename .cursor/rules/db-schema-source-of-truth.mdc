@@ -1,0 +1,17 @@
+---
+description: Enforce real DB schema as source of truth
+alwaysApply: true
+---
+
+# Database Schema Rule (Must Follow)
+
+- Use the user-provided NHUTIN schema as the only source of truth for database structure.
+- Do not invent, rename, or assume table/column names.
+- Before writing SQL/PHP queries, map fields exactly to the schema:
+  - `customers.company_name` (not `name`)
+  - `customers.notes` (not `note`)
+  - `customers.customer_type_id` (not `customer_type`)
+  - `customers.logo_url` (not `avatar_url`)
+- If a required field/mapping is unclear, ask the user first instead of guessing.
+- For customer CRUD, keep compatibility with current schema and constraints (including FKs and enum status values).
+- Prefer explicit, schema-aligned error messages when SQL fails.

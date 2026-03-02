@@ -11,11 +11,11 @@
         body { 
             font-family: 'Be Vietnam Pro', sans-serif; 
             background: linear-gradient(180deg, 
-                #e0c3fc 0%,
-                #8ec5fc 25%,
-                #b1e5fc 50%,
-                #c2f0fc 75%,
-                #daf5f0 100%
+                #bfdbfe 0%,
+                #93c5fd 25%,
+                #bae6fd 50%,
+                #cffafe 75%,
+                #e0f2fe 100%
             );
             min-height: 100vh;
             background-attachment: fixed;
@@ -91,16 +91,20 @@
         .action-btn svg { width: 16px; height: 16px; stroke: #666; fill: none; stroke-width: 2; }
 
         /* Pagination */
-        .pagination { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 24px; padding: 20px; }
+        .pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: 24px; padding: 20px; border-top: 1px solid #E5E7EB; }
+        .pagination-info { font-size: 13px; color: #6B7280; }
+        .pagination-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .pagination .limit-select { padding: 8px 32px 8px 12px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px; font-family: inherit; background: #fff; cursor: pointer; }
         .page-btn { padding: 8px 14px; border: 1px solid #E5E7EB; background: #fff; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; color: #333; }
-        .page-btn:hover { background: #0077b6; color: #fff; border-color: #0077b6; }
+        .page-btn:hover:not(:disabled) { background: #0077b6; color: #fff; border-color: #0077b6; }
         .page-btn.active { background: #0077b6; color: #fff; border-color: #0077b6; }
+        .page-text { font-size: 14px; color: #374151; font-weight: 500; }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 899px) {
             .sidebar { transform: translateX(-100%); }
             .sidebar.open { transform: translateX(0); }
-            .main-content { margin-left: 0; padding: 24px 16px; }
+            .main-content { margin-left: 0; padding: 24px 16px; padding-top: 72px; }
         }
 
         .overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 99; }
@@ -119,6 +123,38 @@
         .modal-btn-cancel:hover { background: #e8e8e8; }
         .modal-btn-confirm { background: #DC2626; color: #fff; }
         .modal-btn-confirm:hover { background: #B91C1C; }
+
+        .empty-cell { text-align: center; color: #888; padding: 28px 20px; }
+        .page-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .page-btn:disabled:hover { background: #fff; color: #333; border-color: #E5E7EB; }
+
+        .form-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 1100; align-items: center; justify-content: center; padding: 20px; }
+        .form-modal-overlay.show { display: flex; }
+        .form-modal { width: 100%; max-width: 680px; max-height: 90vh; overflow: auto; background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 16px 50px rgba(0,0,0,0.2); }
+        .form-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .form-modal-title { font-size: 20px; font-weight: 700; color: #111827; }
+        .icon-btn { width: 34px; height: 34px; border: 1px solid #E5E7EB; border-radius: 8px; background: #fff; cursor: pointer; }
+        .icon-btn:hover { background: #F9FAFB; }
+        .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+        .form-group.full { grid-column: 1 / -1; }
+        .form-label { font-size: 13px; font-weight: 600; color: #374151; }
+        .form-input, .form-select, .form-textarea { width: 100%; border: 1px solid #E5E7EB; border-radius: 10px; padding: 10px 12px; font-family: inherit; font-size: 14px; }
+        .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: #0077b6; box-shadow: 0 0 0 3px rgba(0,119,182,0.12); }
+        .form-textarea { min-height: 86px; resize: vertical; }
+        .form-error { display: none; margin-bottom: 12px; background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; padding: 10px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; }
+        .form-error.show { display: block; }
+        .avatar-upload { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .avatar-preview { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; border: 1px solid #E5E7EB; }
+        .avatar-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .avatar-note { font-size: 12px; color: #6B7280; }
+        .form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
+        .btn-outline { background: #fff; border: 1px solid #E5E7EB; color: #4B5563; }
+        .btn-outline:hover { background: #F9FAFB; }
+
+        .toast { position: fixed; right: 24px; bottom: 24px; background: #111827; color: #fff; padding: 10px 14px; border-radius: 10px; font-size: 13px; opacity: 0; pointer-events: none; transform: translateY(6px); transition: all 0.2s ease; z-index: 1300; }
+        .toast.show { opacity: 1; transform: translateY(0); }
+        .toast.error { background: #B91C1C; }
     </style>
 </head>
 <body>
@@ -136,7 +172,7 @@
             <nav class="nav-menu" id="navMenu"></nav>
             <div class="sidebar-footer">
                 <div class="user-info" onclick="toggleUserMenu()">
-                    <img src="https://i.pravatar.cc/150?img=8" alt="Admin" class="user-avatar" id="userAvatar">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Admin" class="user-avatar" id="userAvatar" data-avatar-init>
                     <div class="user-details">
                         <div class="user-name" id="userName">Administrator</div>
                         <div class="user-email" id="userEmail">admin@nhutin.vn</div>
@@ -149,9 +185,9 @@
             <div class="page-header">
                 <div>
                     <h1 class="page-title">Quản lý Khách hàng</h1>
-                    <p class="page-subtitle">Tổng số: 248 khách hàng</p>
+                    <p class="page-subtitle" id="customersSubtitle">Tổng số: 0 khách hàng</p>
                 </div>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="addCustomerBtn" type="button">
                     <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
                     Thêm khách hàng
                 </button>
@@ -160,18 +196,18 @@
             <div class="filters-bar">
                 <div class="search-box">
                     <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-                    <input type="text" placeholder="Tìm kiếm theo tên, email, mã khách hàng...">
+                    <input type="text" id="customerSearch" placeholder="Tìm kiếm theo tên, email, số điện thoại...">
                 </div>
-                <select class="filter-select">
-                    <option>Tất cả trạng thái</option>
-                    <option>Đang hoạt động</option>
-                    <option>Chờ duyệt</option>
-                    <option>Ngưng hoạt động</option>
+                <select class="filter-select" id="statusFilter">
+                    <option value="">Tất cả trạng thái</option>
+                    <option value="active">Đang hoạt động</option>
+                    <option value="pending">Chờ duyệt</option>
+                    <option value="inactive">Ngưng hoạt động</option>
                 </select>
-                <select class="filter-select">
-                    <option>Tất cả loại</option>
-                    <option>Cá nhân</option>
-                    <option>Doanh nghiệp</option>
+                <select class="filter-select" id="typeFilter">
+                    <option value="">Tất cả loại</option>
+                    <option value="individual">Cá nhân</option>
+                    <option value="business">Doanh nghiệp</option>
                 </select>
             </div>
 
@@ -188,88 +224,26 @@
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="customersTableBody">
                             <tr>
-                                <td>
-                                    <div class="customer-cell">
-                                        <img src="https://i.pravatar.cc/150?img=1" class="customer-avatar">
-                                        <div class="customer-info">
-                                            <div class="customer-name">Công ty ABC</div>
-                                            <div class="customer-id">KH001</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>contact@abc.com</td>
-                                <td>0909 123 456</td>
-                                <td><span class="status active">Active</span></td>
-                                <td>27/12/2025</td>
-                                <td>
-                                    <div class="actions">
-                                        <button class="action-btn" title="Xem chi tiết">
-                                            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                                        </button>
-                                        <button class="action-btn" title="Chỉnh sửa">
-                                            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-                                        </button>
-                                        <button class="action-btn" title="Xóa">
-                                            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="customer-cell">
-                                        <img src="https://i.pravatar.cc/150?img=2" class="customer-avatar">
-                                        <div class="customer-info">
-                                            <div class="customer-name">XYZ Corporation</div>
-                                            <div class="customer-id">KH002</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>info@xyz.vn</td>
-                                <td>0912 345 678</td>
-                                <td><span class="status pending">Pending</span></td>
-                                <td>26/12/2025</td>
-                                <td>
-                                    <div class="actions">
-                                        <button class="action-btn"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
-                                        <button class="action-btn"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
-                                        <button class="action-btn"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="customer-cell">
-                                        <img src="https://i.pravatar.cc/150?img=3" class="customer-avatar">
-                                        <div class="customer-info">
-                                            <div class="customer-name">DEF Trading</div>
-                                            <div class="customer-id">KH003</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>trade@def.com</td>
-                                <td>0987 654 321</td>
-                                <td><span class="status active">Active</span></td>
-                                <td>25/12/2025</td>
-                                <td>
-                                    <div class="actions">
-                                        <button class="action-btn"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
-                                        <button class="action-btn"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
-                                        <button class="action-btn"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
-                                    </div>
-                                </td>
+                                <td colspan="6" class="empty-cell">Đang tải dữ liệu...</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="pagination">
-                    <button class="page-btn">« Trước</button>
-                    <button class="page-btn active">1</button>
-                    <button class="page-btn">2</button>
-                    <button class="page-btn">3</button>
-                    <button class="page-btn">Sau »</button>
+                    <span class="pagination-info" id="paginationInfo">Đang tải...</span>
+                    <div class="pagination-controls">
+                        <select class="limit-select" id="limitSelect" title="Số bản ghi mỗi trang">
+                            <option value="10" selected>10 / trang</option>
+                            <option value="20">20 / trang</option>
+                            <option value="30">30 / trang</option>
+                            <option value="50">50 / trang</option>
+                        </select>
+                        <button class="page-btn" id="prevPageBtn" type="button">« Trước</button>
+                        <span class="page-text" id="pageInfo">Trang 1/1</span>
+                        <button class="page-btn" id="nextPageBtn" type="button">Sau »</button>
+                    </div>
                 </div>
             </div>
         </main>
@@ -290,7 +264,95 @@
         </div>
     </div>
 
+    <div class="form-modal-overlay" id="customerFormModal">
+        <div class="form-modal">
+            <div class="form-modal-header">
+                <h3 class="form-modal-title" id="customerModalTitle">Thêm khách hàng</h3>
+                <button class="icon-btn" id="closeCustomerModalBtn" type="button">✕</button>
+            </div>
+
+            <div id="customerFormError" class="form-error"></div>
+
+            <form id="customerForm">
+                <input type="hidden" id="customerId">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="customerName">Tên khách hàng *</label>
+                        <input class="form-input" id="customerName" maxlength="120" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="customerEmail">Email *</label>
+                        <input class="form-input" id="customerEmail" type="email" maxlength="255" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="customerPhone">Số điện thoại *</label>
+                        <input class="form-input" id="customerPhone" maxlength="30" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="customerType">Loại khách hàng</label>
+                        <select class="form-select" id="customerType">
+                            <option value="business">Doanh nghiệp</option>
+                            <option value="individual">Cá nhân</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="customerStatus">Trạng thái</label>
+                        <select class="form-select" id="customerStatus">
+                            <option value="active">Đang hoạt động</option>
+                            <option value="pending">Chờ duyệt</option>
+                            <option value="inactive">Ngưng hoạt động</option>
+                        </select>
+                    </div>
+                    <div class="form-group full">
+                        <label class="form-label">Ảnh đại diện</label>
+                        <div class="avatar-upload">
+                            <img id="customerAvatarPreview" class="avatar-preview" src="../img/default.png" alt="Avatar preview">
+                            <div class="avatar-actions">
+                                <input id="customerAvatarFile" type="file" accept="image/*" hidden>
+                                <input id="customerAvatar" type="hidden">
+                                <button class="btn btn-outline" id="chooseAvatarBtn" type="button">Chọn ảnh</button>
+                                <button class="btn btn-outline" id="clearAvatarBtn" type="button">Dùng ảnh mặc định</button>
+                            </div>
+                            <div class="avatar-note">PNG/JPG/WEBP/GIF, tối đa 5MB.</div>
+                        </div>
+                    </div>
+                    <div class="form-group full">
+                        <label class="form-label" for="customerAddress">Địa chỉ</label>
+                        <input class="form-input" id="customerAddress" maxlength="255">
+                    </div>
+                    <div class="form-group full">
+                        <label class="form-label" for="customerNote">Ghi chú</label>
+                        <textarea class="form-textarea" id="customerNote"></textarea>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-outline" id="cancelCustomerBtn" type="button">Hủy</button>
+                    <button class="btn btn-primary" type="submit">Lưu khách hàng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="deleteCustomerModal">
+        <div class="modal">
+            <div class="modal-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 9v4m0 4h.01M4.93 19h14.14c1.54 0 2.5-1.67 1.73-3L13.73 3a2 2 0 00-3.46 0L3.2 16c-.77 1.33.19 3 1.73 3z"/>
+                </svg>
+            </div>
+            <h3>Xóa khách hàng?</h3>
+            <p id="deleteCustomerText">Bạn có chắc chắn muốn xóa khách hàng này không?</p>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-cancel" id="cancelDeleteCustomerBtn" type="button">Hủy</button>
+                <button class="modal-btn modal-btn-confirm" id="confirmDeleteCustomerBtn" type="button">Xóa</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="customerToast"></div>
+
     <script src="js/admin-nav.js"></script>
+    <script src="js/customers.js"></script>
 </body>
 </html>
 

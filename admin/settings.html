@@ -11,11 +11,11 @@
         body { 
             font-family: 'Be Vietnam Pro', sans-serif; 
             background: linear-gradient(180deg, 
-                #e0c3fc 0%,
-                #8ec5fc 25%,
-                #b1e5fc 50%,
-                #c2f0fc 75%,
-                #daf5f0 100%
+                #bfdbfe 0%,
+                #93c5fd 25%,
+                #bae6fd 50%,
+                #cffafe 75%,
+                #e0f2fe 100%
             );
             min-height: 100vh;
             background-attachment: fixed;
@@ -83,10 +83,19 @@
         .btn-danger { background: #DC2626; color: #fff; }
         .btn-danger:hover { background: #B91C1C; }
 
-        @media (max-width: 768px) {
+        .form-error { display: none; background: #FEE2E2; color: #991B1B; padding: 10px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+        .form-error.show { display: block; }
+        .danger-zone { border: 2px solid #FEE2E2; }
+        .section-title.danger { color: #DC2626; }
+
+        .toast { position: fixed; right: 24px; bottom: 24px; background: #111827; color: #fff; padding: 10px 14px; border-radius: 10px; font-size: 13px; opacity: 0; transform: translateY(6px); transition: all 0.2s; z-index: 1300; }
+        .toast.show { opacity: 1; transform: translateY(0); }
+        .toast.error { background: #B91C1C; }
+
+        @media (max-width: 899px) {
             .sidebar { transform: translateX(-100%); }
             .sidebar.open { transform: translateX(0); }
-            .main-content { margin-left: 0; padding: 24px 16px; }
+            .main-content { margin-left: 0; padding: 24px 16px; padding-top: 72px; }
         }
 
         .overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 99; }
@@ -121,7 +130,7 @@
             <nav class="nav-menu" id="navMenu"></nav>
             <div class="sidebar-footer">
                 <div class="user-info" onclick="toggleUserMenu()">
-                    <img src="https://i.pravatar.cc/150?img=8" alt="Admin" class="user-avatar" id="userAvatar">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Admin" class="user-avatar" id="userAvatar" data-avatar-init>
                     <div class="user-details">
                         <div class="user-name" id="userName">Administrator</div>
                         <div class="user-email" id="userEmail">admin@nhutin.vn</div>
@@ -136,119 +145,152 @@
                 <p class="page-subtitle">Cấu hình và quản lý hệ thống NHUTIN</p>
             </div>
 
-            <!-- General Settings -->
-            <div class="settings-section">
+            <!-- General Settings - Admin only -->
+            <div class="settings-section admin-only">
                 <div class="section-header">
                     <div class="section-title">Cài đặt chung</div>
                     <div class="section-desc">Thông tin cơ bản về hệ thống</div>
                 </div>
                 <div class="form-group">
-                    <label>Tên công ty</label>
-                    <input type="text" value="CÔNG TY CỔ PHẦN NHƯ TÍN" placeholder="Nhập tên công ty">
+                    <label for="settingCompanyName">Tên công ty</label>
+                    <input type="text" id="settingCompanyName" placeholder="Nhập tên công ty">
                 </div>
                 <div class="form-group">
-                    <label>Email liên hệ</label>
-                    <input type="email" value="contact@nhutin.vn" placeholder="Nhập email">
+                    <label for="settingContactEmail">Email liên hệ</label>
+                    <input type="email" id="settingContactEmail" placeholder="Nhập email">
                 </div>
                 <div class="form-group">
-                    <label>Số điện thoại</label>
-                    <input type="tel" value="0909 123 456" placeholder="Nhập số điện thoại">
+                    <label for="settingContactPhone">Số điện thoại</label>
+                    <input type="tel" id="settingContactPhone" placeholder="Nhập số điện thoại">
                 </div>
                 <div class="form-group">
-                    <label>Địa chỉ</label>
-                    <textarea placeholder="Nhập địa chỉ công ty">123 Đường ABC, Quận 1, TP.HCM</textarea>
+                    <label for="settingCompanyAddress">Địa chỉ</label>
+                    <textarea id="settingCompanyAddress" placeholder="Nhập địa chỉ công ty"></textarea>
                 </div>
+                <div id="generalFormError" class="form-error" style="display:none;"></div>
                 <div style="display: flex; gap: 12px;">
-                    <button class="btn btn-primary">Lưu thay đổi</button>
-                    <button class="btn btn-secondary">Hủy</button>
+                    <button class="btn btn-primary" id="saveGeneralBtn" type="button">Lưu thay đổi</button>
+                    <button class="btn btn-secondary" id="cancelGeneralBtn" type="button">Hủy</button>
                 </div>
             </div>
 
-            <!-- System Settings -->
-            <div class="settings-section">
+            <!-- System Settings - Admin only -->
+            <div class="settings-section admin-only">
                 <div class="section-header">
                     <div class="section-title">Cấu hình hệ thống</div>
                     <div class="section-desc">Bật/tắt các tính năng hệ thống</div>
                 </div>
                 <div class="setting-item">
                     <div class="setting-info">
-                        <div class="setting-label">Email notifications</div>
+                        <div class="setting-label">Thông báo email</div>
                         <div class="setting-desc">Gửi email thông báo khi có ticket mới</div>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox" checked>
+                        <input type="checkbox" id="settingEmailNotifications">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
                 <div class="setting-item">
                     <div class="setting-info">
-                        <div class="setting-label">Auto-assign tickets</div>
+                        <div class="setting-label">Tự động phân công ticket</div>
                         <div class="setting-desc">Tự động phân công tickets cho staff</div>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox" checked>
+                        <input type="checkbox" id="settingAutoAssignTickets">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
                 <div class="setting-item">
                     <div class="setting-info">
-                        <div class="setting-label">Customer registration</div>
+                        <div class="setting-label">Đăng ký khách hàng</div>
                         <div class="setting-desc">Cho phép khách hàng tự đăng ký tài khoản</div>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="settingCustomerRegistration">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
                 <div class="setting-item">
                     <div class="setting-info">
-                        <div class="setting-label">Maintenance mode</div>
+                        <div class="setting-label">Chế độ bảo trì</div>
                         <div class="setting-desc">Bật chế độ bảo trì hệ thống</div>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="settingMaintenanceMode">
                         <span class="toggle-slider"></span>
                     </label>
+                </div>
+                <div id="systemFormError" class="form-error" style="display:none;"></div>
+                <div style="margin-top: 16px;">
+                    <button class="btn btn-primary" id="saveSystemBtn" type="button">Lưu cấu hình</button>
                 </div>
             </div>
 
             <!-- Security Settings -->
             <div class="settings-section">
-                <div class="section-header">
+                <div class="section-header admin-only">
                     <div class="section-title">Bảo mật</div>
                     <div class="section-desc">Cài đặt liên quan đến bảo mật</div>
                 </div>
-                <div class="setting-item">
+                <div class="setting-item admin-only">
                     <div class="setting-info">
-                        <div class="setting-label">Two-factor authentication (2FA)</div>
+                        <div class="setting-label">Xác thực hai lớp (2FA)</div>
                         <div class="setting-desc">Yêu cầu xác thực 2 lớp khi đăng nhập</div>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="settingTwoFactorAuth">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
-                <div class="setting-item">
+                <div class="setting-item admin-only">
                     <div class="setting-info">
-                        <div class="setting-label">Session timeout</div>
+                        <div class="setting-label">Tự động đăng xuất</div>
                         <div class="setting-desc">Tự động đăng xuất sau 30 phút không hoạt động</div>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox" checked>
+                        <input type="checkbox" id="settingSessionTimeout">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
-                <div class="form-group" style="margin-top: 24px;">
-                    <label>Đổi mật khẩu Admin</label>
-                    <input type="password" placeholder="Mật khẩu mới">
+                <div class="admin-only" style="margin-top: 16px;">
+                    <button class="btn btn-primary" id="saveSecurityBtn" type="button">Lưu cài đặt bảo mật</button>
                 </div>
-                <button class="btn btn-primary">Cập nhật mật khẩu</button>
+                <div class="section-header" style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #E5E7EB;">
+                    <div class="section-title">Ảnh đại diện</div>
+                    <div class="section-desc">Cập nhật ảnh đại diện cho tài khoản (Admin và Staff)</div>
+                </div>
+                <div class="avatar-upload-area" style="margin-top: 16px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+                    <div class="avatar-preview-wrap">
+                        <img id="settingsAvatarPreview" src="../img/default.png" alt="Avatar" class="user-avatar" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover;">
+                    </div>
+                    <div class="avatar-upload-controls">
+                        <input type="file" id="avatarFileInput" accept="image/jpeg,image/png,image/webp,image/gif" style="display: none;">
+                        <button class="btn btn-secondary" type="button" id="btnSelectAvatar">Chọn ảnh</button>
+                        <button class="btn btn-primary" type="button" id="btnUploadAvatar" disabled>Cập nhật ảnh đại diện</button>
+                        <span class="avatar-hint" style="display: block; font-size: 12px; color: #888; margin-top: 8px;">JPG, PNG, WebP, GIF. Tối đa 5MB.</span>
+                    </div>
+                </div>
+                <div id="avatarFormError" class="form-error" style="display:none; margin-top: 12px;"></div>
+                <div class="section-header" style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #E5E7EB;">
+                    <div class="section-title">Đổi mật khẩu</div>
+                    <div class="section-desc">Cập nhật mật khẩu đăng nhập của bạn</div>
+                </div>
+                <div class="form-group" style="margin-top: 16px;">
+                    <label for="settingCurrentPassword">Mật khẩu hiện tại</label>
+                    <input type="password" id="settingCurrentPassword" placeholder="Nhập mật khẩu hiện tại">
+                </div>
+                <div class="form-group">
+                    <label for="settingNewPassword">Mật khẩu mới</label>
+                    <input type="password" id="settingNewPassword" placeholder="Mật khẩu mới (tối thiểu 6 ký tự)">
+                </div>
+                <div id="passwordFormError" class="form-error" style="display:none;"></div>
+                <button class="btn btn-primary" id="savePasswordBtn" type="button">Cập nhật mật khẩu</button>
             </div>
 
-            <!-- Danger Zone -->
-            <div class="settings-section" style="border: 2px solid #FEE2E2;">
+            <!-- Danger Zone - Admin only -->
+            <div class="settings-section danger-zone admin-only">
                 <div class="section-header">
-                    <div class="section-title" style="color: #DC2626;">Vùng nguy hiểm</div>
+                    <div class="section-title danger">Vùng nguy hiểm</div>
                     <div class="section-desc">Các thao tác không thể hoàn tác</div>
                 </div>
                 <div class="setting-item">
@@ -256,14 +298,14 @@
                         <div class="setting-label">Xóa tất cả dữ liệu</div>
                         <div class="setting-desc">Xóa toàn bộ database (không thể khôi phục)</div>
                     </div>
-                    <button class="btn btn-danger">Xóa Database</button>
+                    <button class="btn btn-danger" id="btnDeleteDb" type="button" disabled>Xóa Database</button>
                 </div>
                 <div class="setting-item">
                     <div class="setting-info">
                         <div class="setting-label">Reset hệ thống</div>
                         <div class="setting-desc">Khôi phục cài đặt mặc định</div>
                     </div>
-                    <button class="btn btn-danger">Reset System</button>
+                    <button class="btn btn-secondary" id="btnResetSettings" type="button">Reset cài đặt</button>
                 </div>
             </div>
         </main>
@@ -284,7 +326,21 @@
         </div>
     </div>
 
+    <div class="toast" id="settingsToast"></div>
+
     <script src="js/admin-nav.js"></script>
+    <script>
+        (function() {
+            try {
+                const admin = JSON.parse(localStorage.getItem('nhutin_admin') || '{}');
+                if ((admin.role || 'admin') === 'staff') {
+                    document.querySelectorAll('.admin-only').forEach(el => { el.style.display = 'none'; });
+                    document.querySelector('.page-subtitle').textContent = 'Đổi mật khẩu và thông tin cơ bản của bạn';
+                }
+            } catch (_) {}
+        })();
+    </script>
+    <script src="js/settings.js"></script>
 </body>
 </html>
 

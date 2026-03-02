@@ -11,11 +11,11 @@
         body { 
             font-family: 'Be Vietnam Pro', sans-serif; 
             background: linear-gradient(180deg, 
-                #e0c3fc 0%,
-                #8ec5fc 25%,
-                #b1e5fc 50%,
-                #c2f0fc 75%,
-                #daf5f0 100%
+                #bfdbfe 0%,
+                #93c5fd 25%,
+                #bae6fd 50%,
+                #cffafe 75%,
+                #e0f2fe 100%
             );
             min-height: 100vh;
             background-attachment: fixed;
@@ -52,6 +52,13 @@
         .btn-primary { background: linear-gradient(135deg, #0096c7 0%, #0077b6 100%); color: #fff; }
         .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(30,64,175,0.3); }
 
+        .filters-bar { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+        .search-box { flex: 1; min-width: 280px; position: relative; }
+        .search-box input { width: 100%; padding: 12px 16px 12px 44px; border: 1px solid #E5E7EB; border-radius: 10px; font-size: 14px; font-family: inherit; background: #fff; }
+        .search-box input:focus { outline: none; border-color: #0077b6; box-shadow: 0 0 0 3px rgba(0,119,182,0.12); }
+        .search-box svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; stroke: #888; fill: none; stroke-width: 2; }
+        .filter-select { padding: 12px 36px 12px 16px; border: 1px solid #E5E7EB; border-radius: 10px; font-size: 14px; font-family: inherit; background: #fff; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6,9 12,15 18,9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
+
         /* Users Grid */
         .users-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
         .user-card { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); transition: all 0.2s; }
@@ -71,6 +78,9 @@
         .user-status { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
         .user-status.active { background: #D1FAE5; color: #059669; }
         .user-status.inactive { background: #F3F4F6; color: #6B7280; }
+        .user-role-badge { padding: 2px 8px; border-radius: 8px; font-size: 10px; font-weight: 600; margin-left: 4px; }
+        .user-role-badge.staff { background: #DBEAFE; color: #1D4ED8; }
+        .user-role-badge.customer { background: #FEF3C7; color: #B45309; }
 
         .user-actions { display: flex; gap: 6px; }
         .user-action-btn { width: 32px; height: 32px; border-radius: 8px; border: 1px solid #E5E7EB; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
@@ -78,10 +88,49 @@
         .user-action-btn:hover svg { stroke: #fff; }
         .user-action-btn svg { width: 14px; height: 14px; stroke: #666; fill: none; stroke-width: 2; }
 
-        @media (max-width: 768px) {
+        .empty-card { background: #fff; border-radius: 12px; padding: 24px; color: #6B7280; font-size: 14px; text-align: center; border: 1px solid #F3F4F6; }
+        .pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: 20px; padding: 20px; border-top: 1px solid #E5E7EB; }
+        .pagination-info { font-size: 13px; color: #6B7280; }
+        .pagination-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .pagination .limit-select { padding: 8px 32px 8px 12px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px; font-family: inherit; background: #fff; cursor: pointer; }
+        .page-btn { padding: 8px 14px; border: 1px solid #E5E7EB; background: #fff; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; color: #333; }
+        .page-btn:hover:not(:disabled) { background: #0077b6; color: #fff; border-color: #0077b6; }
+        .page-btn.active { background: #0077b6; color: #fff; border-color: #0077b6; }
+        .page-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .page-btn:disabled:hover { background: #fff; color: #333; border-color: #E5E7EB; }
+        .page-text { font-size: 14px; color: #374151; font-weight: 500; }
+
+        .form-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 1100; align-items: center; justify-content: center; padding: 20px; }
+        .form-modal-overlay.show { display: flex; }
+        .form-modal { width: 100%; max-width: 760px; max-height: 90vh; overflow: auto; background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 16px 50px rgba(0,0,0,0.2); }
+        .form-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .form-modal-title { font-size: 20px; font-weight: 700; color: #111827; }
+        .icon-btn { width: 34px; height: 34px; border: 1px solid #E5E7EB; border-radius: 8px; background: #fff; cursor: pointer; }
+        .icon-btn:hover { background: #F9FAFB; }
+        .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+        .form-group.full { grid-column: 1 / -1; }
+        .form-label { font-size: 13px; font-weight: 600; color: #374151; }
+        .form-input, .form-select { width: 100%; border: 1px solid #E5E7EB; border-radius: 10px; padding: 10px 12px; font-family: inherit; font-size: 14px; }
+        .form-input:focus, .form-select:focus { outline: none; border-color: #0077b6; box-shadow: 0 0 0 3px rgba(0,119,182,0.12); }
+        .form-error { display: none; margin-bottom: 12px; background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; padding: 10px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; }
+        .form-error.show { display: block; }
+        .form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
+        .btn-outline { background: #fff; border: 1px solid #E5E7EB; color: #4B5563; }
+        .btn-outline:hover { background: #F9FAFB; }
+        .avatar-upload { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .avatar-preview { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; border: 1px solid #E5E7EB; }
+        .avatar-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .avatar-note { font-size: 12px; color: #6B7280; }
+
+        .toast { position: fixed; right: 24px; bottom: 24px; background: #111827; color: #fff; padding: 10px 14px; border-radius: 10px; font-size: 13px; opacity: 0; pointer-events: none; transform: translateY(6px); transition: all 0.2s ease; z-index: 1300; }
+        .toast.show { opacity: 1; transform: translateY(0); }
+        .toast.error { background: #B91C1C; }
+
+        @media (max-width: 899px) {
             .sidebar { transform: translateX(-100%); }
             .sidebar.open { transform: translateX(0); }
-            .main-content { margin-left: 0; padding: 24px 16px; }
+            .main-content { margin-left: 0; padding: 24px 16px; padding-top: 72px; }
             .users-grid { grid-template-columns: 1fr; }
         }
 
@@ -117,7 +166,7 @@
             <nav class="nav-menu" id="navMenu"></nav>
             <div class="sidebar-footer">
                 <div class="user-info" onclick="toggleUserMenu()">
-                    <img src="https://i.pravatar.cc/150?img=8" alt="Admin" class="user-avatar" id="userAvatar">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Admin" class="user-avatar" id="userAvatar" data-avatar-init>
                     <div class="user-details">
                         <div class="user-name" id="userName">Administrator</div>
                         <div class="user-email" id="userEmail">admin@nhutin.vn</div>
@@ -130,98 +179,46 @@
             <div class="page-header">
                 <div>
                     <h1 class="page-title">Quản lý Users</h1>
-                    <p class="page-subtitle">15 người dùng đang hoạt động</p>
+                    <p class="page-subtitle" id="usersSubtitle">Tổng số: 0 người dùng</p>
                 </div>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="addUserBtn" type="button">
                     <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-                    Thêm user mới
+                    Thêm nhân viên
                 </button>
             </div>
 
-            <div class="users-grid">
-                <div class="user-card">
-                    <div class="user-card-header">
-                        <img src="https://i.pravatar.cc/150?img=8" class="user-card-avatar">
-                        <div class="user-card-info">
-                            <div class="user-card-name">Nguyễn Văn Admin</div>
-                            <div class="user-card-role">Super Admin</div>
-                        </div>
-                    </div>
-                    <div class="user-card-body">
-                        <div class="user-detail">
-                            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                            admin@nhutin.vn
-                        </div>
-                        <div class="user-detail">
-                            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                            0909 123 456
-                        </div>
-                    </div>
-                    <div class="user-card-footer">
-                        <span class="user-status active">Active</span>
-                        <div class="user-actions">
-                            <button class="user-action-btn" title="Chỉnh sửa">
-                                <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-                            </button>
-                            <button class="user-action-btn" title="Cài đặt">
-                                <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                            </button>
-                        </div>
-                    </div>
+            <div class="filters-bar">
+                <div class="search-box">
+                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <input type="text" id="userSearch" placeholder="Tìm theo username, họ tên, email, số điện thoại...">
                 </div>
+                <select class="filter-select" id="roleFilter">
+                    <option value="">Tất cả (Staff + Customer)</option>
+                    <option value="staff">Nhân viên</option>
+                    <option value="customer">Khách hàng</option>
+                </select>
+                <select class="filter-select" id="statusFilter">
+                    <option value="">Tất cả trạng thái</option>
+                    <option value="active">Đang hoạt động</option>
+                    <option value="inactive">Ngưng hoạt động</option>
+                </select>
+            </div>
 
-                <div class="user-card">
-                    <div class="user-card-header">
-                        <img src="https://i.pravatar.cc/150?img=12" class="user-card-avatar">
-                        <div class="user-card-info">
-                            <div class="user-card-name">Trần Thị Support</div>
-                            <div class="user-card-role">Customer Support</div>
-                        </div>
-                    </div>
-                    <div class="user-card-body">
-                        <div class="user-detail">
-                            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                            support@nhutin.vn
-                        </div>
-                        <div class="user-detail">
-                            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                            0912 345 678
-                        </div>
-                    </div>
-                    <div class="user-card-footer">
-                        <span class="user-status active">Active</span>
-                        <div class="user-actions">
-                            <button class="user-action-btn"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
-                            <button class="user-action-btn"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="user-card">
-                    <div class="user-card-header">
-                        <img src="https://i.pravatar.cc/150?img=5" class="user-card-avatar">
-                        <div class="user-card-info">
-                            <div class="user-card-name">Lê Văn Manager</div>
-                            <div class="user-card-role">Sales Manager</div>
-                        </div>
-                    </div>
-                    <div class="user-card-body">
-                        <div class="user-detail">
-                            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                            sales@nhutin.vn
-                        </div>
-                        <div class="user-detail">
-                            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                            0987 654 321
-                        </div>
-                    </div>
-                    <div class="user-card-footer">
-                        <span class="user-status active">Active</span>
-                        <div class="user-actions">
-                            <button class="user-action-btn"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
-                            <button class="user-action-btn"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></button>
-                        </div>
-                    </div>
+            <div class="users-grid" id="usersGrid">
+                <div class="empty-card">Đang tải dữ liệu...</div>
+            </div>
+            <div class="pagination">
+                <span class="pagination-info" id="paginationInfo">Đang tải...</span>
+                <div class="pagination-controls">
+                    <select class="limit-select" id="limitSelect" title="Số bản ghi mỗi trang">
+                        <option value="10" selected>10 / trang</option>
+                        <option value="20">20 / trang</option>
+                        <option value="30">30 / trang</option>
+                        <option value="50">50 / trang</option>
+                    </select>
+                    <button class="page-btn" id="prevPageBtn" type="button">« Trước</button>
+                    <span class="page-text" id="pageInfo">Trang 1/1</span>
+                    <button class="page-btn" id="nextPageBtn" type="button">Sau »</button>
                 </div>
             </div>
         </main>
@@ -242,7 +239,116 @@
         </div>
     </div>
 
+    <div class="form-modal-overlay" id="userFormModal">
+        <div class="form-modal">
+            <div class="form-modal-header">
+                <h3 class="form-modal-title" id="userModalTitle">Thêm nhân viên</h3>
+                <button class="icon-btn" id="closeUserModalBtn" type="button">✕</button>
+            </div>
+
+            <div id="userFormError" class="form-error"></div>
+
+            <form id="userForm">
+                <input type="hidden" id="userId">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="username">Username *</label>
+                        <input class="form-input" id="username" maxlength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="fullName">Họ tên *</label>
+                        <input class="form-input" id="fullName" maxlength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email *</label>
+                        <input class="form-input" id="email" type="email" maxlength="255" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Số điện thoại</label>
+                        <input class="form-input" id="phone" maxlength="20">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="password">Mật khẩu</label>
+                        <input class="form-input" id="password" type="password" minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="isActive">Trạng thái</label>
+                        <select class="form-select" id="isActive">
+                            <option value="1">Đang hoạt động</option>
+                            <option value="0">Ngưng hoạt động</option>
+                        </select>
+                    </div>
+                    <div class="form-group full">
+                        <label class="form-label">Ảnh đại diện</label>
+                        <div class="avatar-upload">
+                            <img id="avatarPreview" class="avatar-preview" src="../img/default.png" alt="Avatar preview">
+                            <div class="avatar-actions">
+                                <input id="avatarFile" type="file" accept="image/*" hidden>
+                                <input id="avatarValue" type="hidden">
+                                <button class="btn btn-outline" id="chooseAvatarBtn" type="button">Chọn ảnh</button>
+                                <button class="btn btn-outline" id="clearAvatarBtn" type="button">Dùng ảnh mặc định</button>
+                            </div>
+                            <div class="avatar-note">PNG/JPG/WEBP/GIF, tối đa 5MB.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-outline" id="cancelUserBtn" type="button">Hủy</button>
+                    <button class="btn btn-primary" type="submit">Lưu nhân viên</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="form-modal-overlay" id="changePasswordModal">
+        <div class="form-modal" style="max-width:420px">
+            <div class="form-modal-header">
+                <h3 class="form-modal-title">Đổi mật khẩu</h3>
+                <button class="icon-btn" id="closeChangePasswordBtn" type="button">✕</button>
+            </div>
+            <div id="changePasswordError" class="form-error"></div>
+            <form id="changePasswordForm">
+                <input type="hidden" id="changePasswordUserId">
+                <div class="form-group full">
+                    <label class="form-label">Người dùng</label>
+                    <input class="form-input" id="changePasswordUserName" readonly disabled style="background:#f5f5f5">
+                </div>
+                <div class="form-group full">
+                    <label class="form-label" for="newPassword">Mật khẩu mới *</label>
+                    <input class="form-input" id="newPassword" type="password" minlength="6" placeholder="Tối thiểu 6 ký tự" required>
+                </div>
+                <div class="form-group full">
+                    <label class="form-label" for="confirmPassword">Xác nhận mật khẩu *</label>
+                    <input class="form-input" id="confirmPassword" type="password" minlength="6" placeholder="Nhập lại mật khẩu" required>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-outline" id="cancelChangePasswordBtn" type="button">Hủy</button>
+                    <button class="btn btn-primary" type="submit">Đổi mật khẩu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="deleteUserModal">
+        <div class="modal">
+            <div class="modal-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 9v4m0 4h.01M4.93 19h14.14c1.54 0 2.5-1.67 1.73-3L13.73 3a2 2 0 00-3.46 0L3.2 16c-.77 1.33.19 3 1.73 3z"/>
+                </svg>
+            </div>
+            <h3>Xóa người dùng?</h3>
+            <p id="deleteUserText">Bạn có chắc chắn muốn xóa người dùng này không?</p>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-cancel" id="cancelDeleteUserBtn" type="button">Hủy</button>
+                <button class="modal-btn modal-btn-confirm" id="confirmDeleteUserBtn" type="button">Xóa</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="userToast"></div>
+
     <script src="js/admin-nav.js"></script>
+    <script src="js/users.js"></script>
 </body>
 </html>
 
