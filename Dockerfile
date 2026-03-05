@@ -4,6 +4,11 @@ FROM php:8.2-apache
 # Bật mod_rewrite
 RUN a2enmod rewrite headers
 
+# Cài thư viện cần thiết để build pdo_pgsql
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 # Cài PDO PostgreSQL cho Render Postgres
 RUN docker-php-ext-install pdo pdo_pgsql
 
