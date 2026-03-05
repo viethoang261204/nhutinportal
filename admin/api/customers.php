@@ -122,29 +122,28 @@ function generateCustomerCode(): string
 
 function ensureCustomersSchema(PDO $pdo): void
 {
-    $pdo->exec(
-        "CREATE TABLE IF NOT EXISTS customers (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            customer_code VARCHAR(50) NULL,
-            company_name VARCHAR(255) NOT NULL,
-            tax_code VARCHAR(50) NULL,
-            customer_type_id INT NOT NULL DEFAULT 1,
-            address TEXT NULL,
-            phone VARCHAR(20) NULL,
-            email VARCHAR(255) NULL,
-            contact_person VARCHAR(100) NULL,
-            position VARCHAR(100) NULL,
-            logo_url VARCHAR(500) NULL,
-            status ENUM('pending','active','inactive','suspended') NOT NULL DEFAULT 'pending',
-            assigned_staff_id INT NULL,
-            notes TEXT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            INDEX idx_customers_status (status),
-            INDEX idx_customers_type (customer_type_id),
-            INDEX idx_customers_created (created_at)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
-    );
+    try {
+        $pdo->exec(
+            "CREATE TABLE IF NOT EXISTS customers (
+                id SERIAL PRIMARY KEY,
+                customer_code VARCHAR(50) NULL,
+                company_name VARCHAR(255) NOT NULL,
+                tax_code VARCHAR(50) NULL,
+                customer_type_id INT NOT NULL DEFAULT 1,
+                address TEXT NULL,
+                phone VARCHAR(20) NULL,
+                email VARCHAR(255) NULL,
+                contact_person VARCHAR(100) NULL,
+                position VARCHAR(100) NULL,
+                logo_url VARCHAR(500) NULL,
+                status VARCHAR(20) NOT NULL DEFAULT 'pending',
+                assigned_staff_id INT NULL,
+                notes TEXT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )"
+        );
+    } catch (Throwable $e) {}
 }
 
 function validateCustomerInput(array $input, bool $isUpdate = false): array
@@ -482,23 +481,25 @@ if ($method === 'POST') {
         logActivity($pdo, 'create', 'customer', $newId, 'Tạo khách hàng: ' . $payload['name']);
 
         // Tự động tạo tài khoản user (role=customer) cho khách hàng
-        $pdo->exec(
-            "CREATE TABLE IF NOT EXISTS users (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                username VARCHAR(100) NOT NULL UNIQUE,
-                email VARCHAR(255) NOT NULL UNIQUE,
-                password_hash VARCHAR(255) NOT NULL,
-                full_name VARCHAR(100) NULL,
-                phone VARCHAR(20) NULL,
-                avatar_url VARCHAR(500) NULL,
-                role ENUM('admin', 'staff', 'customer') DEFAULT 'customer',
-                customer_id INT NULL,
-                is_active TINYINT(1) DEFAULT 1,
-                last_login_at TIMESTAMP NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
-        );
+        try {
+            $pdo->exec(
+                "CREATE TABLE IF NOT EXISTS users (
+                    id SERIAL PRIMARY KEY,
+                    username VARCHAR(100) NOT NULL UNIQUE,
+                    email VARCHAR(255) NOT NULL UNIQUE,
+                    password_hash VARCHAR(255) NOT NULL,
+                    full_name VARCHAR(100) NULL,
+                    phone VARCHAR(20) NULL,
+                    avatar_url VARCHAR(500) NULL,
+                    role VARCHAR(20) DEFAULT 'customer',
+                    customer_id INT NULL,
+                    is_active SMALLINT DEFAULT 1,
+                    last_login_at TIMESTAMP NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )"
+            );
+        } catch (Throwable $e) {}
         $userCreated = false;
         try {
             $email = strtolower(trim($payload['email']));

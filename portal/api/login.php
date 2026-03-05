@@ -38,23 +38,25 @@ function getRequestBody(): array
 
 function ensureUsersSchema(PDO $pdo): void
 {
-    $pdo->exec(
-        "CREATE TABLE IF NOT EXISTS users (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            username VARCHAR(100) NOT NULL UNIQUE,
-            email VARCHAR(255) NOT NULL UNIQUE,
-            password_hash VARCHAR(255) NOT NULL,
-            full_name VARCHAR(100) NULL,
-            phone VARCHAR(20) NULL,
-            avatar_url VARCHAR(500) NULL,
-            role ENUM('admin', 'staff', 'customer') DEFAULT 'customer',
-            customer_id INT NULL,
-            is_active TINYINT(1) DEFAULT 1,
-            last_login_at TIMESTAMP NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
-    );
+    try {
+        $pdo->exec(
+            "CREATE TABLE IF NOT EXISTS users (
+                id SERIAL PRIMARY KEY,
+                username VARCHAR(100) NOT NULL UNIQUE,
+                email VARCHAR(255) NOT NULL UNIQUE,
+                password_hash VARCHAR(255) NOT NULL,
+                full_name VARCHAR(100) NULL,
+                phone VARCHAR(20) NULL,
+                avatar_url VARCHAR(500) NULL,
+                role VARCHAR(20) DEFAULT 'customer',
+                customer_id INT NULL,
+                is_active SMALLINT DEFAULT 1,
+                last_login_at TIMESTAMP NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )"
+        );
+    } catch (Throwable $e) {}
 }
 
 $method = strtoupper((string) ($_SERVER['REQUEST_METHOD'] ?? 'GET'));

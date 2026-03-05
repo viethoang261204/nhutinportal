@@ -4,8 +4,8 @@ FROM php:8.2-apache
 # Bật mod_rewrite
 RUN a2enmod rewrite headers
 
-# Cài MySQL PDO
-RUN docker-php-ext-install pdo pdo_mysql
+# Cài PDO PostgreSQL cho Render Postgres
+RUN docker-php-ext-install pdo pdo_pgsql
 
 # Copy toàn bộ project
 COPY . /var/www/html/

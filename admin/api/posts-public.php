@@ -50,24 +50,6 @@ if ($method !== 'GET') {
 
 try {
     $pdo = getDbConnection();
-    $pdo->exec(
-        "CREATE TABLE IF NOT EXISTS posts (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            title VARCHAR(255) NOT NULL,
-            slug VARCHAR(255) NOT NULL UNIQUE,
-            category VARCHAR(100) NOT NULL,
-            excerpt TEXT NULL,
-            content MEDIUMTEXT NULL,
-            thumbnail_url VARCHAR(500) NULL,
-            status ENUM('published','draft') NOT NULL DEFAULT 'draft',
-            view_count INT NOT NULL DEFAULT 0,
-            published_at TIMESTAMP NULL,
-            created_by INT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            INDEX idx_posts_status (status)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
-    );
 } catch (Throwable $e) {
     error_log('Posts public API DB error: ' . $e->getMessage());
     respondJson(500, ['success' => false, 'message' => 'Lỗi kết nối cơ sở dữ liệu.']);

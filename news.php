@@ -7,20 +7,6 @@ require_once __DIR__ . '/admin/config/db.php';
 $posts = [];
 try {
     $pdo = getDbConnection();
-    $pdo->exec("CREATE TABLE IF NOT EXISTS posts (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        title VARCHAR(255) NOT NULL,
-        slug VARCHAR(255) NOT NULL,
-        category VARCHAR(100) NOT NULL,
-        excerpt TEXT NULL,
-        content MEDIUMTEXT NULL,
-        thumbnail_url VARCHAR(500) NULL,
-        status ENUM('published','draft') NOT NULL DEFAULT 'draft',
-        published_at TIMESTAMP NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        INDEX idx_status (status)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
-    
     $stmt = $pdo->query("SELECT * FROM posts WHERE status = 'published' ORDER BY COALESCE(published_at, created_at) DESC LIMIT 50");
     $posts = $stmt ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
 } catch (Throwable $e) {

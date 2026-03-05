@@ -72,71 +72,46 @@ function normalizeTicketPriority(string $priority): string
 
 function ensureTicketsSchema(PDO $pdo): void
 {
-    $pdo->exec(
-        "CREATE TABLE IF NOT EXISTS tickets (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            ticket_code VARCHAR(50) NOT NULL UNIQUE,
-            title VARCHAR(255) NOT NULL,
-            description TEXT NULL,
-            customer_id INT NULL,
-            status ENUM('open','progress','resolved') NOT NULL DEFAULT 'open',
-            priority ENUM('high','medium','low') NOT NULL DEFAULT 'medium',
-            assigned_to INT NULL,
-            created_by INT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            INDEX idx_tickets_status (status),
-            INDEX idx_tickets_priority (priority),
-            INDEX idx_tickets_created (created_at)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
-    );
+    try {
+        $pdo->exec(
+            "CREATE TABLE IF NOT EXISTS tickets (
+                id SERIAL PRIMARY KEY,
+                ticket_code VARCHAR(50) NOT NULL UNIQUE,
+                title VARCHAR(255) NOT NULL,
+                description TEXT NULL,
+                customer_id INT NULL,
+                status VARCHAR(20) NOT NULL DEFAULT 'open',
+                priority VARCHAR(20) NOT NULL DEFAULT 'medium',
+                assigned_to INT NULL,
+                created_by INT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )"
+        );
+        $pdo->exec("CREATE INDEX IF NOT EXISTS idx_tickets_status ON tickets (status)");
+        $pdo->exec("CREATE INDEX IF NOT EXISTS idx_tickets_priority ON tickets (priority)");
+        $pdo->exec("CREATE INDEX IF NOT EXISTS idx_tickets_created ON tickets (created_at)");
+    } catch (Throwable $e) {}
 
     // Lưu trao đổi / phản hồi cho từng ticket
-    $pdo->exec(
-        "CREATE TABLE IF NOT EXISTS ticket_replies (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            ticket_id INT NOT NULL,
-            author_type ENUM('admin','staff','customer') NOT NULL DEFAULT 'admin',
-            author_id INT NULL,
-            message TEXT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            INDEX idx_ticket_replies_ticket (ticket_id),
-            INDEX idx_ticket_replies_created (created_at)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
-    );
-
-    // Migrate: add created_by if missing (existing table có thể không có cột này)
     try {
-        $check = $pdo->query("SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'tickets' AND COLUMN_NAME = 'created_by'");
-        if ($check && (int) $check->fetchColumn() === 0) {
-            $pdo->exec("ALTER TABLE tickets ADD COLUMN created_by INT NULL AFTER assigned_to");
-        }
-    } catch (Throwable $e) {
-        // ignore
-    }
-
-    // Migrate: đảm bảo ENUM status có đủ 'open','progress','resolved' để tránh lỗi truncate
-    try {
-        $colStmt = $pdo->query(
-            "SELECT COLUMN_TYPE 
-             FROM information_schema.COLUMNS 
-             WHERE TABLE_SCHEMA = DATABASE() 
-               AND TABLE_NAME = 'tickets' 
-               AND COLUMN_NAME = 'status'
-             LIMIT 1"
+        $pdo->exec(
+            "CREATE TABLE IF NOT EXISTS ticket_replies (
+                id SERIAL PRIMARY KEY,
+                ticket_id INT NOT NULL,
+                author_type VARCHAR(20) NOT NULL DEFAULT 'admin',
+                author_id INT NULL,
+                message TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )"
         );
-        $colType = $colStmt ? (string) $colStmt->fetchColumn() : '';
-        $needsMigrate = ($colType === '' || stripos($colType, "'progress'") === false);
-        if ($needsMigrate) {
-            $pdo->exec(
-                "ALTER TABLE tickets 
-                 MODIFY COLUMN status ENUM('open','progress','resolved') 
-                 NOT NULL DEFAULT 'open'"
-            );
-        }
-    } catch (Throwable $e) {
-        error_log('Tickets status enum migration: ' . $e->getMessage());
-    }
+        $pdo->exec("CREATE INDEX IF NOT EXISTS idx_ticket_replies_ticket ON ticket_replies (ticket_id)");
+        $pdo->exec("CREATE INDEX IF NOT EXISTS idx_ticket_replies_created ON ticket_replies (created_at)");
+    } catch (Throwable $e) {}
+
+    try {
+        $pdo->exec("ALTER TABLE tickets ADD COLUMN IF NOT EXISTS created_by INT NULL");
+    } catch (Throwable $e) {}
 }
 
 function resolveCreatorId(): ?int
@@ -235,34 +210,10 @@ if ($method === 'GET' && $action === 'stats') {
 }
 
 if ($method === 'GET' && $action === 'fix_schema') {
-    try {
-        $colStmt = $pdo->query(
-            "SELECT COLUMN_TYPE FROM information_schema.COLUMNS 
-             WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'tickets' AND COLUMN_NAME = 'status' LIMIT 1"
-        );
-        $before = $colStmt ? (string) $colStmt->fetchColumn() : 'N/A';
-        $pdo->exec(
-            "ALTER TABLE tickets 
-             MODIFY COLUMN status ENUM('open','progress','resolved') 
-             NOT NULL DEFAULT 'open'"
-        );
-        $colStmt2 = $pdo->query(
-            "SELECT COLUMN_TYPE FROM information_schema.COLUMNS 
-             WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'tickets' AND COLUMN_NAME = 'status' LIMIT 1"
-        );
-        $after = $colStmt2 ? (string) $colStmt2->fetchColumn() : 'N/A';
-        respondJson(200, [
-            'success' => true,
-            'message' => 'Đã cập nhật schema status.',
-            'before' => $before,
-            'after' => $after,
-        ]);
-    } catch (Throwable $e) {
-        respondJson(500, [
-            'success' => false,
-            'message' => 'Không thể sửa schema: ' . $e->getMessage(),
-        ]);
-    }
+    respondJson(200, [
+        'success' => true,
+        'message' => 'Schema đã dùng PostgreSQL-compatible, không cần fix thủ công.',
+    ]);
 }
 
 if ($method === 'GET' && $action === 'meta') {

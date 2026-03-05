@@ -71,38 +71,45 @@ function verifyCsrfToken(string $providedToken): bool
 
 function ensureAuthSchema(PDO $pdo): void
 {
-    $pdo->exec(
-        "CREATE TABLE IF NOT EXISTS admins (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(100) NOT NULL,
-            email VARCHAR(255) NOT NULL UNIQUE,
-            password VARCHAR(255) NOT NULL,
-            avatar_url VARCHAR(500) NULL,
-            role VARCHAR(50) NOT NULL DEFAULT 'admin',
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
-    );
     try {
-        $chk = $pdo->query("SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'admins' AND COLUMN_NAME = 'avatar_url'");
+        $pdo->exec(
+            "CREATE TABLE IF NOT EXISTS admins (
+                id SERIAL PRIMARY KEY,
+                name VARCHAR(100) NOT NULL,
+                email VARCHAR(255) NOT NULL UNIQUE,
+                password VARCHAR(255) NOT NULL,
+                avatar_url VARCHAR(500) NULL,
+                role VARCHAR(50) NOT NULL DEFAULT 'admin',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )"
+        );
+    } catch (Throwable $e) {}
+    try {
+        $chk = $pdo->query("SELECT COUNT(*) FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'admins' AND column_name = 'avatar_url'");
         if ($chk && (int) $chk->fetchColumn() === 0) {
-            $pdo->exec("ALTER TABLE admins ADD COLUMN avatar_url VARCHAR(500) NULL AFTER password");
+            $pdo->exec("ALTER TABLE admins ADD COLUMN avatar_url VARCHAR(500) NULL");
         }
     } catch (Throwable $e) {}
 
-    $pdo->exec(
-        "CREATE TABLE IF NOT EXISTS admin_login_attempts (
-            id BIGINT AUTO_INCREMENT PRIMARY KEY,
-            identifier CHAR(64) NOT NULL,
-            is_success TINYINT(1) NOT NULL DEFAULT 0,
-            attempted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            INDEX idx_identifier_time (identifier, attempted_at)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
-    );
+    try {
+        $pdo->exec(
+            "CREATE TABLE IF NOT EXISTS admin_login_attempts (
+                id BIGSERIAL PRIMARY KEY,
+                identifier CHAR(64) NOT NULL,
+                is_success SMALLINT NOT NULL DEFAULT 0,
+                attempted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )"
+        );
+        $pdo->exec(
+            "CREATE INDEX IF NOT EXISTS idx_identifier_time
+             ON admin_login_attempts (identifier, attempted_at)"
+        );
+    } catch (Throwable $e) {}
 
     $seedStmt = $pdo->prepare(
         "INSERT INTO admins (name, email, password, role)
          VALUES (:name, :email, :password, :role)
-         ON DUPLICATE KEY UPDATE id = id"
+         ON CONFLICT (email) DO NOTHING"
     );
     $seedStmt->execute([
         'name' => 'Administrator',
@@ -119,7 +126,7 @@ function isRateLimited(PDO $pdo, string $identifier): bool
          FROM admin_login_attempts
          WHERE identifier = :identifier
            AND is_success = 0
-           AND attempted_at >= (NOW() - INTERVAL ' . FAILED_WINDOW_MINUTES . ' MINUTE)'
+           AND attempted_at >= (NOW() - INTERVAL \'' . FAILED_WINDOW_MINUTES . ' minutes\')'
     );
     $stmt->execute(['identifier' => $identifier]);
     $result = $stmt->fetch();

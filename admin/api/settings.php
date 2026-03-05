@@ -34,14 +34,16 @@ function getRequestBody(): array
 
 function ensureSettingsSchema(PDO $pdo): void
 {
-    $pdo->exec(
-        "CREATE TABLE IF NOT EXISTS site_settings (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            setting_key VARCHAR(100) NOT NULL UNIQUE,
-            setting_value TEXT NULL,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
-    );
+    try {
+        $pdo->exec(
+            "CREATE TABLE IF NOT EXISTS site_settings (
+                id SERIAL PRIMARY KEY,
+                setting_key VARCHAR(100) NOT NULL UNIQUE,
+                setting_value TEXT NULL,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )"
+        );
+    } catch (Throwable $e) {}
 }
 
 const DEFAULT_SETTINGS = [
@@ -108,9 +110,9 @@ function saveSetting(PDO $pdo, string $key, string $value): void
     }
     $stmt = $pdo->prepare(
         "INSERT INTO site_settings (setting_key, setting_value) VALUES (:k, :v)
-         ON DUPLICATE KEY UPDATE setting_value = :v2"
+         ON CONFLICT (setting_key) DO UPDATE SET setting_value = EXCLUDED.setting_value, updated_at = CURRENT_TIMESTAMP"
     );
-    $stmt->execute(['k' => $key, 'v' => $value, 'v2' => $value]);
+    $stmt->execute(['k' => $key, 'v' => $value]);
 }
 
 ensureAdminOrStaff();

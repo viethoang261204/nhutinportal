@@ -55,45 +55,48 @@ function stringLength(string $value): int
 
 function ensureDocumentsSchema(PDO $pdo): void
 {
-    $pdo->exec(
-        "CREATE TABLE IF NOT EXISTS documents (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            document_code VARCHAR(50) UNIQUE NOT NULL,
-            title VARCHAR(255) NOT NULL,
-            document_type_id INT NOT NULL,
-            order_id INT NULL,
-            folder_id INT NULL,
-            customer_id INT NOT NULL,
-            file_path VARCHAR(500) NOT NULL,
-            file_name VARCHAR(255) NOT NULL,
-            file_size BIGINT NULL,
-            mime_type VARCHAR(100) NULL,
-            status ENUM('draft', 'published', 'archived') DEFAULT 'draft',
-            metadata JSON NULL,
-            created_by INT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
-    );
+    try {
+        $pdo->exec(
+            "CREATE TABLE IF NOT EXISTS documents (
+                id SERIAL PRIMARY KEY,
+                document_code VARCHAR(50) UNIQUE NOT NULL,
+                title VARCHAR(255) NOT NULL,
+                document_type_id INT NOT NULL,
+                order_id INT NULL,
+                folder_id INT NULL,
+                customer_id INT NOT NULL,
+                file_path VARCHAR(500) NOT NULL,
+                file_name VARCHAR(255) NOT NULL,
+                file_size BIGINT NULL,
+                mime_type VARCHAR(100) NULL,
+                status VARCHAR(20) DEFAULT 'draft',
+                metadata JSON NULL,
+                created_by INT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )"
+        );
 
-    $pdo->exec(
-        "CREATE TABLE IF NOT EXISTS document_customers (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            document_id INT NOT NULL,
-            customer_id INT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            UNIQUE KEY uq_document_customer (document_id, customer_id),
-            INDEX idx_document (document_id),
-            INDEX idx_customer (customer_id)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
-    );
+        $pdo->exec(
+            "CREATE TABLE IF NOT EXISTS document_customers (
+                id SERIAL PRIMARY KEY,
+                document_id INT NOT NULL,
+                customer_id INT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                CONSTRAINT uq_document_customer UNIQUE (document_id, customer_id)
+            )"
+        );
+        $pdo->exec("CREATE INDEX IF NOT EXISTS idx_document ON document_customers (document_id)");
+        $pdo->exec("CREATE INDEX IF NOT EXISTS idx_customer ON document_customers (customer_id)");
+    } catch (Throwable $e) {}
 
     // Backfill mapping table from legacy one-document-one-customer rows.
     $pdo->exec(
-        "INSERT IGNORE INTO document_customers (document_id, customer_id)
+        "INSERT INTO document_customers (document_id, customer_id)
          SELECT d.id, d.customer_id
          FROM documents d
-         WHERE d.customer_id IS NOT NULL"
+         WHERE d.customer_id IS NOT NULL
+         ON CONFLICT (document_id, customer_id) DO NOTHING"
     );
 }
 
@@ -414,8 +417,8 @@ if ($method === 'GET') {
                  LEFT JOIN customers c ON c.id = d.customer_id
                  LEFT JOIN (
                     SELECT dc.document_id,
-                           GROUP_CONCAT(DISTINCT c_map.company_name ORDER BY c_map.company_name SEPARATOR ', ') AS customer_names,
-                           GROUP_CONCAT(DISTINCT dc.customer_id ORDER BY dc.customer_id SEPARATOR ',') AS customer_ids_csv
+                           STRING_AGG(c_map.company_name, ', ' ORDER BY c_map.company_name) AS customer_names,
+                           STRING_AGG(dc.customer_id::text, ',' ORDER BY dc.customer_id) AS customer_ids_csv
                     FROM document_customers dc
                     LEFT JOIN customers c_map ON c_map.id = dc.customer_id
                     GROUP BY dc.document_id
@@ -493,8 +496,8 @@ if ($method === 'GET') {
              LEFT JOIN customers c ON c.id = d.customer_id
              LEFT JOIN (
                 SELECT dc.document_id,
-                       GROUP_CONCAT(DISTINCT c_map.company_name ORDER BY c_map.company_name SEPARATOR ', ') AS customer_names,
-                       GROUP_CONCAT(DISTINCT dc.customer_id ORDER BY dc.customer_id SEPARATOR ',') AS customer_ids_csv
+                       STRING_AGG(c_map.company_name, ', ' ORDER BY c_map.company_name) AS customer_names,
+                       STRING_AGG(dc.customer_id::text, ',' ORDER BY dc.customer_id) AS customer_ids_csv
                 FROM document_customers dc
                 LEFT JOIN customers c_map ON c_map.id = dc.customer_id
                 GROUP BY dc.document_id

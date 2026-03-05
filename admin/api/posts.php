@@ -102,26 +102,28 @@ function normalizeSlug(string $value): string
 
 function ensurePostsSchema(PDO $pdo): void
 {
-    $pdo->exec(
-        "CREATE TABLE IF NOT EXISTS posts (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            title VARCHAR(255) NOT NULL,
-            slug VARCHAR(255) NOT NULL UNIQUE,
-            category VARCHAR(100) NOT NULL,
-            excerpt TEXT NULL,
-            content MEDIUMTEXT NULL,
-            thumbnail_url VARCHAR(500) NULL,
-            status ENUM('published','draft') NOT NULL DEFAULT 'draft',
-            view_count INT NOT NULL DEFAULT 0,
-            published_at TIMESTAMP NULL,
-            created_by INT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            INDEX idx_posts_status (status),
-            INDEX idx_posts_category (category),
-            INDEX idx_posts_created (created_at)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
-    );
+    try {
+        $pdo->exec(
+            "CREATE TABLE IF NOT EXISTS posts (
+                id SERIAL PRIMARY KEY,
+                title VARCHAR(255) NOT NULL,
+                slug VARCHAR(255) NOT NULL UNIQUE,
+                category VARCHAR(100) NOT NULL,
+                excerpt TEXT NULL,
+                content TEXT NULL,
+                thumbnail_url VARCHAR(500) NULL,
+                status VARCHAR(20) NOT NULL DEFAULT 'draft',
+                view_count INT NOT NULL DEFAULT 0,
+                published_at TIMESTAMP NULL,
+                created_by INT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )"
+        );
+        $pdo->exec("CREATE INDEX IF NOT EXISTS idx_posts_status ON posts (status)");
+        $pdo->exec("CREATE INDEX IF NOT EXISTS idx_posts_category ON posts (category)");
+        $pdo->exec("CREATE INDEX IF NOT EXISTS idx_posts_created ON posts (created_at)");
+    } catch (Throwable $e) {}
 }
 
 function resolveCreatorIdFromSession(): ?int

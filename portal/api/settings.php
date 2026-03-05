@@ -30,14 +30,16 @@ try {
     $pdo = getDbConnection();
     $out = DEFAULT_COMPANY;
 
-    $pdo->exec(
-        "CREATE TABLE IF NOT EXISTS site_settings (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            setting_key VARCHAR(100) NOT NULL UNIQUE,
-            setting_value TEXT NULL,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
-    );
+    try {
+        $pdo->exec(
+            "CREATE TABLE IF NOT EXISTS site_settings (
+                id SERIAL PRIMARY KEY,
+                setting_key VARCHAR(100) NOT NULL UNIQUE,
+                setting_value TEXT NULL,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )"
+        );
+    } catch (Throwable $e) {}
 
     $stmt = $pdo->prepare(
         "SELECT setting_key, setting_value FROM site_settings WHERE setting_key IN ('company_name','contact_email','contact_phone','company_address')"
