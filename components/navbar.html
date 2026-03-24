@@ -15,12 +15,17 @@
         </ul>
       </li>
       <li><a href="news.php">Tin tức</a></li>
-      <li><a href="contact.html">Liên hệ</a></li>
       <li><a href="portal/login.html">Portal</a></li>
     </ul>
 
     <div class="nav-actions">
-      <a class="btn primary" href="contact.html">Liên hệ</a>
+      <button class="lang-btn" id="langToggle" type="button" title="Chuyển ngôn ngữ">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+        <span id="langLabel">VI</span>
+      </button>
       <button
         class="btn small hamburger"
         type="button"
@@ -31,6 +36,42 @@
         Menu
       </button>
     </div>
+
+    <style>
+      .lang-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px 12px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: transparent;
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        transition: background 0.15s, border-color 0.15s;
+      }
+      .lang-btn:hover {
+        background: rgba(11,18,32,0.06);
+      }
+    </style>
+
+    <script>
+      (function() {
+        var btn = document.getElementById('langToggle');
+        var label = document.getElementById('langLabel');
+        if (!btn) return;
+        var lang = localStorage.getItem('lang') || 'VI';
+        label.textContent = lang;
+        btn.addEventListener('click', function() {
+          lang = lang === 'VI' ? 'EN' : 'VI';
+          label.textContent = lang;
+          localStorage.setItem('lang', lang);
+        });
+      })();
+    </script>
   </nav>
 
   <div class="drawer" id="nav-drawer" data-nav-panel>
@@ -41,7 +82,6 @@
       <a href="product2.html" style="padding-left: 20px">→ Bã vỏ hạt điều</a>
       <a href="product1.html" style="padding-left: 20px">→ Sàn trượt tự đổ</a>
       <a href="news.php">Tin tức</a>
-      <a href="contact.html">Liên hệ</a>
       <a href="portal/login.html">Portal</a>
     </div>
   </div>

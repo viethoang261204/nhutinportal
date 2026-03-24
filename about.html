@@ -27,32 +27,32 @@
         align-items: center;
         padding-top: 100px;
         padding-bottom: 80px;
-        background: #0b3d35;
+        background: linear-gradient(to bottom, #0b3d35 50%, transparent 100%);
         overflow: hidden;
       }
 
-      /* Ảnh nền */
+      /* Ảnh nền — mask fade ra trước khi chạm đáy */
       .about-hero::before {
         content: "";
         position: absolute;
         inset: 0;
         background: url('img/nhutinbanner.png') center / cover no-repeat;
         opacity: 0.58;
+        -webkit-mask-image: linear-gradient(to bottom, black 72%, transparent 98%);
+        mask-image: linear-gradient(to bottom, black 72%, transparent 98%);
         pointer-events: none;
       }
 
-      /* Overlay: nhẹ hơn ở giữa, fade trắng hoàn toàn ở dưới */
+      /* Overlay — fade hoàn toàn về transparent */
       .about-hero::after {
         content: "";
         position: absolute;
         inset: 0;
-        background:
-          linear-gradient(to bottom,
-            rgba(11,61,53,0.58) 0%,
-            rgba(11,61,53,0.28) 40%,
-            rgba(11,61,53,0.10) 75%,
-            rgba(255,255,255,0.88) 92%,
-            rgba(255,255,255,1.00) 100%);
+        background: linear-gradient(to bottom,
+          rgba(11,61,53,0.58) 0%,
+          rgba(11,61,53,0.30) 40%,
+          rgba(11,61,53,0.05) 85%,
+          transparent 98%);
         pointer-events: none;
       }
 
