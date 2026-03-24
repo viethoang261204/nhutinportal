@@ -41,7 +41,7 @@ function thumb($row) {
         align-items: center;
         padding-top: 100px;
         padding-bottom: 80px;
-        background: #0b3d35;
+        background: linear-gradient(to bottom, #0b3d35 50%, transparent 100%);
         overflow: hidden;
       }
       .news-hero::before {
@@ -50,6 +50,8 @@ function thumb($row) {
         inset: 0;
         background: url('img/nhutinbanner.png') center / cover no-repeat;
         opacity: 0.58;
+        -webkit-mask-image: linear-gradient(to bottom, black 72%, transparent 98%);
+        mask-image: linear-gradient(to bottom, black 72%, transparent 98%);
         pointer-events: none;
       }
       .news-hero::after {
@@ -58,17 +60,12 @@ function thumb($row) {
         inset: 0;
         background: linear-gradient(to bottom,
           rgba(11,61,53,0.58) 0%,
-          rgba(11,61,53,0.28) 40%,
-          rgba(11,61,53,0.10) 75%,
-          rgba(255,255,255,0.88) 92%,
-          rgba(255,255,255,1.00) 100%);
+          rgba(11,61,53,0.30) 40%,
+          rgba(11,61,53,0.05) 85%,
+          transparent 98%);
         pointer-events: none;
       }
-      .news-hero .container {
-        position: relative;
-        z-index: 1;
-        width: 100%;
-      }
+      .news-hero .container { position: relative; z-index: 1; width: 100%; }
       .news-hero-inner {
         display: flex;
         flex-direction: column;
@@ -77,6 +74,23 @@ function thumb($row) {
         max-width: 860px;
         margin: 0 auto;
       }
+      .about-tags { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-bottom: 20px; background: none; }
+      .about-tag-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: 0.02em;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.18);
+        padding: 5px 14px 5px 10px;
+        border-radius: 999px;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+      .about-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--primary); flex-shrink: 0; }
       .news-hero h1 {
         margin: 0 0 20px;
         font-size: clamp(28px, 3.8vw, 54px);
@@ -87,23 +101,10 @@ function thumb($row) {
         text-shadow: 0 2px 24px rgba(0,0,0,0.35);
         white-space: nowrap;
       }
-      .news-hero .sub {
-        font-size: 16px;
-        line-height: 1.85;
-        max-width: 78ch;
-        margin: 0 auto;
-        color: rgba(255,255,255,0.88);
-      }
+      .news-hero .sub { font-size: 16px; line-height: 1.85; max-width: 78ch; margin: 0 auto; color: rgba(255,255,255,0.88); }
       .news-hero .sub strong { color: #ffffff; }
-      .news-hero .btn:not(.primary) {
-        background: var(--deep);
-        border-color: var(--deep);
-        color: #ffffff;
-      }
-      .news-hero .btn:not(.primary):hover {
-        background: #0e4a3e;
-        border-color: #0e4a3e;
-      }
+      .news-hero .btn:not(.primary) { background: var(--deep); border-color: var(--deep); color: #ffffff; }
+      .news-hero .btn:not(.primary):hover { background: #0e4a3e; border-color: #0e4a3e; }
       @media (max-width: 640px) {
         .news-hero { padding-top: 90px; padding-bottom: 60px; }
         .news-hero h1 { font-size: clamp(24px, 7vw, 38px); white-space: normal; }
@@ -120,6 +121,9 @@ function thumb($row) {
         <section class="news-hero">
             <div class="container">
                 <div class="news-hero-inner" data-reveal>
+                    <div class="about-tags">
+                      <span class="about-tag-pill"><i class="about-dot"></i>Kiến thức & Cập nhật</span>
+                    </div>
                     <h1>NHUTIN News</h1>
                     <p class="sub">
                         Nội dung tập trung vào ứng dụng thực tế, tối ưu chi phí và quy trình vận hành.

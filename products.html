@@ -26,7 +26,7 @@
         align-items: center;
         padding-top: 100px;
         padding-bottom: 80px;
-        background: #0b3d35;
+        background: linear-gradient(to bottom, #0b3d35 50%, transparent 100%);
         overflow: hidden;
       }
       .products-hero::before {
@@ -35,6 +35,8 @@
         inset: 0;
         background: url('img/nhutinbanner.png') center / cover no-repeat;
         opacity: 0.58;
+        -webkit-mask-image: linear-gradient(to bottom, black 72%, transparent 98%);
+        mask-image: linear-gradient(to bottom, black 72%, transparent 98%);
         pointer-events: none;
       }
       .products-hero::after {
@@ -43,10 +45,9 @@
         inset: 0;
         background: linear-gradient(to bottom,
           rgba(11,61,53,0.58) 0%,
-          rgba(11,61,53,0.28) 40%,
-          rgba(11,61,53,0.10) 75%,
-          rgba(255,255,255,0.88) 92%,
-          rgba(255,255,255,1.00) 100%);
+          rgba(11,61,53,0.30) 40%,
+          rgba(11,61,53,0.05) 85%,
+          transparent 98%);
         pointer-events: none;
       }
       .products-hero .container {
@@ -81,15 +82,50 @@
       }
       .products-hero .sub strong { color: #ffffff; }
       .products-hero .page-stats {
-        background: rgba(255,255,255,0.12);
-        border: 1px solid rgba(255,255,255,0.22);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        background: rgba(255,255,255,0.18);
+        border: 1px solid rgba(255,255,255,0.12);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 6px 24px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08);
+        padding: 4px 0;
+        transform: scale(1.10);
+        transform-origin: center;
       }
-      .products-hero .page-stat strong { color: var(--primary); }
+      .products-hero .page-stat strong { color: #d4f5ed; }
       .products-hero .page-stat span   { color: rgba(255,255,255,0.78); }
       .products-hero .page-stat-sep    { background: rgba(255,255,255,0.22); }
+      .about-tags {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 20px;
+        background: none;
+      }
+      .about-tag-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: 0.02em;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.18);
+        padding: 5px 14px 5px 10px;
+        border-radius: 999px;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+      .about-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--primary);
+        flex-shrink: 0;
+      }
+
       .products-hero .btn:not(.primary) {
         background: var(--deep);
         border-color: var(--deep);
@@ -103,7 +139,7 @@
         .products-hero { padding-top: 90px; padding-bottom: 60px; }
         .products-hero h1 { font-size: clamp(24px, 7vw, 38px); white-space: normal; }
         .products-hero .sub { font-size: 15px; }
-        .products-hero .page-stats { flex-direction: column; }
+        .products-hero .page-stats { flex-direction: column; transform: none; }
         .products-hero .page-stat-sep { width: 70%; height: 1px; }
       }
     </style>
@@ -119,6 +155,9 @@
       <section class="products-hero">
         <div class="container">
           <div class="products-hero-inner" data-reveal>
+            <div class="about-tags">
+              <span class="about-tag-pill"><i class="about-dot"></i>Sản phẩm & Giải pháp NHUTIN</span>
+            </div>
             <h1>NHUTIN Products</h1>
             <p class="sub">
               Nhiên liệu sinh khối bã vỏ hạt điều và hệ thống sàn trượt tự đổ —
