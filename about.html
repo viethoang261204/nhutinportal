@@ -18,6 +18,137 @@
     />
 
     <link rel="stylesheet" href="css/site.css" />
+    <style>
+      /* ── About Hero: ảnh nền + overlay xanh ── */
+      .about-hero {
+        position: relative;
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        padding-top: 100px;
+        padding-bottom: 80px;
+        background: #0b3d35;
+        overflow: hidden;
+      }
+
+      /* Ảnh nền */
+      .about-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url('img/nhutinbanner.png') center / cover no-repeat;
+        opacity: 0.58;
+        pointer-events: none;
+      }
+
+      /* Overlay: nhẹ hơn ở giữa, fade trắng hoàn toàn ở dưới */
+      .about-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(to bottom,
+            rgba(11,61,53,0.58) 0%,
+            rgba(11,61,53,0.28) 40%,
+            rgba(11,61,53,0.10) 75%,
+            rgba(255,255,255,0.88) 92%,
+            rgba(255,255,255,1.00) 100%);
+        pointer-events: none;
+      }
+
+      .about-hero .container {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+      }
+
+      .about-hero-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 860px;
+        margin: 0 auto;
+      }
+
+      .about-hero h1 {
+        margin: 0 0 20px;
+        font-size: clamp(28px, 3.8vw, 54px);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        color: #ffffff;
+        text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+        white-space: nowrap;
+      }
+
+      .about-hero .sub {
+        font-size: 16px;
+        line-height: 1.85;
+        max-width: 78ch;
+        margin: 0 auto;
+        color: rgba(255,255,255,0.88);
+      }
+
+      .about-hero .sub strong {
+        color: #ffffff;
+      }
+
+      /* Stats: nền trắng mờ blur */
+      .about-hero .page-stats {
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.22);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      }
+
+      .about-hero .page-stat strong {
+        color: var(--primary); /* cam */
+      }
+
+      .about-hero .page-stat span {
+        color: rgba(255,255,255,0.78);
+      }
+
+      .about-hero .page-stat-sep {
+        background: rgba(255,255,255,0.22);
+      }
+
+      /* Nút thứ 2: nền xanh đậm */
+      .about-hero .btn:not(.primary) {
+        background: var(--deep);
+        border-color: var(--deep);
+        color: #ffffff;
+      }
+
+      .about-hero .btn:not(.primary):hover {
+        background: #0e4a3e;
+        border-color: #0e4a3e;
+      }
+
+      @media (max-width: 640px) {
+        .about-hero {
+          min-height: 100svh;
+          padding-top: 90px;
+          padding-bottom: 60px;
+        }
+        .about-hero h1 {
+          font-size: clamp(24px, 7vw, 38px);
+          white-space: normal;
+        }
+        .about-hero .sub {
+          font-size: 15px;
+        }
+        .about-hero .page-stats {
+          flex-direction: column;
+        }
+        .about-hero .page-stat-sep {
+          width: 70%;
+          height: 1px;
+        }
+      }
+    </style>
   </head>
 
   <body>
@@ -27,22 +158,33 @@
     <header class="topbar" data-include="components/navbar.html"></header>
 
     <main id="main">
-      <section class="section hero">
+      <section class="about-hero">
         <div class="container">
-          <div class="grid hero-grid">
-            <div class="card padded" data-reveal>
-              <h1>Về Công ty Cổ phần Như Tín</h1>
-              <p class="sub">
-                <strong>NHUTIN</strong> được thành lập vào tháng 01 năm 2010. Chúng tôi không ngừng phát triển hoạt động
-                kinh doanh trên cơ sở mang lại lợi ích song phương và đồng hành kỹ thuật sát với nhu cầu vận hành thực tế.
-              </p>
-              <div class="hero-actions">
-                <a class="btn primary" href="products.html">Xem sản phẩm</a>
-                <a class="btn" href="contact.html">Liên hệ</a>
+          <div class="about-hero-inner" data-reveal>
+            <h1>About Nhu Tin Coporation</h1>
+            <p class="sub">
+              <strong>NHUTIN</strong> không ngừng phát triển hoạt động kinh doanh trên cơ sở mang lại lợi ích
+              song phương, đồng hành kỹ thuật sát với nhu cầu vận hành thực tế của khách hàng.
+            </p>
+            <div class="page-stats">
+              <div class="page-stat">
+                <strong>15+</strong>
+                <span>Năm kinh nghiệm</span>
+              </div>
+              <div class="page-stat-sep"></div>
+              <div class="page-stat">
+                <strong>2</strong>
+                <span>Lĩnh vực chủ lực</span>
+              </div>
+              <div class="page-stat-sep"></div>
+              <div class="page-stat">
+                <strong>100%</strong>
+                <span>Cam kết đồng hành</span>
               </div>
             </div>
-            <div class="card hero-media solid" data-reveal>
-              <img src="img/nhutinlogo.png" alt="NHUTIN - hoạt động và triển khai" />
+            <div class="hero-actions">
+              <a class="btn primary" href="products.html">Xem sản phẩm</a>
+              <a class="btn" href="contact.html">Liên hệ</a>
             </div>
           </div>
         </div>

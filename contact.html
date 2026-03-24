@@ -18,6 +18,95 @@
     />
 
     <link rel="stylesheet" href="css/site.css" />
+    <style>
+      .contact-hero {
+        position: relative;
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        padding-top: 100px;
+        padding-bottom: 80px;
+        background: #0b3d35;
+        overflow: hidden;
+      }
+      .contact-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url('img/nhutinbanner.png') center / cover no-repeat;
+        opacity: 0.58;
+        pointer-events: none;
+      }
+      .contact-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom,
+          rgba(11,61,53,0.58) 0%,
+          rgba(11,61,53,0.28) 40%,
+          rgba(11,61,53,0.10) 75%,
+          rgba(255,255,255,0.88) 92%,
+          rgba(255,255,255,1.00) 100%);
+        pointer-events: none;
+      }
+      .contact-hero .container {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+      }
+      .contact-hero-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 860px;
+        margin: 0 auto;
+      }
+      .contact-hero h1 {
+        margin: 0 0 20px;
+        font-size: clamp(28px, 3.8vw, 54px);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        color: #ffffff;
+        text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+        white-space: nowrap;
+      }
+      .contact-hero .sub {
+        font-size: 16px;
+        line-height: 1.85;
+        max-width: 78ch;
+        margin: 0 auto;
+        color: rgba(255,255,255,0.88);
+      }
+      .contact-hero .sub strong { color: #ffffff; }
+      .contact-hero .page-stats {
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.22);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      }
+      .contact-hero .page-stat strong { color: var(--primary); }
+      .contact-hero .page-stat span   { color: rgba(255,255,255,0.78); }
+      .contact-hero .page-stat-sep    { background: rgba(255,255,255,0.22); }
+      .contact-hero .btn:not(.primary) {
+        background: var(--deep);
+        border-color: var(--deep);
+        color: #ffffff;
+      }
+      .contact-hero .btn:not(.primary):hover {
+        background: #0e4a3e;
+        border-color: #0e4a3e;
+      }
+      @media (max-width: 640px) {
+        .contact-hero { padding-top: 90px; padding-bottom: 60px; }
+        .contact-hero h1 { font-size: clamp(24px, 7vw, 38px); white-space: normal; }
+        .contact-hero .sub { font-size: 15px; }
+        .contact-hero .page-stats { flex-direction: column; }
+        .contact-hero .page-stat-sep { width: 70%; height: 1px; }
+      }
+    </style>
   </head>
 
   <body>
@@ -27,26 +116,33 @@
     <header class="topbar" data-include="components/navbar.html"></header>
 
     <main id="main">
-      <section class="section hero">
+      <section class="contact-hero">
         <div class="container">
-          <div class="grid hero-grid">
-            <div class="card padded" data-reveal>
-              <h1>Gửi nhu cầu — NHUTIN tư vấn nhanh</h1>
-              <p class="sub">
-                Vui lòng để lại thông tin. Chúng tôi sẽ liên hệ lại sớm để tư vấn giải pháp phù hợp theo hiện trạng và mục tiêu vận hành.
-              </p>
-              <div style="margin-top: 20px; padding: 16px 18px; background: rgba(11, 61, 53, 0.08); border-radius: 12px; border-left: 3px solid var(--deep);">
-                <div style="font-weight: 700; color: var(--deep); font-size: 15px; margin-bottom: 6px;">NHƯ TÍN HỖ TRỢ 24/24</div>
-                <div style="font-weight: 600; color: var(--deep); font-size: 13px; margin-bottom: 4px;">UY TÍN - KINH NGHIỆM - TẬN TÂM</div>
-                <div style="color: rgba(11, 18, 32, 0.7); font-size: 12px; line-height: 1.5;">Cam kết mang đến khách hàng sản phẩm tốt nhất</div>
+          <div class="contact-hero-inner" data-reveal>
+            <h1>Contact NHUTIN</h1>
+            <p class="sub">
+              Vui lòng để lại thông tin. Chúng tôi sẽ liên hệ lại sớm để tư vấn giải pháp
+              phù hợp theo hiện trạng và mục tiêu vận hành của bạn.
+            </p>
+            <div class="page-stats">
+              <div class="page-stat">
+                <strong>24/7</strong>
+                <span>Hỗ trợ liên tục</span>
               </div>
-              <div class="hero-actions" style="margin-top: 20px">
-                <a class="btn primary" href="tel:0907917301">Gọi ngay: 0907 917 301</a>
-                <a class="btn" href="https://zalo.me/0907917301" target="_blank" rel="noopener noreferrer">Chat Zalo</a>
+              <div class="page-stat-sep"></div>
+              <div class="page-stat">
+                <strong>15+</strong>
+                <span>Năm kinh nghiệm</span>
+              </div>
+              <div class="page-stat-sep"></div>
+              <div class="page-stat">
+                <strong>100%</strong>
+                <span>Cam kết tư vấn</span>
               </div>
             </div>
-            <div class="card hero-media solid" data-reveal>
-              <img src="img/aboutnt4.jpg" alt="Liên hệ NHUTIN" />
+            <div class="hero-actions">
+              <a class="btn primary" href="tel:0907917301">Gọi ngay: 0907 917 301</a>
+              <a class="btn" href="https://zalo.me/0907917301" target="_blank" rel="noopener noreferrer">Chat Zalo</a>
             </div>
           </div>
         </div>

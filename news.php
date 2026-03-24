@@ -33,6 +33,83 @@ function thumb($row) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/site.css" />
+    <style>
+      .news-hero {
+        position: relative;
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        padding-top: 100px;
+        padding-bottom: 80px;
+        background: #0b3d35;
+        overflow: hidden;
+      }
+      .news-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url('img/nhutinbanner.png') center / cover no-repeat;
+        opacity: 0.58;
+        pointer-events: none;
+      }
+      .news-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom,
+          rgba(11,61,53,0.58) 0%,
+          rgba(11,61,53,0.28) 40%,
+          rgba(11,61,53,0.10) 75%,
+          rgba(255,255,255,0.88) 92%,
+          rgba(255,255,255,1.00) 100%);
+        pointer-events: none;
+      }
+      .news-hero .container {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+      }
+      .news-hero-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 860px;
+        margin: 0 auto;
+      }
+      .news-hero h1 {
+        margin: 0 0 20px;
+        font-size: clamp(28px, 3.8vw, 54px);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        color: #ffffff;
+        text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+        white-space: nowrap;
+      }
+      .news-hero .sub {
+        font-size: 16px;
+        line-height: 1.85;
+        max-width: 78ch;
+        margin: 0 auto;
+        color: rgba(255,255,255,0.88);
+      }
+      .news-hero .sub strong { color: #ffffff; }
+      .news-hero .btn:not(.primary) {
+        background: var(--deep);
+        border-color: var(--deep);
+        color: #ffffff;
+      }
+      .news-hero .btn:not(.primary):hover {
+        background: #0e4a3e;
+        border-color: #0e4a3e;
+      }
+      @media (max-width: 640px) {
+        .news-hero { padding-top: 90px; padding-bottom: 60px; }
+        .news-hero h1 { font-size: clamp(24px, 7vw, 38px); white-space: normal; }
+        .news-hero .sub { font-size: 15px; }
+      }
+    </style>
 </head>
 <body>
     <div class="bgfx" aria-hidden="true"></div>
@@ -40,22 +117,17 @@ function thumb($row) {
     <header class="topbar" data-include="components/navbar.html"></header>
 
     <main id="main">
-        <section class="section hero">
+        <section class="news-hero">
             <div class="container">
-                <div class="grid hero-grid">
-                    <div class="card padded" data-reveal>
-                        <h1>Kiến thức & cập nhật</h1>
-                        <p class="sub">
-                            Nội dung tập trung vào ứng dụng thực tế, tối ưu chi phí và quy trình vận hành. Bạn cần tư vấn theo dự án?
-                            Hãy gửi nhu cầu để NHUTIN hỗ trợ nhanh.
-                        </p>
-                        <div class="hero-actions">
-                            <a class="btn primary" href="contact.html">Liên hệ</a>
-                            <a class="btn" href="products.html">Xem sản phẩm</a>
-                        </div>
-                    </div>
-                    <div class="card hero-media solid" data-reveal>
-                        <img src="img/picture2.png" alt="Tin tức NHUTIN" />
+                <div class="news-hero-inner" data-reveal>
+                    <h1>NHUTIN News</h1>
+                    <p class="sub">
+                        Nội dung tập trung vào ứng dụng thực tế, tối ưu chi phí và quy trình vận hành.
+                        Bạn cần tư vấn theo dự án? Hãy gửi nhu cầu để NHUTIN hỗ trợ nhanh.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="btn primary" href="contact.html">Liên hệ tư vấn</a>
+                        <a class="btn" href="products.html">Xem sản phẩm</a>
                     </div>
                 </div>
             </div>

@@ -18,6 +18,95 @@
     />
 
     <link rel="stylesheet" href="css/site.css" />
+    <style>
+      .products-hero {
+        position: relative;
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        padding-top: 100px;
+        padding-bottom: 80px;
+        background: #0b3d35;
+        overflow: hidden;
+      }
+      .products-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url('img/nhutinbanner.png') center / cover no-repeat;
+        opacity: 0.58;
+        pointer-events: none;
+      }
+      .products-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom,
+          rgba(11,61,53,0.58) 0%,
+          rgba(11,61,53,0.28) 40%,
+          rgba(11,61,53,0.10) 75%,
+          rgba(255,255,255,0.88) 92%,
+          rgba(255,255,255,1.00) 100%);
+        pointer-events: none;
+      }
+      .products-hero .container {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+      }
+      .products-hero-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 860px;
+        margin: 0 auto;
+      }
+      .products-hero h1 {
+        margin: 0 0 20px;
+        font-size: clamp(28px, 3.8vw, 54px);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        color: #ffffff;
+        text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+        white-space: nowrap;
+      }
+      .products-hero .sub {
+        font-size: 16px;
+        line-height: 1.85;
+        max-width: 78ch;
+        margin: 0 auto;
+        color: rgba(255,255,255,0.88);
+      }
+      .products-hero .sub strong { color: #ffffff; }
+      .products-hero .page-stats {
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.22);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      }
+      .products-hero .page-stat strong { color: var(--primary); }
+      .products-hero .page-stat span   { color: rgba(255,255,255,0.78); }
+      .products-hero .page-stat-sep    { background: rgba(255,255,255,0.22); }
+      .products-hero .btn:not(.primary) {
+        background: var(--deep);
+        border-color: var(--deep);
+        color: #ffffff;
+      }
+      .products-hero .btn:not(.primary):hover {
+        background: #0e4a3e;
+        border-color: #0e4a3e;
+      }
+      @media (max-width: 640px) {
+        .products-hero { padding-top: 90px; padding-bottom: 60px; }
+        .products-hero h1 { font-size: clamp(24px, 7vw, 38px); white-space: normal; }
+        .products-hero .sub { font-size: 15px; }
+        .products-hero .page-stats { flex-direction: column; }
+        .products-hero .page-stat-sep { width: 70%; height: 1px; }
+      }
+    </style>
   </head>
 
   <body>
@@ -27,22 +116,33 @@
     <header class="topbar" data-include="components/navbar.html"></header>
 
     <main id="main">
-      <section class="section hero">
+      <section class="products-hero">
         <div class="container">
-          <div class="grid hero-grid">
-            <div class="card padded" data-reveal>
-              <h1>Sản phẩm của NHUTIN</h1>
-              <p class="sub">
-                NHUTIN cung cấp 2 nhóm sản phẩm chính: nhiên liệu sinh khối bã vỏ hạt điều và hệ thống sàn trượt tự đổ - 
-                Giải pháp tối ưu cho năng lượng & logistics.
-              </p>
-              <div class="hero-actions">
-                <a class="btn primary" href="product2.html">Bã vỏ hạt điều</a>
-                <a class="btn" href="product1.html">Sàn trượt tự đổ</a>
+          <div class="products-hero-inner" data-reveal>
+            <h1>NHUTIN Products</h1>
+            <p class="sub">
+              Nhiên liệu sinh khối bã vỏ hạt điều và hệ thống sàn trượt tự đổ —
+              giải pháp tối ưu chi phí năng lượng và logistics cho doanh nghiệp.
+            </p>
+            <div class="page-stats">
+              <div class="page-stat">
+                <strong>2</strong>
+                <span>Nhóm sản phẩm</span>
+              </div>
+              <div class="page-stat-sep"></div>
+              <div class="page-stat">
+                <strong>50%</strong>
+                <span>Tiết kiệm chi phí</span>
+              </div>
+              <div class="page-stat-sep"></div>
+              <div class="page-stat">
+                <strong>100%</strong>
+                <span>Cam kết chất lượng</span>
               </div>
             </div>
-            <div class="card hero-media solid" data-reveal>
-              <img src="img/product1_b.jpg" alt="Sản phẩm NHUTIN" />
+            <div class="hero-actions">
+              <a class="btn primary" href="product2.html">Bã vỏ hạt điều</a>
+              <a class="btn" href="product1.html">Sàn trượt tự đổ</a>
             </div>
           </div>
         </div>
