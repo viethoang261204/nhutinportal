@@ -19,7 +19,6 @@
 
     <link rel="stylesheet" href="css/site.css" />
     <style>
-      /* ── About Hero: ảnh nền + overlay xanh ── */
       .about-hero {
         position: relative;
         min-height: 100svh;
@@ -30,8 +29,6 @@
         background: linear-gradient(to bottom, #0b3d35 50%, transparent 100%);
         overflow: hidden;
       }
-
-      /* Ảnh nền — mask fade ra trước khi chạm đáy */
       .about-hero::before {
         content: "";
         position: absolute;
@@ -42,8 +39,6 @@
         mask-image: linear-gradient(to bottom, black 72%, transparent 98%);
         pointer-events: none;
       }
-
-      /* Overlay — fade hoàn toàn về transparent */
       .about-hero::after {
         content: "";
         position: absolute;
@@ -55,13 +50,7 @@
           transparent 98%);
         pointer-events: none;
       }
-
-      .about-hero .container {
-        position: relative;
-        z-index: 1;
-        width: 100%;
-      }
-
+      .about-hero .container { position: relative; z-index: 1; width: 100%; }
       .about-hero-inner {
         display: flex;
         flex-direction: column;
@@ -70,7 +59,6 @@
         max-width: 860px;
         margin: 0 auto;
       }
-
       .about-hero h1 {
         margin: 0 0 20px;
         font-size: clamp(28px, 3.8vw, 54px);
@@ -81,7 +69,6 @@
         text-shadow: 0 2px 24px rgba(0,0,0,0.35);
         white-space: nowrap;
       }
-
       .about-hero .sub {
         font-size: 16px;
         line-height: 1.85;
@@ -89,11 +76,7 @@
         margin: 0 auto;
         color: rgba(255,255,255,0.88);
       }
-
-      .about-hero .sub strong {
-        color: #ffffff;
-      }
-
+      .about-hero .sub strong { color: #ffffff; }
       .about-tags {
         display: flex;
         flex-direction: column;
@@ -125,8 +108,6 @@
         background: var(--primary);
         flex-shrink: 0;
       }
-
-      /* Stats: nền trắng mờ blur */
       .about-hero .page-stats {
         background: rgba(255,255,255,0.18);
         border: 1px solid rgba(255,255,255,0.12);
@@ -137,51 +118,24 @@
         transform: scale(1.10);
         transform-origin: center;
       }
-
-      .about-hero .page-stat strong {
-        color: #d4f5ed;
-      }
-
-      .about-hero .page-stat span {
-        color: rgba(255,255,255,0.78);
-      }
-
-      .about-hero .page-stat-sep {
-        background: rgba(255,255,255,0.22);
-      }
-
-      /* Nút thứ 2: nền xanh đậm */
+      .about-hero .page-stat strong { color: #d4f5ed; }
+      .about-hero .page-stat span { color: rgba(255,255,255,0.78); }
+      .about-hero .page-stat-sep { background: rgba(255,255,255,0.22); }
       .about-hero .btn:not(.primary) {
         background: var(--deep);
         border-color: var(--deep);
         color: #ffffff;
       }
-
       .about-hero .btn:not(.primary):hover {
         background: #0e4a3e;
         border-color: #0e4a3e;
       }
-
       @media (max-width: 640px) {
-        .about-hero {
-          min-height: 100svh;
-          padding-top: 90px;
-          padding-bottom: 60px;
-        }
-        .about-hero h1 {
-          font-size: clamp(24px, 7vw, 38px);
-          white-space: normal;
-        }
-        .about-hero .sub {
-          font-size: 15px;
-        }
-        .about-hero .page-stats {
-          flex-direction: column;
-        }
-        .about-hero .page-stat-sep {
-          width: 70%;
-          height: 1px;
-        }
+        .about-hero { min-height: 100svh; padding-top: 90px; padding-bottom: 60px; }
+        .about-hero h1 { font-size: clamp(24px, 7vw, 38px); white-space: normal; }
+        .about-hero .sub { font-size: 15px; }
+        .about-hero .page-stats { flex-direction: column; }
+        .about-hero .page-stat-sep { width: 70%; height: 1px; }
       }
     </style>
   </head>
@@ -321,5 +275,3 @@
     <script src="js/site.js" defer></script>
   </body>
 </html>
-
-

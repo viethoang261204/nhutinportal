@@ -4,71 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sàn trượt tự đổ - Hệ thống xuống hàng tự động KEITH® | NHUTIN</title>
-    <meta
-      name="description"
-      content="Hệ thống sàn trượt tự đổ KEITH® - Giải pháp xếp dỡ hàng hóa tự động cho xe tải, container. Tiết kiệm thời gian, giảm nhân công, độ bền cao 10-15 năm."
-    />
-    <meta name="keywords" content="sàn trượt tự đổ, walking floor, xuống hàng tự động, KEITH walking floor, hệ thống dỡ hàng tự động, container tự đổ" />
+    <meta name="description" content="Hệ thống sàn trượt tự đổ KEITH® - Giải pháp xếp dỡ hàng hóa tự động cho xe tải, container. Tiết kiệm thời gian, giảm nhân công, độ bền cao 10-15 năm." />
     <link rel="canonical" href="https://nhutincompany.com/san-truot-tu-do" />
     <link rel="icon" href="img/logo.png" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://nhutincompany.com/san-truot-tu-do" />
-    <meta property="og:title" content="Sàn trượt tự đổ - Hệ thống xuống hàng tự động KEITH® | NHUTIN" />
-    <meta property="og:description" content="Giải pháp xếp dỡ hàng hóa tự động cho xe tải, container. Tiết kiệm thời gian, giảm nhân công, độ bền cao 10-15 năm." />
-    <meta property="og:image" content="https://nhutincompany.com/img/product1_a.jpg" />
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://nhutincompany.com/san-truot-tu-do" />
-    <meta property="twitter:title" content="Sàn trượt tự đổ - Hệ thống xuống hàng tự động KEITH® | NHUTIN" />
-    <meta property="twitter:description" content="Giải pháp xếp dỡ hàng hóa tự động cho xe tải, container. Tiết kiệm thời gian, giảm nhân công, độ bền cao 10-15 năm." />
-    <meta property="twitter:image" content="https://nhutincompany.com/img/product1_a.jpg" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/site.css" />
-    
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": "Sàn trượt tự đổ KEITH® Walking Floor",
-      "description": "Hệ thống sàn trượt tự đổ - Giải pháp xếp dỡ hàng hóa tự động cho xe tải, container và kho bãi. Tiết kiệm thời gian, giảm nhân công.",
-      "brand": {
-        "@type": "Brand",
-        "name": "KEITH Manufacturing Co."
-      },
-      "manufacturer": {
-        "@type": "Organization",
-        "name": "KEITH Manufacturing Co.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "US"
-        }
-      },
-      "offers": {
-        "@type": "Offer",
-        "availability": "https://schema.org/InStock",
-        "seller": {
-          "@type": "Organization",
-          "name": "Công ty Cổ phần Như Tín (NHUTIN)"
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "85"
-      }
-    }
-    </script>
   </head>
 
   <body>
@@ -270,7 +212,8 @@
           </div>
         </div>
       </section>
-<section class="p1-ctaBand">
+
+      <section class="p1-ctaBand">
         <div class="container">
           <div data-reveal>
             <h2 class="p1-section-title" data-i18n="p1.cta">Liên hệ NHUTIN để được tư vấn</h2>
@@ -308,4 +251,3 @@
     <script src="js/site.js" defer></script>
   </body>
 </html>
-

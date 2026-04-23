@@ -4,72 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bã vỏ hạt điều - Nhiên liệu sinh khối giá rẻ 4400-5000 Kcal/kg | NHUTIN</title>
-    <meta
-      name="description"
-      content="Bã vỏ hạt điều - Nhiên liệu sinh khối giá rẻ, nhiệt lượng cao 4400-5000 Kcal/kg. Tiết kiệm 40-50% chi phí so với than đá. Giao hàng tận nơi, chất lượng ổn định quanh năm."
-    />
-    <meta name="keywords" content="bã vỏ hạt điều, nhiên liệu sinh khối, chất đốt lò hơi, bã điều, nhiên liệu giá rẻ, tiết kiệm chi phí, nhiệt lượng cao" />
+    <meta name="description" content="Bã vỏ hạt điều - Nhiên liệu sinh khối giá rẻ, nhiệt lượng cao 4400-5000 Kcal/kg. Tiết kiệm 40-50% chi phí so với than đá. Giao hàng tận nơi, chất lượng ổn định quanh năm." />
     <link rel="canonical" href="https://nhutincompany.com/ba-vo-hat-dieu" />
     <link rel="icon" href="img/logo.png" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://nhutincompany.com/ba-vo-hat-dieu" />
-    <meta property="og:title" content="Bã vỏ hạt điều - Nhiên liệu sinh khối giá rẻ | NHUTIN" />
-    <meta property="og:description" content="Nhiên liệu sinh khối giá rẻ, nhiệt lượng cao 4400-5000 Kcal/kg. Tiết kiệm 40-50% chi phí so với than đá." />
-    <meta property="og:image" content="https://nhutincompany.com/img/product2_a.jpg" />
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://nhutincompany.com/ba-vo-hat-dieu" />
-    <meta property="twitter:title" content="Bã vỏ hạt điều - Nhiên liệu sinh khối giá rẻ | NHUTIN" />
-    <meta property="twitter:description" content="Nhiên liệu sinh khối giá rẻ, nhiệt lượng cao 4400-5000 Kcal/kg. Tiết kiệm 40-50% chi phí so với than đá." />
-    <meta property="twitter:image" content="https://nhutincompany.com/img/product2_a.jpg" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/site.css" />
-    
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": "Bã vỏ hạt điều - Nhiên liệu sinh khối",
-      "description": "Bã vỏ hạt điều là nhiên liệu sinh khối giá rẻ, nhiệt lượng cao 4400-5000 Kcal/kg. Tiết kiệm 40-50% chi phí so với than đá.",
-      "brand": {
-        "@type": "Organization",
-        "name": "NHUTIN",
-        "url": "https://nhutincompany.com"
-      },
-      "offers": {
-        "@type": "Offer",
-        "priceCurrency": "VND",
-        "price": "1000-3000",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "priceCurrency": "VND",
-          "price": "1000-3000",
-          "unitCode": "KGM"
-        },
-        "availability": "https://schema.org/InStock",
-        "seller": {
-          "@type": "Organization",
-          "name": "Công ty Cổ phần Như Tín"
-        }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "reviewCount": "150"
-      }
-    }
-    </script>
   </head>
 
   <body>
@@ -121,7 +62,6 @@
         </div>
       </section>
 
-      <!-- TOP (kiểu ảnh 1): slider trái + nội dung nhanh phải -->
       <section class="p2-top">
         <div class="container">
           <div class="p2-top-grid" data-reveal>
@@ -176,7 +116,6 @@
         </div>
       </section>
 
-      <!-- (kiểu ảnh 2): khối nội dung lớn + 3 ô tóm tắt -->
       <section class="p2-article">
         <div class="container">
           <div class="p2-article-card" data-reveal>
@@ -204,94 +143,64 @@
               Sau khi tách hạt và vỏ, vỏ hạt điều chủ yếu được dùng làm nguyên liệu chế biến dầu vỏ hạt điều.
             </p>
           </div>
-
-          <div class="p2-mini-row" data-reveal aria-label="Tóm tắt nhanh">
-  
-          <!-- Thị trường -->
-          <div class="p2-mini">
-            <div class="mini-thumb">
-              <img src="img/badieu11.jpg" alt="Thị trường xuất khẩu" />
-            </div>
-            <h4 data-i18n="p2.mini1.title">Thị trường</h4>
-            <p data-i18n="p2.mini1.text">
-              Xuất khẩu chủ yếu sang Mỹ, Trung Quốc và các nước châu Âu như Đức, Hà Lan.
-            </p>
-          </div>
-
-          <!-- Vỏ / CNSL -->
-           
-          <div class="p2-mini">
-            <div class="mini-thumb">
-              <img src="img/baidieu10.jpg" alt="Dầu vỏ hạt điều CNSL" />
-            </div>
-            <h4 data-i18n="p2.mini2.title">Dầu vỏ hạt điều (CNSL)</h4>
-            <p data-i18n="p2.mini2.text">
-              Nguyên liệu công nghiệp dùng trong sơn, mực in, gỗ, nhựa, cao su và hóa chất chuyên dụng.
-            </p>
-          </div>
-
-          <!-- Công ty Như Tín -->
-          <div class="p2-mini">
-            <div class="mini-thumb">
-              <img src="img/badieu4.jpg" alt="Kho bãi và vận chuyển Như Tín" />
-            </div>
-            <h4 data-i18n="p2.mini3.title">Công ty Như Tín</h4>
-            <p data-i18n="p2.mini3.text">
-              Chuyên cung cấp bã điều số lượng lớn, giao hàng tận nơi, chất lượng ổn định, giá cạnh tranh.
-            </p>
-          </div>
-
-        </div>
-
         </div>
       </section>
 
-      <section class="p1-section">
+      <section class="p1-section" id="nhutin-cung-cap">
         <div class="container">
           <div class="p1-head" data-reveal>
             <h2 class="p1-section-title" data-i18n="p2.spec.title">Thông số của Bã Vỏ Điều chất lượng</h2>
-
+            <p class="p1-section-sub" data-i18n="p2.spec.sub">Phụ phẩm từ nhà máy chế biến dầu vỏ hạt điều chủ yếu là bã điều. Đây là nguồn nguyên liệu sạch và là xu hướng thay thế nhiên liệu hóa thạch đang dần cạn kiệt.</p>
           </div>
 
-          <div class="p1-split" data-reveal>
-            <div>
-              <p class="p1-section-sub" data-i18n="p2.spec.sub">
-              Phụ phẩm từ nhà máy chế biến dầu vỏ hạt điều chủ yếu là bã điều. Đây là nguồn nguyên liệu sạch và là xu hướng thay thế nhiên liệu hóa thạch đang dần cạn kiệt.
-            </p>
-              <ul class="p1-list">
-                <li data-i18n-html="p2.spec.li1"><strong>Độ ẩm:</strong> thông thường 10% – 14%.</li>
-                <li data-i18n-html="p2.spec.li2"><strong>Độ tro:</strong> thường dưới 3%.</li>
-                <li data-i18n-html="p2.spec.li3"><strong>Độ sạch:</strong> không lẫn tạp chất khác ngoài bã điều.</li>
-                <li data-i18n-html="p2.spec.li4"><strong>Nhiệt lượng:</strong> thông số quan trọng, thường có thể đạt đến 5000 Kcal/kg.</li>
-              </ul>
-            </div>
-            <div>
-              <table style="width: 100%; border-collapse: collapse; font-size: 16px; background: rgba(255,255,255,0.72); border: 1px solid var(--border); border-radius: 18px; overflow: hidden">
-                <tr style="border-bottom: 1px solid var(--border)">
-                  <td style="padding: 14px 16px; font-weight: 700; color: var(--deep); width: 45%" data-i18n="p2.tbl.comp">Thành phần</td>
-                  <td style="padding: 14px 16px; color: var(--text)" data-i18n="p2.tbl.compVal">100% vỏ điều sau ép dầu</td>
+          <div class="card padded solid" data-reveal style="max-width: 640px; margin: 0 auto 32px">
+            <table style="width: 100%; border-collapse: collapse; font-size: 15px;">
+              <tbody>
+                <tr style="border-bottom: 1px solid rgba(0,0,0,0.08)">
+                  <td style="padding: 10px 0; color: var(--muted,#666)" data-i18n="p2.tbl.comp">Thành phần</td>
+                  <td style="padding: 10px 0; font-weight: 600; text-align: right" data-i18n="p2.tbl.compVal">100% vỏ điều sau ép dầu</td>
                 </tr>
-                <tr style="border-bottom: 1px solid var(--border)">
-                  <td style="padding: 14px 16px; font-weight: 700; color: var(--deep)" data-i18n="p2.tbl.imp">Tạp chất</td>
-                  <td style="padding: 14px 16px; color: var(--text)">&lt; 3%</td>
+                <tr style="border-bottom: 1px solid rgba(0,0,0,0.08)">
+                  <td style="padding: 10px 0; color: var(--muted,#666)" data-i18n="p2.tbl.imp">Tạp chất</td>
+                  <td style="padding: 10px 0; font-weight: 600; text-align: right">&lt; 3%</td>
                 </tr>
-                <tr style="border-bottom: 1px solid var(--border)">
-                  <td style="padding: 14px 16px; font-weight: 700; color: var(--deep)" data-i18n="p2.tbl.moisture">Độ ẩm (ARB)</td>
-                  <td style="padding: 14px 16px; color: var(--text)">12% +/- 2% (m/m)</td>
+                <tr style="border-bottom: 1px solid rgba(0,0,0,0.08)">
+                  <td style="padding: 10px 0; color: var(--muted,#666)" data-i18n="p2.tbl.moisture">Độ ẩm (ARB)</td>
+                  <td style="padding: 10px 0; font-weight: 600; text-align: right">10% – 14%</td>
                 </tr>
-                <tr style="border-bottom: 1px solid var(--border)">
-                  <td style="padding: 14px 16px; font-weight: 700; color: var(--deep)" data-i18n="p2.tbl.heat">Nhiệt lượng (ARB)</td>
-                  <td style="padding: 14px 16px; color: var(--primary); font-weight: 800">4.400 +/- 200 kcal/kg</td>
-                </tr>
-                <tr style="border-bottom: 1px solid var(--border)">
-                  <td style="padding: 14px 16px; font-weight: 700; color: var(--deep)" data-i18n="p2.tbl.supply">Sản lượng cung ứng</td>
-                  <td style="padding: 14px 16px; color: var(--text)">50 – 20.000 tấn/tháng</td>
+                <tr style="border-bottom: 1px solid rgba(0,0,0,0.08)">
+                  <td style="padding: 10px 0; color: var(--muted,#666)" data-i18n="p2.tbl.heat">Nhiệt lượng (ARB)</td>
+                  <td style="padding: 10px 0; font-weight: 600; text-align: right">4.400 – 5.000 kcal/kg</td>
                 </tr>
                 <tr>
-                  <td style="padding: 14px 16px; font-weight: 700; color: var(--deep)" data-i18n="p2.tbl.form">Quy cách</td>
-                  <td style="padding: 14px 16px; color: var(--text)" data-i18n="p2.tbl.formVal">Dạng bã điều rời (đổ xá)</td>
+                  <td style="padding: 10px 0; color: var(--muted,#666)" data-i18n="p2.tbl.supply">Sản lượng cung ứng</td>
+                  <td style="padding: 10px 0; font-weight: 600; text-align: right">50 – 20.000 tấn/tháng</td>
                 </tr>
-              </table>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap: 18px" data-reveal>
+            <div class="card padded solid" style="text-align:center">
+              <div style="font-size: 36px; margin-bottom: 8px">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              </div>
+              <h3 data-i18n="p2.mini1.title">Thị trường</h3>
+              <p data-i18n="p2.mini1.text">Xuất khẩu chủ yếu sang Mỹ, Trung Quốc và các nước châu Âu như Đức, Hà Lan.</p>
+            </div>
+            <div class="card padded solid" style="text-align:center">
+              <div style="font-size: 36px; margin-bottom: 8px">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </div>
+              <h3 data-i18n="p2.mini2.title">Dầu vỏ hạt điều (CNSL)</h3>
+              <p data-i18n="p2.mini2.text">Nguyên liệu công nghiệp dùng trong sơn, mực in, gỗ, nhựa, cao su và hóa chất chuyên dụng.</p>
+            </div>
+            <div class="card padded solid" style="text-align:center">
+              <div style="font-size: 36px; margin-bottom: 8px">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <h3 data-i18n="p2.mini3.title">Công ty Như Tín</h3>
+              <p data-i18n="p2.mini3.text">Chuyên cung cấp bã điều số lượng lớn, giao hàng tận nơi, chất lượng ổn định, giá cạnh tranh.</p>
             </div>
           </div>
         </div>
@@ -329,7 +238,6 @@
               <h3 data-i18n="p2.adv.f6.t">Giảm lãng phí tài nguyên</h3>
               <p data-i18n="p2.adv.f6.d">Tận dụng phụ phẩm điều, hạn chế chất thải và gia tăng hiệu quả sử dụng tài nguyên.</p>
             </div>
-          </div>
           </div>
         </div>
       </section>
@@ -396,7 +304,7 @@
             <p class="p1-section-sub" data-i18n="p2.gallery.sub">Tổng hợp hình ảnh thực tế về bã điều từ quy trình sản xuất đến ứng dụng.</p>
           </div>
 
-          <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 26px; max-width: 1120px; margin-left: auto; margin-right: auto;" data-reveal data-image-gallery>
+          <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 26px" data-reveal data-image-gallery>
             <div class="card solid" style="overflow: hidden; cursor: pointer;" data-lightbox>
               <img src="img/badieu1.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/badieu1.jpg" />
             </div>
@@ -426,7 +334,6 @@
             </div>
           </div>
 
-          <!-- Lightbox Modal -->
           <div id="lightbox" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); align-items: center; justify-content: center; cursor: pointer;">
             <span id="lightbox-close" style="position: absolute; top: 20px; right: 40px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 10000; line-height: 1;">&times;</span>
             <img id="lightbox-img" style="max-width: 90%; max-height: 90%; object-fit: contain; border-radius: 8px;" alt="Bã điều" />
@@ -471,12 +378,11 @@
     <script src="js/include.js" defer></script>
     <script src="js/site.js" defer></script>
     <script>
-      // Lightbox functionality
       document.addEventListener('DOMContentLoaded', function() {
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxClose = document.getElementById('lightbox-close');
-        const images = document.querySelectorAll('[data-lightbox] img');
+        var lightbox = document.getElementById('lightbox');
+        var lightboxImg = document.getElementById('lightbox-img');
+        var lightboxClose = document.getElementById('lightbox-close');
+        var images = document.querySelectorAll('[data-lightbox] img');
 
         function openLightbox(src) {
           lightboxImg.src = src;
@@ -489,7 +395,7 @@
           document.body.style.overflow = '';
         }
 
-        images.forEach(img => {
+        images.forEach(function(img) {
           img.addEventListener('click', function(e) {
             e.stopPropagation();
             openLightbox(this.dataset.image || this.src);
@@ -498,18 +404,12 @@
 
         lightboxClose.addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', function(e) {
-          if (e.target === lightbox) {
-            closeLightbox();
-          }
+          if (e.target === lightbox) closeLightbox();
         });
-
         document.addEventListener('keydown', function(e) {
-          if (e.key === 'Escape' && lightbox.style.display === 'flex') {
-            closeLightbox();
-          }
+          if (e.key === 'Escape' && lightbox.style.display === 'flex') closeLightbox();
         });
       });
     </script>
   </body>
 </html>
-

@@ -1,25 +1,5 @@
-<?php
-/**
- * Tin tức - Hiển thị bài viết trực tiếp từ DB (đơn giản, không cần JS fetch)
- */
-require_once __DIR__ . '/admin/config/db.php';
-
-$posts = [];
-try {
-    $pdo = getDbConnection();
-    $stmt = $pdo->query("SELECT * FROM posts WHERE status = 'published' ORDER BY COALESCE(published_at, created_at) DESC LIMIT 50");
-    $posts = $stmt ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
-} catch (Throwable $e) {
-    $posts = [];
-}
-
+<?php // DB removed — add later when DB is ready
 function e($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
-function thumb($row) {
-    $t = trim($row['thumbnail_url'] ?? '');
-    if (!$t) return 'img/picture1.png';
-    if (str_starts_with($t, 'http')) return $t;
-    return preg_replace('#^\.\./#', '', $t);
-}
 ?>
 <!doctype html>
 <html lang="vi">
@@ -147,27 +127,24 @@ function thumb($row) {
                 </div>
 
                 <div class="grid blog" style="margin-top: 18px">
-<?php if (empty($posts)): ?>
-                    <div style="grid-column:1/-1;display:flex;align-items:center;justify-content:center;min-height:200px;">
-                        <p class="sub" style="margin:0;text-align:center;color:var(--muted,#666);">Chưa có bài viết.</p>
-                    </div>
-<?php else: foreach ($posts as $p): 
-    $href = '/tin-tuc/' . ($p['slug'] ?? $p['id'] ?? '');
-    $thumb = thumb($p);
-    $cat = trim($p['category'] ?? '') ?: 'Tin tức';
-    $year = !empty($p['published_at']) ? substr($p['published_at'], 0, 4) : (substr($p['created_at'] ?? '', 0, 4) ?: date('Y'));
-    $excerpt = mb_substr($p['excerpt'] ?? $p['title'] ?? '', 0, 120, 'UTF-8');
-    if (mb_strlen(($p['excerpt'] ?? $p['title'] ?? ''), 'UTF-8') > 120) $excerpt .= '...';
-?>
                     <article class="card padded blogCard solid" data-reveal>
-                        <a href="<?= e($href) ?>" style="text-decoration:none;color:inherit;display:block">
-                            <div class="thumb"><img src="<?= e($thumb) ?>" alt="<?= e($p['title'] ?? '') ?>" loading="lazy" onerror="this.src='img/picture1.png'"></div>
-                            <div class="meta"><span><?= e($cat) ?></span><span><?= e($year) ?></span></div>
-                            <h3><?= e($p['title'] ?? '') ?></h3>
-                            <p><?= e($excerpt) ?></p>
-                        </a>
+                        <div class="thumb"><img src="img/picture1.png" alt="Sàn trượt tự đổ" loading="lazy" onerror="this.src='img/picture1.png'"></div>
+                        <div class="meta"><span>Sàn trượt tự đổ</span><span><?= date('Y') ?></span></div>
+                        <h3>Sàn trượt tự đổ là gì? Khi nào nên triển khai?</h3>
+                        <p>Nguyên lý hoạt động, lợi ích và các tình huống giúp thu hồi vốn nhanh.</p>
                     </article>
-<?php endforeach; endif; ?>
+                    <article class="card padded blogCard solid" data-reveal>
+                        <div class="thumb"><img src="img/picture2.png" alt="Vận hành" loading="lazy" onerror="this.src='img/picture1.png'"></div>
+                        <div class="meta"><span>Vận hành</span><span><?= date('Y') ?></span></div>
+                        <h3>Checklist an toàn khi xuống hàng tự động</h3>
+                        <p>Các bước chuẩn hóa giúp giảm rủi ro và tăng độ ổn định khi vận hành.</p>
+                    </article>
+                    <article class="card padded blogCard solid" data-reveal>
+                        <div class="thumb"><img src="img/picture3.png" alt="Sinh khối" loading="lazy" onerror="this.src='img/picture1.png'"></div>
+                        <div class="meta"><span>Sinh khối</span><span><?= date('Y') ?></span></div>
+                        <h3>Đốt bã điều hiệu quả: tối ưu lò hơi &amp; chi phí</h3>
+                        <p>Gợi ý cải tiến lò hơi, lưu trữ và vận hành để tối ưu hiệu suất đốt.</p>
+                    </article>
                 </div>
             </div>
         </section>

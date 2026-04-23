@@ -1,22 +1,16 @@
 # NHUTIN SEO URLs - Apache mod_rewrite
 RewriteEngine On
+RewriteBase /
 
-# ── Redirect old URLs to new SEO-friendly URLs (301 Permanent) ──────────────
-# These ensure old bookmarks / search results still work and pass SEO value
-
-RewriteRule ^index\.php$ /trang-chu [R=301,L]
-
+# ── Redirect old HTML URLs to new SEO-friendly URLs (301) ──────────────────────
 RewriteRule ^about\.html$ /gioi-thieu [R=301,L]
-
 RewriteRule ^products\.html$ /san-pham [R=301,L]
-
 RewriteRule ^product1\.html$ /san-truot-tu-do [R=301,L]
-
 RewriteRule ^product2\.html$ /ba-vo-hat-dieu [R=301,L]
-
 RewriteRule ^contact\.html$ /lien-he [R=301,L]
-
-RewriteRule ^news\.php$ /tin-tuc [R=301,L]
+RewriteRule ^news\.html$ /tin-tuc [R=301,L]
+RewriteRule ^news-detail\.html$ /tin-tuc [R=301,L]
+RewriteRule ^index\.html$ / [R=301,L]
 
 # news-detail.php?id=123 or ?slug=post-title -> /tin-tuc/post-title
 RewriteCond %{QUERY_STRING} ^id=(\d+)$
@@ -25,19 +19,13 @@ RewriteRule ^news-detail\.php$ /tin-tuc/$1 [R=301,L,QSD]
 RewriteCond %{QUERY_STRING} ^slug=([^&]+)$
 RewriteRule ^news-detail\.php$ /tin-tuc/%1 [R=301,L,QSD]
 
-RewriteCond %{QUERY_STRING} ^slug=([^&]+)&id=(\d+)$
-RewriteRule ^news-detail\.php$ /tin-tuc/%1 [R=301,L,QSD]
-
-RewriteRule ^news-detail\.html$ /tin-tuc [R=301,L]
-
-# ── Rewrite new SEO URLs to actual files ────────────────────────────────────
-# Root paths
+# ── Rewrite new SEO URLs to actual PHP files ──────────────────────────────────
 RewriteRule ^trang-chu/?$ index.php [L,QSA]
-RewriteRule ^gioi-thieu/?$ about.html [L,QSA]
-RewriteRule ^san-pham/?$ products.html [L,QSA]
-RewriteRule ^san-truot-tu-do/?$ product1.html [L,QSA]
-RewriteRule ^ba-vo-hat-dieu/?$ product2.html [L,QSA]
-RewriteRule ^lien-he/?$ contact.html [L,QSA]
+RewriteRule ^gioi-thieu/?$ about.php [L,QSA]
+RewriteRule ^san-pham/?$ products.php [L,QSA]
+RewriteRule ^san-truot-tu-do/?$ product1.php [L,QSA]
+RewriteRule ^ba-vo-hat-dieu/?$ product2.php [L,QSA]
+RewriteRule ^lien-he/?$ contact.php [L,QSA]
 RewriteRule ^tin-tuc/?$ news.php [L,QSA]
 
 # News detail: /tin-tuc/some-post-slug or /tin-tuc/123

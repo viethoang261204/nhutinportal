@@ -7,7 +7,6 @@
     <meta name="description" content="Liên hệ NHUTIN để được tư vấn về nhiên liệu sinh khối bã điều và hệ thống sàn trượt tự đổ." />
     <link rel="canonical" href="https://nhutincompany.com/lien-he" />
     <link rel="icon" href="img/logo.png" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />

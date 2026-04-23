@@ -1,18 +1,5 @@
-<?php
-$latestPosts = [];
-try {
-    require_once __DIR__ . '/admin/config/db.php';
-    $pdo = getDbConnection();
-    $stmt = $pdo->query("SELECT * FROM posts WHERE status = 'published' ORDER BY COALESCE(published_at, created_at) DESC LIMIT 3");
-    $latestPosts = $stmt ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
-} catch (Throwable $e) {}
+<?php // DB removed — add later when DB is ready
 function esc($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
-function thumbUrl($r) {
-    $t = trim($r['thumbnail_url'] ?? '');
-    if (!$t) return 'img/picture1.png';
-    if (str_starts_with($t, 'http')) return $t;
-    return preg_replace('#^\.\./#', '', $t);
-}
 ?>
 <!doctype html>
 <html lang="vi">
@@ -138,7 +125,6 @@ function thumbUrl($r) {
             <p class="sub" data-i18n="home.knowledge.sub">Chia sẻ ngắn gọn, tập trung vào ứng dụng thực tế và tối ưu vận hành.</p>
           </div>
           <div class="grid blog" style="margin-top: 18px">
-<?php if (empty($latestPosts)): ?>
             <article class="card padded blogCard solid" data-reveal>
               <div class="thumb"><img src="img/picture1.png" alt="Sàn trượt tự đổ" /></div>
               <div class="meta"><span data-i18n="home.blog1.cat">Sàn trượt tự đổ</span><span><?= date('Y') ?></span></div>
@@ -157,23 +143,6 @@ function thumbUrl($r) {
               <h3 data-i18n="home.blog3.title">Đốt bã điều hiệu quả: tối ưu lò hơi & chi phí</h3>
               <p data-i18n="home.blog3.desc">Gợi ý cải tiến lò hơi, lưu trữ và vận hành để tối ưu hiệu suất đốt.</p>
             </article>
-<?php else: foreach ($latestPosts as $p):
-    $href = '/tin-tuc/' . ($p['slug'] ?? $p['id'] ?? '');
-    $thumb = thumbUrl($p);
-    $cat = trim($p['category'] ?? '') ?: 'Tin tức';
-    $year = !empty($p['published_at']) ? substr($p['published_at'], 0, 4) : (substr($p['created_at'] ?? '', 0, 4) ?: date('Y'));
-    $excerpt = mb_substr($p['excerpt'] ?? $p['title'] ?? '', 0, 100, 'UTF-8');
-    if (mb_strlen(($p['excerpt'] ?? $p['title'] ?? ''), 'UTF-8') > 100) $excerpt .= '...';
-?>
-            <article class="card padded blogCard solid" data-reveal>
-              <a href="<?= esc($href) ?>" style="text-decoration:none;color:inherit;display:block">
-                <div class="thumb"><img src="<?= esc($thumb) ?>" alt="<?= esc($p['title'] ?? '') ?>" loading="lazy" onerror="this.src='img/picture1.png'"></div>
-                <div class="meta"><span><?= esc($cat) ?></span><span><?= esc($year) ?></span></div>
-                <h3><?= esc($p['title'] ?? '') ?></h3>
-                <p><?= esc($excerpt) ?></p>
-              </a>
-            </article>
-<?php endforeach; endif; ?>
           </div>
           <div class="hero-actions" style="margin-top: 18px" data-reveal>
             <a class="btn primary" href="/tin-tuc" data-i18n="btn.allNews">Xem tất cả tin tức</a>

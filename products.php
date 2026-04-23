@@ -4,19 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sản phẩm — NHUTIN</title>
-    <meta
-      name="description"
-      content="Sản phẩm chính của NHUTIN: nhiên liệu sinh khối bã điều và hệ thống sàn trượt tự đổ."
-    />
+    <meta name="description" content="Sản phẩm chính của NHUTIN: nhiên liệu sinh khối bã điều và hệ thống sàn trượt tự đổ." />
     <link rel="icon" href="img/logo.png" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/site.css" />
     <style>
       .products-hero {
@@ -50,11 +42,7 @@
           transparent 98%);
         pointer-events: none;
       }
-      .products-hero .container {
-        position: relative;
-        z-index: 1;
-        width: 100%;
-      }
+      .products-hero .container { position: relative; z-index: 1; width: 100%; }
       .products-hero-inner {
         display: flex;
         flex-direction: column;
@@ -92,8 +80,8 @@
         transform-origin: center;
       }
       .products-hero .page-stat strong { color: #d4f5ed; }
-      .products-hero .page-stat span   { color: rgba(255,255,255,0.78); }
-      .products-hero .page-stat-sep    { background: rgba(255,255,255,0.22); }
+      .products-hero .page-stat span { color: rgba(255,255,255,0.78); }
+      .products-hero .page-stat-sep { background: rgba(255,255,255,0.22); }
       .about-tags {
         display: flex;
         flex-direction: column;
@@ -125,7 +113,6 @@
         background: var(--primary);
         flex-shrink: 0;
       }
-
       .products-hero .btn:not(.primary) {
         background: var(--deep);
         border-color: var(--deep);
@@ -259,7 +246,7 @@
                 Chúng tôi sẵn sàng hỗ trợ bạn tìm giải pháp phù hợp nhất
               </p>
             </div>
-            
+
             <div class="grid twoCol" style="gap: 24px; margin-bottom: 32px">
               <div style="text-align: center; padding: 24px; background: rgba(34,197,94,0.1); border-radius: 12px; border: 1px solid rgba(34,197,94,0.2)">
                 <p style="font-size: 14px; opacity: 0.8; margin: 0 0 8px; color: rgba(255,255,255,0.7)">Hotline 1</p>
