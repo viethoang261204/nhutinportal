@@ -13,7 +13,9 @@ async function includePartials() {
     })
   );
 
-  // Notify other scripts that partials are ready (navbar/footer now in DOM)
+  // Dispatch event AFTER partials are inserted so that deferred scripts
+  // (i18n.js, site.js) that registered listeners on DOMContentLoaded
+  // are guaranteed to be in place when this fires.
   window.dispatchEvent(new Event("nhutin:partials"));
 }
 
