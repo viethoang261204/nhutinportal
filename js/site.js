@@ -198,7 +198,8 @@ function initSliders() {
 function initLang() {
   const btn = document.getElementById('langToggle');
   const label = document.getElementById('langLabel');
-  if (!btn || btn.dataset.langBound === '1') return;
+  if (!btn) return; // navbar not yet in DOM — wait for nhutin:partials
+  if (btn.dataset.langBound === '1') return;
 
   let lang = localStorage.getItem('lang') || 'VI';
   label.textContent = lang;
@@ -231,7 +232,8 @@ if (document.readyState === "loading") {
   boot();
 }
 
-// If navbar/footer are injected after DOM load, re-run boot (idempotent guards apply)
-window.addEventListener("nhutin:partials", boot);
+window.addEventListener("nhutin:partials", function () {
+  boot();
+});
 
 

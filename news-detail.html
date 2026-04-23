@@ -55,7 +55,7 @@
         if (!container) return;
 
         if (!slug) {
-          container.innerHTML = '<p class="sub">Không tìm thấy bài viết. <a href="news.html">Quay lại tin tức</a></p>';
+          container.innerHTML = '<p class="sub">Không tìm thấy bài viết. <a href="/tin-tuc">Quay lại tin tức</a></p>';
           return;
         }
 
@@ -67,7 +67,7 @@
           .then(function(r) { return r.json(); })
           .then(function(res) {
             if (!res.success || !res.data) {
-              container.innerHTML = '<p class="sub">Không tìm thấy bài viết. <a href="news.html">Quay lại tin tức</a></p>';
+              container.innerHTML = '<p class="sub">Không tìm thấy bài viết. <a href="/tin-tuc">Quay lại tin tức</a></p>';
               return;
             }
             var p = res.data;
@@ -80,7 +80,7 @@
             var pub = p.published_at || p.created_at || '';
             var pubStr = pub ? pub.substring(0, 10) : '';
 
-            var html = '<a href="news.html" class="back-link">&larr; Tin tức</a>' +
+            var html = '<a href="/tin-tuc" class="back-link">&larr; Tin tức</a>' +
               '<article class="post-header" data-reveal">' +
               '<div class="post-meta">' + cat + (pubStr ? ' &middot; ' + pubStr : '') + '</div>' +
               '<h1 class="post-title">' + (p.title || '').replace(/</g, '&lt;') + '</h1>' +
@@ -93,7 +93,7 @@
             container.innerHTML = html;
           })
           .catch(function() {
-            container.innerHTML = '<p class="sub">Không thể tải bài viết. <a href="news.html">Quay lại tin tức</a></p>';
+            container.innerHTML = '<p class="sub">Không thể tải bài viết. <a href="/tin-tuc">Quay lại tin tức</a></p>';
           });
       })();
     </script>

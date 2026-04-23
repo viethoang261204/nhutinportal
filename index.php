@@ -39,9 +39,9 @@ function thumbUrl($r) {
             <h1 class="banner-title">Nhu Tin Corporation</h1>
             <p class="banner-subtitle" data-i18n="home.banner.sub">Tiên phong ứng dụng nhiên liệu sinh khối bã điều cho lò hơi công nghiệp và triển khai hệ thống sàn trượt tự đổ – giải pháp tối ưu chi phí và nâng cao hiệu suất vận hành.</p>
             <div class="banner-actions">
-              <a class="btn primary large" href="products.html" data-i18n="btn.viewProduct">Xem sản phẩm</a>
-              <a class="btn large" href="about.html" data-i18n="btn.aboutUs">Về chúng tôi</a>
-              <a class="btn large" href="contact.html" data-i18n="btn.contact">Liên hệ ngay</a>
+              <a class="btn primary large" href="/san-pham" data-i18n="btn.viewProduct">Xem sản phẩm</a>
+              <a class="btn large" href="/gioi-thieu" data-i18n="btn.aboutUs">Về chúng tôi</a>
+              <a class="btn large" href="/lien-he" data-i18n="btn.contact">Liên hệ ngay</a>
             </div>
           </div>
           <div class="banner-features">
@@ -89,7 +89,7 @@ function thumbUrl($r) {
                 <li data-i18n="home.biomass.li4">Nguồn cung ổn định từ vùng nguyên liệu tập trung</li>
               </ul>
               <div class="hero-actions" style="margin-top: 16px; display: flex; gap: 10px;">
-                <a class="btn primary" href="products.html#biomass" style="flex: 1;" data-i18n="btn.viewDetail2">Xem chi tiết</a>
+                <a class="btn primary" href="/san-pham" style="flex: 1;" data-i18n="btn.viewDetail2">Xem chi tiết</a>
                 <a class="btn" href="https://bavohatdieu.com" target="_blank" rel="noopener noreferrer" style="flex: 1;" data-i18n="home.biomass.btn2">Tới bavohatdieu.com</a>
               </div>
             </article>
@@ -105,7 +105,7 @@ function thumbUrl($r) {
                 <li data-i18n="home.walkfloor.li4">Giảm nhân công, tăng an toàn lao động và vòng quay kho bãi</li>
               </ul>
               <div class="hero-actions" style="margin-top: 16px; display: flex; gap: 10px;">
-                <a class="btn primary" href="products.html#walking-floor" style="flex: 1;" data-i18n="btn.viewDetail2">Xem chi tiết</a>
+                <a class="btn primary" href="/san-pham" style="flex: 1;" data-i18n="btn.viewDetail2">Xem chi tiết</a>
                 <a class="btn" href="https://thungxetudo.com" target="_blank" rel="noopener noreferrer" style="flex: 1;" data-i18n="home.walkfloor.btn2">Tới thungxetudo.com</a>
               </div>
             </article>
@@ -120,8 +120,8 @@ function thumbUrl($r) {
               <h2 class="h2" data-i18n="home.process">Nhìn nhanh quy trình & ứng dụng thực tế</h2>
               <p class="sub" data-i18n="home.process.sub">Video ngắn giúp bạn hình dung cách vận hành và ứng dụng, từ đó quyết định phương án phù hợp cho doanh nghiệp.</p>
               <div class="hero-actions" style="margin-top: 14px">
-                <a class="btn primary" href="contact.html" data-i18n="btn.contact2">Liên hệ</a>
-                <a class="btn" href="about.html" data-i18n="btn.aboutNhutin">Về NHUTIN</a>
+                <a class="btn primary" href="/lien-he" data-i18n="btn.contact2">Liên hệ</a>
+                <a class="btn" href="/gioi-thieu" data-i18n="btn.aboutNhutin">Về NHUTIN</a>
               </div>
             </div>
             <div class="card solid" style="overflow: hidden" data-reveal>
@@ -158,7 +158,7 @@ function thumbUrl($r) {
               <p data-i18n="home.blog3.desc">Gợi ý cải tiến lò hơi, lưu trữ và vận hành để tối ưu hiệu suất đốt.</p>
             </article>
 <?php else: foreach ($latestPosts as $p):
-    $href = 'news-detail.php?id=' . (int)($p['id'] ?? 0);
+    $href = '/tin-tuc/' . ($p['slug'] ?? $p['id'] ?? '');
     $thumb = thumbUrl($p);
     $cat = trim($p['category'] ?? '') ?: 'Tin tức';
     $year = !empty($p['published_at']) ? substr($p['published_at'], 0, 4) : (substr($p['created_at'] ?? '', 0, 4) ?: date('Y'));
@@ -176,7 +176,7 @@ function thumbUrl($r) {
 <?php endforeach; endif; ?>
           </div>
           <div class="hero-actions" style="margin-top: 18px" data-reveal>
-            <a class="btn primary" href="news.php" data-i18n="btn.allNews">Xem tất cả tin tức</a>
+            <a class="btn primary" href="/tin-tuc" data-i18n="btn.allNews">Xem tất cả tin tức</a>
           </div>
         </div>
       </section>

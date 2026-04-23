@@ -130,8 +130,8 @@ function thumb($row) {
                         Bạn cần tư vấn theo dự án? Hãy gửi nhu cầu để NHUTIN hỗ trợ nhanh.
                     </p>
                     <div class="hero-actions">
-                        <a class="btn primary" href="contact.html">Liên hệ tư vấn</a>
-                        <a class="btn" href="products.html">Xem sản phẩm</a>
+                        <a class="btn primary" href="/lien-he">Liên hệ tư vấn</a>
+                        <a class="btn" href="/san-pham">Xem sản phẩm</a>
                     </div>
                 </div>
             </div>
@@ -152,7 +152,7 @@ function thumb($row) {
                         <p class="sub" style="margin:0;text-align:center;color:var(--muted,#666);">Chưa có bài viết.</p>
                     </div>
 <?php else: foreach ($posts as $p): 
-    $href = 'news-detail.php?id=' . (int)($p['id'] ?? 0);
+    $href = '/tin-tuc/' . ($p['slug'] ?? $p['id'] ?? '');
     $thumb = thumb($p);
     $cat = trim($p['category'] ?? '') ?: 'Tin tức';
     $year = !empty($p['published_at']) ? substr($p['published_at'], 0, 4) : (substr($p['created_at'] ?? '', 0, 4) ?: date('Y'));

@@ -9,7 +9,6 @@
     'nav.slider':           { vi: 'Sàn trượt tự đổ',       en: 'Self-Tipping Sliding Floor' },
     'nav.news':             { vi: 'Tin tức',                en: 'News' },
     'nav.portal':           { vi: 'Portal',                 en: 'Portal' },
-    'nav.dealer':           { vi: 'Đại lý ủy quyền',        en: 'Authorized Dealer' },
 
     // ── Common ───────────────────────────────────────────────────────────────────
     'skip':                 { vi: 'Bỏ qua menu',            en: 'Skip to content' },

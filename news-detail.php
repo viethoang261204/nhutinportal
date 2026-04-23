@@ -59,7 +59,7 @@ function e($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
         <section class="section">
             <div class="container" style="max-width: 800px">
 <?php if (!$post): ?>
-                <p class="sub">Không tìm thấy bài viết. <a href="news.php">Quay lại tin tức</a></p>
+                <p class="sub">Không tìm thấy bài viết. <a href="/tin-tuc">Quay lại tin tức</a></p>
 <?php else:
     $thumb = trim($post['thumbnail_url'] ?? '');
     if ($thumb && !str_starts_with($thumb, 'http')) $thumb = preg_replace('#^\.\./#', '', $thumb);
@@ -69,7 +69,7 @@ function e($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
     $body = $post['content'] ?? $post['excerpt'] ?? '';
     $body = nl2br(e($body));
 ?>
-                <a href="news.php" class="back-link">&larr; Tin tức</a>
+                <a href="/tin-tuc" class="back-link">&larr; Tin tức</a>
                 <article class="post-header" data-reveal>
                     <div class="post-meta"><?= e($cat) ?><?= $pubStr ? ' · ' . e($pubStr) : '' ?></div>
                     <h1 class="post-title"><?= e($post['title']) ?></h1>
