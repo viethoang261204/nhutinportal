@@ -5,17 +5,17 @@
     </a>
 
     <ul class="navlinks" role="list">
-      <li><a href="index.php">Trang chủ</a></li>
-      <li><a href="about.html">Giới thiệu</a></li>
+      <li><a href="index.php" data-i18n="nav.home">Trang chủ</a></li>
+      <li><a href="about.html" data-i18n="nav.about">Giới thiệu</a></li>
       <li class="has-dropdown">
-        <a href="products.html">Sản phẩm</a>
+        <a href="products.html" data-i18n="nav.products">Sản phẩm</a>
         <ul class="dropdown">
-          <li><a href="product2.html">Bã vỏ hạt điều</a></li>
-          <li><a href="product1.html">Sàn trượt tự đổ</a></li>
+          <li><a href="product2.html" data-i18n="nav.cashew">Bã vỏ hạt điều</a></li>
+          <li><a href="product1.html" data-i18n="nav.slider">Sàn trượt tự đổ</a></li>
         </ul>
       </li>
-      <li><a href="news.php">Tin tức</a></li>
-      <li><a href="portal/login.html">Portal</a></li>
+      <li><a href="news.php" data-i18n="nav.news">Tin tức</a></li>
+      <li><a href="portal/login.html" data-i18n="nav.portal">Portal</a></li>
     </ul>
 
     <div class="nav-actions">
@@ -58,33 +58,17 @@
       }
     </style>
 
-    <script>
-      (function() {
-        var btn = document.getElementById('langToggle');
-        var label = document.getElementById('langLabel');
-        if (!btn) return;
-        var lang = localStorage.getItem('lang') || 'VI';
-        label.textContent = lang;
-        btn.addEventListener('click', function() {
-          lang = lang === 'VI' ? 'EN' : 'VI';
-          label.textContent = lang;
-          localStorage.setItem('lang', lang);
-        });
-      })();
-    </script>
   </nav>
 
   <div class="drawer" id="nav-drawer" data-nav-panel>
     <div class="panel" role="navigation" aria-label="Menu mobile">
-      <a href="index.php">Trang chủ</a>
-      <a href="about.html">Giới thiệu</a>
-      <a href="products.html" style="font-weight: 600">Sản phẩm</a>
-      <a href="product2.html" style="padding-left: 20px">→ Bã vỏ hạt điều</a>
-      <a href="product1.html" style="padding-left: 20px">→ Sàn trượt tự đổ</a>
-      <a href="news.php">Tin tức</a>
-      <a href="portal/login.html">Portal</a>
+      <a href="index.php" data-i18n="nav.home">Trang chủ</a>
+      <a href="about.html" data-i18n="nav.about">Giới thiệu</a>
+      <a href="products.html" data-i18n="nav.products" style="font-weight: 600">Sản phẩm</a>
+      <a href="product2.html" data-i18n="nav.cashew" style="padding-left: 20px">→ Bã vỏ hạt điều</a>
+      <a href="product1.html" data-i18n="nav.slider" style="padding-left: 20px">→ Sàn trượt tự đổ</a>
+      <a href="news.php" data-i18n="nav.news">Tin tức</a>
+      <a href="portal/login.html" data-i18n="nav.portal">Portal</a>
     </div>
   </div>
 </div>
-
-

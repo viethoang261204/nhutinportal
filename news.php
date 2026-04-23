@@ -175,6 +175,7 @@ function thumb($row) {
         <div data-include="components/footer.html"></div>
     </main>
 
+    <script src="js/i18n.js" defer></script>
     <script src="js/include.js" defer></script>
     <script src="js/site.js" defer></script>
 </body>

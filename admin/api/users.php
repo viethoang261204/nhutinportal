@@ -547,8 +547,24 @@ if ($method === 'DELETE') {
         ]);
     }
 
+    // Lấy avatar_url trước khi xóa để xóa file
+    $stmtAvatar = $pdo->prepare('SELECT avatar_url FROM users WHERE id = :id AND role IN (\'staff\', \'customer\')');
+    $stmtAvatar->execute(['id' => $id]);
+    $avatarRow = $stmtAvatar->fetch(PDO::FETCH_ASSOC);
+
     $stmt = $pdo->prepare('DELETE FROM users WHERE id = :id AND role IN (\'staff\', \'customer\')');
     $stmt->execute(['id' => $id]);
+
+    if ($stmt->rowCount() > 0 && $avatarRow) {
+        $avatarUrl = $avatarRow['avatar_url'] ?? '';
+        if (str_contains($avatarUrl, 'staff-avatars/')) {
+            $filename = basename($avatarUrl);
+            $filePath = getAvatarDirectory() . DIRECTORY_SEPARATOR . $filename;
+            if (is_file($filePath)) {
+                @unlink($filePath);
+            }
+        }
+    }
 
     if ($stmt->rowCount() === 0) {
         respondJson(404, [

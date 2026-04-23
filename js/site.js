@@ -195,6 +195,24 @@ function initSliders() {
   document.documentElement.dataset.sliderInit = "1";
 }
 
+function initLang() {
+  const btn = document.getElementById('langToggle');
+  const label = document.getElementById('langLabel');
+  if (!btn || btn.dataset.langBound === '1') return;
+
+  let lang = localStorage.getItem('lang') || 'VI';
+  label.textContent = lang;
+
+  btn.addEventListener('click', () => {
+    lang = lang === 'VI' ? 'EN' : 'VI';
+    label.textContent = lang;
+    localStorage.setItem('lang', lang);
+    window.dispatchEvent(new CustomEvent('nhutin:lang', { detail: lang }));
+  });
+
+  btn.dataset.langBound = '1';
+}
+
 function boot() {
   initNav();
   initReveal();
@@ -204,6 +222,7 @@ function boot() {
   initYear();
   initContact();
   initSliders();
+  initLang();
 }
 
 if (document.readyState === "loading") {

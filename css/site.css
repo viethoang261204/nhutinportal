@@ -1466,14 +1466,15 @@ footer {
   position: relative;
   border-radius: 24px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.72);
+  background: #0b3d35;
   border: 1px solid var(--border);
   box-shadow: var(--shadowSoft);
-  min-height: 320px;
+  height: 420px;
 }
 
 .p2-slide {
   display: none;
+  width: 100%;
   height: 100%;
 }
 
@@ -1484,40 +1485,61 @@ footer {
 .p2-slide img {
   width: 100%;
   height: 100%;
-  min-height: 320px;
   object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .p2-slider-controls {
   position: absolute;
-  inset: auto 14px 14px 14px;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  pointer-events: none;
+  padding: 0 12px;
 }
 
 .p2-slider-btns {
-  display: inline-flex;
-  gap: 10px;
+  display: contents;
 }
 
 .p2-slider-btn {
   appearance: none;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  background: rgba(11, 61, 53, 0.72);
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  background: rgba(11, 61, 53, 0.78);
   color: #fff;
-  border-radius: 999px;
-  padding: 8px 12px;
-  font-weight: 800;
-  font-size: 13px;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  line-height: 1;
   cursor: pointer;
   backdrop-filter: blur(10px);
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s, transform 0.15s;
+  flex-shrink: 0;
+}
+
+.p2-slider-btn:hover {
+  background: rgba(11, 61, 53, 0.96);
+  transform: scale(1.08);
 }
 
 .p2-slider-btn:focus {
   outline: none;
   box-shadow: var(--focus);
+}
+
+.p2-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: all;
 }
 
 .p2-dots {
@@ -1627,13 +1649,16 @@ footer {
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid var(--border);
   box-shadow: var(--shadowSoft);
-  padding: 16px 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .p2-mini h4 {
   margin: 0 0 8px;
   font-size: 17px;
   color: var(--deep);
+  padding: 14px 16px 0;
 }
 
 .p2-mini p {
@@ -1641,18 +1666,21 @@ footer {
   color: var(--muted);
   line-height: 1.7;
   font-size: 15.5px;
+  padding: 0 16px 16px;
 }
 
 .p2-mini .mini-thumb {
-  margin-bottom: 12px;
-  border-radius: 14px;
+  width: 100%;
+  height: 240px;
   overflow: hidden;
-  border: 1px solid var(--border);
+  flex-shrink: 0;
 }
 
 .p2-mini .mini-thumb img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   display: block;
 }
 
@@ -1663,8 +1691,8 @@ footer {
   .p2-mini-row {
     grid-template-columns: 1fr;
   }
-  .p2-slider img {
-    min-height: 240px;
+  .p2-slider {
+    height: 280px;
   }
 }
 
