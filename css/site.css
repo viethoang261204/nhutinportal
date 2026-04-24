@@ -355,7 +355,7 @@ h1, h2, h3 {
   display: flex;
   gap: 6px;
   align-items: center;
-  justify-content: center;
+  justify-content: center !important;
   flex: 1;
 }
 

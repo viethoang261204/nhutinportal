@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhật ký hoạt động - NHUTIN Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Be Vietnam Pro', sans-serif; background: linear-gradient(180deg, #bfdbfe 0%, #93c5fd 25%, #bae6fd 50%, #cffafe 75%, #e0f2fe 100%); min-height: 100vh; background-attachment: fixed; }
+        .app-container { display: flex; min-height: 100vh; }
+        .sidebar { width: 280px; background: linear-gradient(180deg, #0077b6 0%, #005a8d 100%); padding: 24px 16px; display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 100; }
+        .sidebar-header { display: flex; align-items: center; gap: 12px; padding: 0 12px 24px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 24px; }
+        .logo-icon { width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+        .logo-icon svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 2; }
+        .logo-text { color: #fff; font-size: 16px; font-weight: 700; }
+        .nav-menu { flex: 1; overflow-y: auto; }
+        .nav-section { margin-bottom: 24px; }
+        .nav-section-title { color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 0 12px; margin-bottom: 8px; }
+        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; transition: all 0.2s ease; margin-bottom: 2px; font-weight: 500; }
+        .nav-item:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        .nav-item.active { background: rgba(255,255,255,0.2); color: #fff; font-weight: 600; }
+        .nav-item svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+        .sidebar-footer { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; }
+        .user-info { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; cursor: pointer; }
+        .user-info:hover { background: rgba(255,255,255,0.1); }
+        .user-avatar { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; }
+        .user-details { flex: 1; }
+        .user-name { color: #fff; font-size: 14px; font-weight: 600; }
+        .user-email { color: rgba(255,255,255,0.7); font-size: 12px; }
+
+        .main-content { flex: 1; margin-left: 280px; padding: 32px; min-height: 100vh; }
+        .page-header { margin-bottom: 32px; }
+        .page-title { font-size: 28px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+        .page-subtitle { color: #666; font-size: 14px; }
+
+        .filters-bar { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+        .search-box { flex: 1; min-width: 200px; position: relative; }
+        .search-box input { width: 100%; padding: 12px 16px 12px 44px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-family: inherit; background: #fff; }
+        .search-box input:focus { outline: none; border-color: #0077b6; }
+        .search-box svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; stroke: #888; fill: none; stroke-width: 2; }
+        .filter-select { padding: 12px 36px 12px 16px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-family: inherit; background: #fff; cursor: pointer; min-width: 140px; }
+
+        .card { background: #fff; border-radius: 16px; padding: 0; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        thead { background: #F9FAFB; }
+        th { padding: 14px 20px; text-align: left; font-size: 12px; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #E5E7EB; }
+        td { padding: 14px 20px; border-bottom: 1px solid #F3F4F6; font-size: 14px; color: #333; }
+        tbody tr:hover { background: #F9FAFB; }
+        tbody tr:last-child td { border-bottom: none; }
+
+        .badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+        .badge-ticket { background: #FED7AA; color: #EA580C; }
+        .badge-post { background: #DBEAFE; color: #2563EB; }
+        .badge-customer { background: #D1FAE5; color: #059669; }
+
+        .pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 20px; border-top: 1px solid #E5E7EB; }
+        .pagination-info { font-size: 13px; color: #6B7280; }
+        .pagination-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .pagination .limit-select { padding: 8px 32px 8px 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; font-family: inherit; background: #fff; cursor: pointer; }
+        .pagination button { padding: 8px 16px; border: 1px solid #e0e0e0; border-radius: 8px; background: #fff; cursor: pointer; font-size: 14px; font-family: inherit; font-weight: 600; color: #333; }
+        .pagination button:hover:not(:disabled) { background: #0077b6; color: #fff; border-color: #0077b6; }
+        .pagination button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .pagination .page-text { font-size: 14px; color: #374151; font-weight: 500; }
+
+        .overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 99; }
+        .overlay.show { display: block; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-overlay.show { display: flex; }
+        .modal { background: #fff; border-radius: 20px; padding: 32px; max-width: 400px; width: 100%; text-align: center; }
+        .modal h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .modal p { font-size: 14px; color: #666; margin-bottom: 24px; }
+        .modal-actions { display: flex; gap: 12px; justify-content: center; }
+        .btn { padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; border: none; }
+        .modal-btn-cancel { background: #f5f5f5; color: #666; }
+        .modal-btn-cancel:hover { background: #e8e8e8; }
+        .modal-btn-confirm { background: #DC2626; color: #fff; }
+        .modal-btn-confirm:hover { background: #B91C1C; }
+
+        @media (max-width: 899px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .main-content { margin-left: 0; padding: 24px 16px; padding-top: 72px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <span class="logo-text">NHUTIN Admin</span>
+            </div>
+            <nav class="nav-menu" id="navMenu"></nav>
+            <div class="sidebar-footer">
+                <div class="user-info" onclick="toggleUserMenu()">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Admin" class="user-avatar" id="userAvatar" data-avatar-init>
+                    <div class="user-details">
+                        <div class="user-name" id="userName">Admin</div>
+                        <div class="user-email" id="userEmail">admin@nhutin.vn</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Nhật ký hoạt động</h1>
+                <p class="page-subtitle">Theo dõi thao tác của nhân viên trên hệ thống</p>
+            </div>
+
+            <div class="filters-bar">
+                <div class="search-box">
+                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    <input type="text" id="searchInput" placeholder="Tìm theo tên, hành động...">
+                </div>
+                <select class="filter-select" id="entityTypeFilter">
+                    <option value="">Tất cả loại</option>
+                    <option value="ticket">Ticket</option>
+                    <option value="post">Bài viết</option>
+                    <option value="customer">Khách hàng</option>
+                </select>
+            </div>
+
+            <div class="card">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Thời gian</th>
+                                <th>Nhân viên</th>
+                                <th>Vai trò</th>
+                                <th>Hành động</th>
+                                <th>Đối tượng</th>
+                                <th>Chi tiết</th>
+                            </tr>
+                        </thead>
+                        <tbody id="activityBody">
+                            <tr><td colspan="6" style="text-align:center;padding:32px;color:#888;">Đang tải...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination" id="pagination">
+                    <span class="pagination-info" id="paginationInfo">Đang tải...</span>
+                    <div class="pagination-controls">
+                        <select class="limit-select" id="limitSelect" title="Số bản ghi mỗi trang">
+                            <option value="10" selected>10 / trang</option>
+                            <option value="20">20 / trang</option>
+                            <option value="30">30 / trang</option>
+                            <option value="50">50 / trang</option>
+                        </select>
+                        <button type="button" id="prevPageBtn" disabled>« Trước</button>
+                        <span class="page-text" id="pageText">Trang 1/1</span>
+                        <button type="button" id="nextPageBtn" disabled>Sau »</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+    <div class="modal-overlay" id="logoutModal">
+        <div class="modal">
+            <h3>Đăng xuất?</h3>
+            <p>Bạn có chắc muốn đăng xuất?</p>
+            <div class="modal-actions">
+                <button class="btn modal-btn-cancel" onclick="closeLogoutModal()">Hủy</button>
+                <button class="btn modal-btn-confirm" onclick="confirmLogout()">Đăng xuất</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin-nav.js"></script>
+    <script src="js/activity.js"></script>
+</body>
+</html>

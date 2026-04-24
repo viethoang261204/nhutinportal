@@ -1,39 +1,125 @@
-# NHUTIN SEO URLs - Apache mod_rewrite
+# ============================================
+# NHUTIN PORTAL - URL REWRITING
+# Biến URL đẹp thành file PHP thực tế
+# ============================================
+
 RewriteEngine On
 RewriteBase /
 
-# ── Redirect old HTML URLs to new SEO-friendly URLs (301) ──────────────────────
-RewriteRule ^about\.html$ /gioi-thieu [R=301,L]
-RewriteRule ^products\.html$ /san-pham [R=301,L]
-RewriteRule ^product1\.html$ /san-truot-tu-do [R=301,L]
-RewriteRule ^product2\.html$ /ba-vo-hat-dieu [R=301,L]
-RewriteRule ^contact\.html$ /lien-he [R=301,L]
-RewriteRule ^news\.html$ /tin-tuc [R=301,L]
-RewriteRule ^news-detail\.html$ /tin-tuc [R=301,L]
-RewriteRule ^index\.html$ / [R=301,L]
+# ============================================
+# 0. BẢO VỆ ADMIN / PORTAL / ASSETS - QUAN TRỌNG!
+# ============================================
 
-# news-detail.php?id=123 or ?slug=post-title -> /tin-tuc/post-title
-RewriteCond %{QUERY_STRING} ^id=(\d+)$
-RewriteRule ^news-detail\.php$ /tin-tuc/$1 [R=301,L,QSD]
+# Không áp dụng rewrite cho /admin/*
+RewriteRule ^admin(/.*)?$ - [L]
 
-RewriteCond %{QUERY_STRING} ^slug=([^&]+)$
-RewriteRule ^news-detail\.php$ /tin-tuc/%1 [R=301,L,QSD]
+# Không áp dụng rewrite cho /portal/*
+RewriteRule ^portal(/.*)?$ - [L]
 
-# ── Rewrite new SEO URLs to actual PHP files ──────────────────────────────────
-RewriteRule ^trang-chu/?$ index.php [L,QSA]
-RewriteRule ^gioi-thieu/?$ about.php [L,QSA]
-RewriteRule ^san-pham/?$ products.php [L,QSA]
-RewriteRule ^san-truot-tu-do/?$ product1.php [L,QSA]
-RewriteRule ^ba-vo-hat-dieu/?$ product2.php [L,QSA]
-RewriteRule ^lien-he/?$ contact.php [L,QSA]
-RewriteRule ^tin-tuc/?$ news.php [L,QSA]
+# Không áp dụng rewrite cho /api/*
+RewriteRule ^api(/.*)?$ - [L]
 
-# News detail: /tin-tuc/some-post-slug or /tin-tuc/123
-RewriteRule ^tin-tuc/([a-zA-Z0-9_-]+)/?$ news-detail.php?slug=$1 [L,QSA]
-
-# ── Static assets — passthrough ─────────────────────────────────────────────
+# Không áp dụng rewrite cho các file thực sự tồn tại (CSS, JS, images, PDF...)
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^ - [L]
 
+# Không áp dụng rewrite cho directories
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
+
+# ============================================
+# 1. REDIRECT .HTML URLs ĐẾN CLEAN URLs (301)
+# ============================================
+
+# Redirect tất cả .html sang URL không có .html (trừ admin/portal)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+([^.]+)\.html [NC]
+RewriteCond %{REQUEST_URI} !^/admin [NC]
+RewriteCond %{REQUEST_URI} !^/portal [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# ============================================
+# 2. ALIASES CHO CÁC TRANG CHÍNH
+# ============================================
+
+# /trang-chu -> index.php
+RewriteRule ^trang-chu/?$ index.php [L]
+
+# /gioi-thieu -> about.php
+RewriteRule ^gioi-thieu/?$ about.php [L]
+
+# /san-pham -> products.php
+RewriteRule ^san-pham/?$ products.php [L]
+
+# /san-truot-tu-do -> product1.php
+RewriteRule ^san-truot-tu-do/?$ product1.php [L]
+
+# /ba-vo-hat-dieu -> product2.php
+RewriteRule ^ba-vo-hat-dieu/?$ product2.php [L]
+
+# /tin-tuc -> news.php
+RewriteRule ^(tin-tuc|news)/?$ news.php [L]
+
+# /tin-tuc/[slug] hoặc /news/[slug] -> news-detail.php
+RewriteRule ^(tin-tuc|news)/([a-zA-Z0-9\-]+)/?$ news-detail.php?slug=$2 [L,QSA]
+
+# /lien-he -> contact.php
+RewriteRule ^lien-he/?$ contact.php [L]
+
+# ============================================
+# 3. XỬ LÝ GENERIC .PHP FILES
+# ============================================
+
+# Nếu file .php tồn tại, serve nó (URL không có .php)
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteCond %{REQUEST_URI} !^/admin [NC]
+RewriteCond %{REQUEST_URI} !^/portal [NC]
+RewriteCond %{REQUEST_URI} !^/api [NC]
+RewriteRule ^([^/]+)/?$ $1.php [L]
+
+# ============================================
+# 4. TRANG CHỦ MẶC ĐỊNH
+# ============================================
+
+DirectoryIndex index.php index.html
+
+# /index -> /
+RewriteRule ^index\.php$ / [R=301,L]
+
+# ============================================
+# 5. XỬ LÝ TRAILING SLASH
+# ============================================
+
+# Thêm trailing slash cho directories (optional)
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_URI} !(.*)/$
+# RewriteRule ^(.*)$ $1/ [L,R=301]
+
+# ============================================
+# 6. XỬ LÝ ERROR PAGES
+# ============================================
+
+ErrorDocument 404 /index.php
+
+# ============================================
+# 7. CACHE CONTROL & COMPRESSION
+# ============================================
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/pdf "access plus 1 month"
+    ExpiresByType video/mp4 "access plus 1 year"
+</IfModule>
+
+# Gzip Compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>

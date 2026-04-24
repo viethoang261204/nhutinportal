@@ -6,18 +6,18 @@
     <title>Sàn trượt tự đổ - Hệ thống xuống hàng tự động KEITH® | NHUTIN</title>
     <meta name="description" content="Hệ thống sàn trượt tự đổ KEITH® - Giải pháp xếp dỡ hàng hóa tự động cho xe tải, container. Tiết kiệm thời gian, giảm nhân công, độ bền cao 10-15 năm." />
     <link rel="canonical" href="https://nhutincompany.com/san-truot-tu-do" />
-    <link rel="icon" href="img/logo.png" />
+    <link rel="icon" href="/img/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="/css/site.css" />
   </head>
 
   <body>
     <div class="bgfx" aria-hidden="true"></div>
     <a class="skip" href="#main">Bỏ qua menu</a>
 
-    <header class="topbar" data-include="components/navbar.html"></header>
+    <header class="topbar" data-include="/components/navbar.html"></header>
 
     <main id="main">
       <section class="p1-hero">
@@ -49,7 +49,7 @@
             </div>
 
             <div class="p1-media">
-              <img src="img/product1_a.jpg" alt="Sàn trượt tự đổ" />
+              <img src="/img/product1_a.jpg" alt="Sàn trượt tự đổ" />
             </div>
           </div>
         </div>
@@ -71,7 +71,7 @@
               </ul>
             </div>
             <div>
-              <img src="img/product1_b.jpg" alt="Hệ thống sàn trượt tự đổ" style="width: 100%; border-radius: 24px; box-shadow: var(--shadow)" />
+              <img src="/img/product1_b.jpg" alt="Hệ thống sàn trượt tự đổ" style="width: 100%; border-radius: 24px; box-shadow: var(--shadow)" />
             </div>
           </div>
 
@@ -113,7 +113,7 @@
 
           <div class="p1-split" data-reveal>
             <div>
-              <div class="mediaTop"><img src="img/picture1.png" alt="Ứng dụng container" /></div>
+              <div class="mediaTop"><img src="/img/picture1.png" alt="Ứng dụng container" /></div>
             </div>
             <div>
               <div class="p1-app-grid" aria-label="Nhóm ứng dụng">
@@ -206,7 +206,7 @@
 
           <div class="p1-video" data-reveal>
             <video controls poster="img/product1_a.jpg">
-              <source src="img/videointro.mp4" type="video/mp4" />
+              <source src="/img/videointro.mp4" type="video/mp4" />
               Trình duyệt của bạn không hỗ trợ video.
             </video>
           </div>
@@ -243,11 +243,11 @@
         </div>
       </section>
 
-      <div data-include="components/footer.html"></div>
+      <div data-include="/components/footer.html"></div>
     </main>
 
-    <script src="js/i18n.js" defer></script>
-    <script src="js/include.js" defer></script>
-    <script src="js/site.js" defer></script>
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/include.js" defer></script>
+    <script src="/js/site.js" defer></script>
   </body>
 </html>

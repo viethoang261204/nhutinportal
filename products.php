@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sản phẩm — NHUTIN</title>
     <meta name="description" content="Sản phẩm chính của NHUTIN: nhiên liệu sinh khối bã điều và hệ thống sàn trượt tự đổ." />
-    <link rel="icon" href="img/logo.png" />
+    <link rel="icon" href="/img/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="/css/site.css" />
     <style>
       .products-hero {
         position: relative;
@@ -136,7 +136,7 @@
     <div class="bgfx" aria-hidden="true"></div>
     <a class="skip" href="#main">Bỏ qua menu</a>
 
-    <header class="topbar" data-include="components/navbar.html"></header>
+    <header class="topbar" data-include="/components/navbar.html"></header>
 
     <main id="main">
       <section class="products-hero">
@@ -198,7 +198,7 @@
                 </div>
               </div>
               <div>
-                <img src="img/badieu1.jpg" alt="Bã vỏ hạt điều" style="width: 100%; border-radius: 12px" />
+                <img src="/img/badieu1.jpg" alt="Bã vỏ hạt điều" style="width: 100%; border-radius: 12px" />
               </div>
             </div>
           </div>
@@ -211,7 +211,7 @@
           <div class="card padded solid" data-reveal>
             <div class="grid twoCol" style="gap: 32px; align-items: center">
               <div>
-                <img src="img/picture3.png" alt="Sàn trượt tự đổ" style="width: 100%; border-radius: 12px" />
+                <img src="/img/picture3.png" alt="Sàn trượt tự đổ" style="width: 100%; border-radius: 12px" />
               </div>
               <div>
                 <h2 class="h2" data-i18n="prod.floor.title">Sàn trượt tự đổ</h2>
@@ -269,11 +269,11 @@
         </div>
       </section>
 
-      <div data-include="components/footer.html"></div>
+      <div data-include="/components/footer.html"></div>
     </main>
 
-    <script src="js/i18n.js" defer></script>
-    <script src="js/include.js" defer></script>
-    <script src="js/site.js" defer></script>
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/include.js" defer></script>
+    <script src="/js/site.js" defer></script>
   </body>
 </html>

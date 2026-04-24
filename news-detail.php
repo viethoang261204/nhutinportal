@@ -8,9 +8,9 @@ function e($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bài viết — NHUTIN</title>
     <meta name="description" content="Bài viết NHUTIN về nhiên liệu sinh khối bã điều và hệ thống sàn trượt tự đổ." />
-    <link rel="icon" href="img/logo.png" />
+    <link rel="icon" href="/img/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="/css/site.css" />
     <style>
         .post-header { margin-bottom: 24px; }
         .post-meta { color: var(--muted, #666); font-size: 14px; margin-bottom: 8px; }
@@ -25,7 +25,7 @@ function e($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 <body>
     <div class="bgfx" aria-hidden="true"></div>
     <a class="skip" href="#main">Bỏ qua menu</a>
-    <header class="topbar" data-include="components/navbar.html"></header>
+    <header class="topbar" data-include="/components/navbar.html"></header>
 
     <main id="main">
         <section class="section">
@@ -35,16 +35,16 @@ function e($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
                     <div class="post-meta">Tin tức · <?= date('Y') ?></div>
                     <h1 class="post-title">Bài viết đang được cập nhật</h1>
                 </article>
-                <div class="post-thumb" data-reveal><img src="img/picture1.png" alt=""></div>
+                <div class="post-thumb" data-reveal><img src="/img/picture1.png" alt=""></div>
                 <div class="post-body" data-reveal>
                     <p>Nội dung bài viết sẽ được cập nhật sớm nhất. Vui lòng quay lại trang <a href="/tin-tuc">Tin tức</a> hoặc liên hệ NHUTIN để được tư vấn.</p>
                 </div>
             </div>
         </section>
-        <div data-include="components/footer.html"></div>
+        <div data-include="/components/footer.html"></div>
     </main>
-    <script src="js/i18n.js" defer></script>
-    <script src="js/include.js" defer></script>
-    <script src="js/site.js" defer></script>
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/include.js" defer></script>
+    <script src="/js/site.js" defer></script>
 </body>
 </html>

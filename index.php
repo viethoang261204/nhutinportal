@@ -8,16 +8,16 @@ function esc($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>NHUTIN — Nhiên liệu sinh khối bã điều & Sàn trượt tự đổ</title>
     <meta name="description" content="Công ty Cổ phần Như Tín (NHUTIN) — tiên phong ứng dụng chất đốt sinh khối bã điều cho lò hơi công nghiệp và triển khai hệ thống sàn trượt tự đổ." />
-    <link rel="icon" href="img/logo.png" />
+    <link rel="icon" href="/img/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="/css/site.css" />
   </head>
   <body>
     <div class="bgfx" aria-hidden="true"></div>
     <a class="skip" href="#main" data-i18n="skip">Bỏ qua menu</a>
-    <header class="topbar" data-include="components/navbar.html"></header>
+    <header class="topbar" data-include="/components/navbar.html"></header>
 
     <main id="main">
       <section class="main-banner" id="top">
@@ -150,7 +150,7 @@ function esc($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
         </div>
       </section>
 
-      <div data-include="components/footer.html"></div>
+      <div data-include="/components/footer.html"></div>
     </main>
     <script src="js/i18n.js" defer></script>
     <script src="js/include.js" defer></script>

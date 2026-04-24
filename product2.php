@@ -6,18 +6,18 @@
     <title>Bã vỏ hạt điều - Nhiên liệu sinh khối giá rẻ 4400-5000 Kcal/kg | NHUTIN</title>
     <meta name="description" content="Bã vỏ hạt điều - Nhiên liệu sinh khối giá rẻ, nhiệt lượng cao 4400-5000 Kcal/kg. Tiết kiệm 40-50% chi phí so với than đá. Giao hàng tận nơi, chất lượng ổn định quanh năm." />
     <link rel="canonical" href="https://nhutincompany.com/ba-vo-hat-dieu" />
-    <link rel="icon" href="img/logo.png" />
+    <link rel="icon" href="/img/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="/css/site.css" />
   </head>
 
   <body>
     <div class="bgfx" aria-hidden="true"></div>
     <a class="skip" href="#main">Bỏ qua menu</a>
 
-    <header class="topbar" data-include="components/navbar.html"></header>
+    <header class="topbar" data-include="/components/navbar.html"></header>
 
     <main id="main">
       <section class="p1-hero">
@@ -56,7 +56,7 @@
             </div>
 
             <div class="p1-media">
-              <img src="img/badieu1.jpg" alt="Bã vỏ hạt điều" />
+              <img src="/img/badieu1.jpg" alt="Bã vỏ hạt điều" />
             </div>
           </div>
         </div>
@@ -67,13 +67,13 @@
           <div class="p2-top-grid" data-reveal>
             <div class="p2-slider" data-slider aria-label="Thư viện hình ảnh">
               <div class="p2-slide is-active" data-slide>
-                <img src="img/badieu2.jpg" alt="Bã vỏ hạt điều" />
+                <img src="/img/badieu2.jpg" alt="Bã vỏ hạt điều" />
               </div>
               <div class="p2-slide" data-slide>
-                <img src="img/baidieu3.jpg" alt="Ứng dụng bã điều" />
+                <img src="/img/baidieu3.jpg" alt="Ứng dụng bã điều" />
               </div>
               <div class="p2-slide" data-slide>
-                <img src="img/badieu6.jpg" alt="Bã điều chất lượng" />
+                <img src="/img/badieu6.jpg" alt="Bã điều chất lượng" />
               </div>
 
               <div class="p2-slider-controls" aria-label="Điều khiển slider">
@@ -306,31 +306,31 @@
 
           <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 26px" data-reveal data-image-gallery>
             <div class="card solid" style="overflow: hidden; cursor: pointer;" data-lightbox>
-              <img src="img/badieu1.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/badieu1.jpg" />
+              <img src="/img/badieu1.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/badieu1.jpg" />
             </div>
             <div class="card solid" style="overflow: hidden; cursor: pointer;" data-lightbox>
-              <img src="img/badieu2.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/badieu2.jpg" />
+              <img src="/img/badieu2.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/badieu2.jpg" />
             </div>
             <div class="card solid" style="overflow: hidden; cursor: pointer;" data-lightbox>
-              <img src="img/baidieu3.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/baidieu3.jpg" />
+              <img src="/img/baidieu3.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/baidieu3.jpg" />
             </div>
             <div class="card solid" style="overflow: hidden; cursor: pointer;" data-lightbox>
-              <img src="img/badieu4.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/badieu4.jpg" />
+              <img src="/img/badieu4.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/badieu4.jpg" />
             </div>
             <div class="card solid" style="overflow: hidden; cursor: pointer;" data-lightbox>
-              <img src="img/badieu5.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/badieu5.jpg" />
+              <img src="/img/badieu5.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/badieu5.jpg" />
             </div>
             <div class="card solid" style="overflow: hidden; cursor: pointer;" data-lightbox>
-              <img src="img/badieu6.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/badieu6.jpg" />
+              <img src="/img/badieu6.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/badieu6.jpg" />
             </div>
             <div class="card solid" style="overflow: hidden; cursor: pointer;" data-lightbox>
-              <img src="img/badieu7.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/badieu7.jpg" />
+              <img src="/img/badieu7.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/badieu7.jpg" />
             </div>
             <div class="card solid" style="overflow: hidden; cursor: pointer;" data-lightbox>
-              <img src="img/baidieu8.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/baidieu8.jpg" />
+              <img src="/img/baidieu8.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/baidieu8.jpg" />
             </div>
             <div class="card solid" style="overflow: hidden; cursor: pointer;" data-lightbox>
-              <img src="img/baidieu9.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/baidieu9.jpg" />
+              <img src="/img/baidieu9.jpg" alt="Bã điều" style="width: 100%; height: 280px; object-fit: cover" data-image="img/baidieu9.jpg" />
             </div>
           </div>
 
@@ -371,12 +371,12 @@
         </div>
       </section>
 
-      <div data-include="components/footer.html"></div>
+      <div data-include="/components/footer.html"></div>
     </main>
 
-    <script src="js/i18n.js" defer></script>
-    <script src="js/include.js" defer></script>
-    <script src="js/site.js" defer></script>
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/include.js" defer></script>
+    <script src="/js/site.js" defer></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         var lightbox = document.getElementById('lightbox');

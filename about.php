@@ -8,7 +8,7 @@
       name="description"
       content="Công ty Cổ phần Như Tín (NHUTIN) thành lập 01/2010. Chuyên cung cấp chất đốt sinh khối bã điều và giải pháp sàn trượt tự đổ."
     />
-    <link rel="icon" href="img/logo.png" />
+    <link rel="icon" href="/img/logo.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,7 +17,7 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="/css/site.css" />
     <style>
       .about-hero {
         position: relative;
@@ -144,7 +144,7 @@
     <div class="bgfx" aria-hidden="true"></div>
     <a class="skip" href="#main" data-i18n="skip">Bỏ qua menu</a>
 
-    <header class="topbar" data-include="components/navbar.html"></header>
+    <header class="topbar" data-include="/components/navbar.html"></header>
 
     <main id="main">
       <section class="about-hero">
@@ -255,23 +255,23 @@
 
           <div class="grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 18px">
             <div class="card solid" style="overflow: hidden" data-reveal>
-              <img src="img/aboutk10.jpg" alt="Thực tế triển khai" style="height: 240px; width: 100%; object-fit: cover" />
+              <img src="/img/aboutk10.jpg" alt="Thực tế triển khai" style="height: 240px; width: 100%; object-fit: cover" />
             </div>
             <div class="card solid" style="overflow: hidden" data-reveal>
-              <img src="img/aboutk11.jpg" alt="Thi công lắp đặt" style="height: 240px; width: 100%; object-fit: cover" />
+              <img src="/img/aboutk11.jpg" alt="Thi công lắp đặt" style="height: 240px; width: 100%; object-fit: cover" />
             </div>
             <div class="card solid" style="overflow: hidden" data-reveal>
-              <img src="img/aboutk13.jpg" alt="Hỗ trợ kỹ thuật" style="height: 240px; width: 100%; object-fit: cover" />
+              <img src="/img/aboutk13.jpg" alt="Hỗ trợ kỹ thuật" style="height: 240px; width: 100%; object-fit: cover" />
             </div>
           </div>
         </div>
       </section>
 
-      <div data-include="components/footer.html"></div>
+      <div data-include="/components/footer.html"></div>
     </main>
 
-    <script src="js/i18n.js" defer></script>
-    <script src="js/include.js" defer></script>
-    <script src="js/site.js" defer></script>
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/include.js" defer></script>
+    <script src="/js/site.js" defer></script>
   </body>
 </html>

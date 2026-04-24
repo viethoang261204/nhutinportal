@@ -6,11 +6,11 @@
     <title>Liên hệ — NHUTIN</title>
     <meta name="description" content="Liên hệ NHUTIN để được tư vấn về nhiên liệu sinh khối bã điều và hệ thống sàn trượt tự đổ." />
     <link rel="canonical" href="https://nhutincompany.com/lien-he" />
-    <link rel="icon" href="img/logo.png" />
+    <link rel="icon" href="/img/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="/css/site.css" />
     <style>
       .contact-hero {
         position: relative;
@@ -93,7 +93,7 @@
     <div class="bgfx" aria-hidden="true"></div>
     <a class="skip" href="#main">Bỏ qua menu</a>
 
-    <header class="topbar" data-include="components/navbar.html"></header>
+    <header class="topbar" data-include="/components/navbar.html"></header>
 
     <main id="main">
       <section class="contact-hero">
@@ -269,12 +269,12 @@
         </div>
       </section>
 
-      <div data-include="components/footer.html"></div>
+      <div data-include="/components/footer.html"></div>
     </main>
 
-    <script src="js/i18n.js" defer></script>
-    <script src="js/include.js" defer></script>
-    <script src="js/site.js" defer></script>
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/include.js" defer></script>
+    <script src="/js/site.js" defer></script>
     <script>
       document.getElementById('contactForm').addEventListener('submit', function(e) {
         e.preventDefault();

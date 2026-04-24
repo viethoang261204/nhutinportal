@@ -8,11 +8,11 @@ function e($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tin tức — NHUTIN</title>
     <meta name="description" content="Tin tức và kiến thức về nhiên liệu sinh khối bã điều, giải pháp sàn trượt tự đổ." />
-    <link rel="icon" href="img/logo.png" />
+    <link rel="icon" href="/img/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="/css/site.css" />
     <style>
       .news-hero {
         position: relative;
@@ -95,7 +95,7 @@ function e($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 <body>
     <div class="bgfx" aria-hidden="true"></div>
     <a class="skip" href="#main">Bỏ qua menu</a>
-    <header class="topbar" data-include="components/navbar.html"></header>
+    <header class="topbar" data-include="/components/navbar.html"></header>
 
     <main id="main">
         <section class="news-hero">
@@ -128,19 +128,19 @@ function e($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 
                 <div class="grid blog" style="margin-top: 18px">
                     <article class="card padded blogCard solid" data-reveal>
-                        <div class="thumb"><img src="img/picture1.png" alt="Sàn trượt tự đổ" loading="lazy" onerror="this.src='img/picture1.png'"></div>
+                        <div class="thumb"><img src="/img/picture1.png" alt="Sàn trượt tự đổ" loading="lazy" onerror="this.src='img/picture1.png'"></div>
                         <div class="meta"><span>Sàn trượt tự đổ</span><span><?= date('Y') ?></span></div>
                         <h3>Sàn trượt tự đổ là gì? Khi nào nên triển khai?</h3>
                         <p>Nguyên lý hoạt động, lợi ích và các tình huống giúp thu hồi vốn nhanh.</p>
                     </article>
                     <article class="card padded blogCard solid" data-reveal>
-                        <div class="thumb"><img src="img/picture2.png" alt="Vận hành" loading="lazy" onerror="this.src='img/picture1.png'"></div>
+                        <div class="thumb"><img src="/img/picture2.png" alt="Vận hành" loading="lazy" onerror="this.src='img/picture1.png'"></div>
                         <div class="meta"><span>Vận hành</span><span><?= date('Y') ?></span></div>
                         <h3>Checklist an toàn khi xuống hàng tự động</h3>
                         <p>Các bước chuẩn hóa giúp giảm rủi ro và tăng độ ổn định khi vận hành.</p>
                     </article>
                     <article class="card padded blogCard solid" data-reveal>
-                        <div class="thumb"><img src="img/picture3.png" alt="Sinh khối" loading="lazy" onerror="this.src='img/picture1.png'"></div>
+                        <div class="thumb"><img src="/img/picture3.png" alt="Sinh khối" loading="lazy" onerror="this.src='img/picture1.png'"></div>
                         <div class="meta"><span>Sinh khối</span><span><?= date('Y') ?></span></div>
                         <h3>Đốt bã điều hiệu quả: tối ưu lò hơi &amp; chi phí</h3>
                         <p>Gợi ý cải tiến lò hơi, lưu trữ và vận hành để tối ưu hiệu suất đốt.</p>
@@ -149,11 +149,11 @@ function e($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
             </div>
         </section>
 
-        <div data-include="components/footer.html"></div>
+        <div data-include="/components/footer.html"></div>
     </main>
 
-    <script src="js/i18n.js" defer></script>
-    <script src="js/include.js" defer></script>
-    <script src="js/site.js" defer></script>
+    <script src="/js/i18n.js" defer></script>
+    <script src="/js/include.js" defer></script>
+    <script src="/js/site.js" defer></script>
 </body>
 </html>
